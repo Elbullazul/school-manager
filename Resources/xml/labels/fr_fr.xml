@@ -1,0 +1,187 @@
+<!--
+  Naming convention:
+  - @SYSXX: System text, used for events, errors or exceptions
+  - @UIXX: Display labels for text in webpages
+
+  TEMPLATE
+  <label>
+    <key></key>
+    <text></text>
+    <comment></comment>
+  </label>
+-->
+
+<labels>
+    <label>
+        <key>@SYS01</key>
+        <text>HTTP 404 - Page introuvable</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS02</key>
+        <text>Impossible d'instantier un nouveau dépôt. Le dépot n'existe pas</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS03</key>
+        <text>Droits d'accès insuffisants</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS04</key>
+        <text>Accès refusé</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS05</key>
+        <text>500 - Erreur serveur</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS06</key>
+        <text>Erreur fatale</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS07</key>
+        <text>Une erreur est survenue</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS08</key>
+        <text>Resource manquante</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@SYS09</key>
+        <text>Aucune action autorisée n'est disponible</text>
+        <comment></comment>
+    </label>
+    <!-- PAGE NAMES -->
+    <label>
+        <key>@PA01</key>
+        <text>Se connecter</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA02</key>
+        <text>Connexion...</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA03</key>
+        <text>Déconnexion...</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA04</key>
+        <text>Tableau de bord</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA05</key>
+        <text>Erreur</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA06</key>
+        <text>Gérer</text>
+        <comment></comment>
+    </label>
+    <!-- UI labels -->
+    <label>
+        <key>@UI01</key>
+        <text>Système de gestion scolaire</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI02</key>
+        <text>Dogfish Systems (c) 2018</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI03</key>
+        <text>Se connecter</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI04</key>
+        <text>Adresse courriel</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI05</key>
+        <text>Mot de passe</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI06</key>
+        <text>Se souvenir de moi</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI07</key>
+        <text>Connexion</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI08</key>
+        <text>Nom d'utilisateur</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI09</key>
+        <text>Activité</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI10</key>
+        <text>Profil</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI11</key>
+        <text>Déconnexion</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI12</key>
+        <text>Tableau de bord</text>
+        <comment>Sidebar label</comment>
+    </label>
+    <label>
+        <key>@UI13</key>
+        <text>Bulletins</text>
+        <comment>Sidebar label</comment>
+    </label>
+    <label>
+        <key>@UI14</key>
+        <text>Notes</text>
+        <comment>Sidebar label</comment>
+    </label>
+    <label>
+        <key>@UI15</key>
+        <text>Horaire</text>
+        <comment>Sidebar label</comment>
+    </label>
+    <label>
+        <key>@UI16</key>
+        <text>Calendrier</text>
+        <comment>Sidebar label</comment>
+    </label>
+    <label>
+        <key>@UI17</key>
+        <text>Configuration</text>
+        <comment>User menu</comment>
+    </label>
+    <label>
+        <key>@UI18</key>
+        <text>Nom d'utilisateur ou mot de passe invalide</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI19</key>
+        <text>Gestion des utilisateurs</text>
+        <comment>Actions récurrentes du tableau de bord</comment>
+    </label>
+</labels>

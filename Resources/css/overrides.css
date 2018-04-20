@@ -1,0 +1,147 @@
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+
+.navbar,
+.navbar-default {
+    background-color: #496ba0;
+    color: #fff;
+}
+
+.navbar .ws-title,
+.navbar .btn-group a {
+    color: #fff;
+    text-decoration: none;
+}
+
+a.dropdown-item,
+a.dropdown-item:hover,
+a.dropdown-item:focus,
+a.dropdown-item:active {
+    color: #000 !important;
+}
+
+/*
+  src: http://getbootstrap.com/docs/4.0/examples/sticky-footer-navbar/sticky-footer-navbar.css
+*/
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #496ba0;
+    color: #fff;
+}
+
+/* right-align menu on navbar */
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
+
+/* annoying text select on dropdown div */
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                     supported by Chrome and Opera */
+}
+
+button a,
+button a:hover,
+button a:focus,
+button a:active {
+    text-decoration: none;
+    color: #000;
+}
+
+/* sidebar */
+.sidebar {
+    padding: 0px 0px !important;
+    /*background-color: rgba(0,0,0,0.05) !important;*/
+}
+
+.nav-pills .nav-link {
+    border-radius: 0px !important;
+}
+
+/* custom spacers */
+.spacer-5 {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.spacer-10 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.spacer-15 {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.spacer-30 {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.alert {
+    border-radius: 0;
+    border: none;
+}
+
+.alert-danger {
+    color: #fff !important;
+    background-color: #ba2222 !important;
+}
+
+.alert-success {
+    color: #fff !important;
+    background-color: #22ba22 !important;
+}
+
+.alert-warning {
+    color: #fff !important;
+    background-color: #eeba22 !important;
+}
+
+.alert-info {
+    color: #000;
+    background-color: #dedede;
+}
+
+.grid-item {
+    /* TODO: Remove this stupid hack once layout is OK */
+    border: 4px solid white !important;
+    border-radius: 8px !important;
+    background-color: rgba(0,0,0,0.05) !important;
+    text-decoration: none !important;
+}
+
+.img-container {
+    height: 180px;
+    width: 180px;
+    overflow: hidden;
+    margin: 0 auto;
+}
+
+.link-no-underline {
+    text-decoration: none !important;
+}
+
+/* accessibility feature */
+.accessible {
+    font-size: 24px;
+}

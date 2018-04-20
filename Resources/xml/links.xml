@@ -1,0 +1,32 @@
+<links>
+    <link>
+        <tag>login</tag>
+        <title>@PA01</title>
+        <path>/public/login</path>
+    </link>
+    <link>
+        <tag>connecting</tag>
+        <title>@PA02</title>
+        <path>/public/connecting</path>
+    </link>
+    <link>
+        <tag>logout</tag>
+        <title>@PA03</title>
+        <path>/user/logout</path>
+    </link>
+    <link>
+        <tag>dashboard</tag>
+        <title>@PA04</title>
+        <path>/user/dashboard</path>
+    </link>
+    <link>
+        <tag>error</tag>
+        <title>@PA05</title>
+        <path>/public/error</path>
+    </link>
+    <link>
+        <tag>general</tag>
+        <title>@PA06</title>
+        <path>/manage/general</path>
+    </link>
+</links>
