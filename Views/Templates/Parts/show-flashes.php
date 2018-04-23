@@ -19,5 +19,3 @@ if (!empty($flashes)) {
         }
     }
 }
-
-?>

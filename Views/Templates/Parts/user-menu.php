@@ -18,14 +18,11 @@ use Services\xml;
     $file = "user-menu\\" . users::type() . '.xml';
     $menuitems = xml::parse(paths::xml($file));
 
-    foreach ($menuitems as $menuitem) {
-        foreach ($menuitem as $item) {
-            foreach ($item as $name) {
-                $view = $item["tag"];
-                $label = $item["label"];
-            }
-            echo '<a class="dropdown-item" href="' . links::get($view) . '">' . labels::get($label) . '</a>';
-        }
+    foreach ($menuitems['menuitem'] as $item) {
+        $view = $item["tag"];
+        $label = $item["label"];
+
+        echo '<a class="dropdown-item" href="' . $view . '">' . labels::get($label) . '</a>';
     }
 
     ?>

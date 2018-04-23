@@ -88,6 +88,16 @@
         <text>Manage</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA07</key>
+        <text>Schedules</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA08</key>
+        <text>View schedules</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>

@@ -11,6 +11,7 @@ namespace Core;
 use Database\Repositories\user_repository;
 use Database\Repositories\user_type_repository;
 use Services\flashes;
+use Services\links;
 use Services\users;
 
 
@@ -54,25 +55,25 @@ abstract class security
 
                     if (!empty($user_type)) {
                         users::connect($bundle["username"], $user_type);
-                        redirect('dashboard');
+                        redirect(links::get('dashboard'));
                     } else {
                         error('@SYS05');
                     }
                 } else {
                     flashes::set('@UI18', flashes::$DANGER);
-                    redirect('login');
+                    redirect(links::get('login'));
                 }
             } else {
                 error("@SYS05");
             }
         } else {
             flashes::set('@UI18', flashes::$DANGER);
-            redirect('login');
+            redirect(links::get('login'));
         }
     }
 
     static function access() {
         if (!users::connected())
-            redirect('login');
+            redirect(links::get('login'));
     }
 }

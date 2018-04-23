@@ -27,7 +27,7 @@ use Services\globals;
                 $label = $item["label"];
             }
             $lbl = labels::get($label);
-            $lnk = links::get($view);
+            $lnk = $view;
 
             if ($current_view == $view) { ?>
                 <?=

@@ -17,7 +17,7 @@ function redirect($view)
     ob_start();
     ob_end_clean();
 
-    header("Location: " . links::get($view));
+    header("Location: " . $view);
 }
 
 function error($label)

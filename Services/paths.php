@@ -11,7 +11,12 @@ abstract class paths
 
     static function view($_view)
     {
-        return globals::get('VIEWS')  . $_view;
+        return globals::get('VIEWS') . $_view;
+    }
+
+    static function template($_view)
+    {
+        return globals::get('VIEWS').'\Templates\\' . $_view;
     }
 
     static function resource($_path)
@@ -21,6 +26,10 @@ abstract class paths
 
     static function xml($file) {
         return globals::get('ROOT').'\Resources\xml\\'.$file;
+    }
+
+    static function layout($file) {
+        return globals::get('ROOT').'\Resources\layouts\\'.$file;
     }
 }
 

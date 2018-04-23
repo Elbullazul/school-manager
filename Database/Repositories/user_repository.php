@@ -14,7 +14,7 @@ class user_repository extends repository
         $cmd = 'SELECT
               user_id,
               username,
-              type as user_type,
+              type_id as user_type,
               password,
               modified_by,
               date_created,

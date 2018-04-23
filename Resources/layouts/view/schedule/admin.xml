@@ -1,0 +1,11 @@
+<menuitems>
+    <menuitem>
+        <tag>/create/schedule</tag>
+        <label>@PA08</label>
+    </menuitem>
+    <menuitem>
+        <tag>/edit/schedule</tag>
+        <label>@PA08</label>
+    </menuitem>
+
+</menuitems>

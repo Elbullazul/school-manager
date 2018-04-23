@@ -2,31 +2,55 @@
     <link>
         <tag>login</tag>
         <title>@PA01</title>
+        <namespace>public</namespace>
         <path>/public/login</path>
     </link>
     <link>
         <tag>connecting</tag>
         <title>@PA02</title>
+        <namespace>public</namespace>
         <path>/public/connecting</path>
     </link>
     <link>
         <tag>logout</tag>
         <title>@PA03</title>
+        <namespace>user</namespace>
         <path>/user/logout</path>
     </link>
     <link>
         <tag>dashboard</tag>
         <title>@PA04</title>
+        <namespace>user</namespace>
         <path>/user/dashboard</path>
     </link>
     <link>
         <tag>error</tag>
         <title>@PA05</title>
+        <namespace>public</namespace>
         <path>/public/error</path>
     </link>
     <link>
         <tag>general</tag>
         <title>@PA06</title>
+        <namespace>manage</namespace>
         <path>/manage/general</path>
+    </link>
+    <link>
+        <tag>schedule</tag>
+        <title>@PA07</title>
+        <namespace>manage</namespace>
+        <path>/manage/schedule</path>
+    </link>
+    <link>
+        <tag>general</tag>
+        <title>@PA06</title>
+        <namespace>view</namespace>
+        <path>/view/general</path>
+    </link>
+    <link>
+        <tag>schedule</tag>
+        <title>@PA08</title>
+        <namespace>view</namespace>
+        <path>/view/schedule</path>
     </link>
 </links>

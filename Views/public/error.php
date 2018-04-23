@@ -1,13 +1,13 @@
 <?php
 
 use Services\paths;
+use Services\links;
 use Services\labels;
 use Services\globals;
 
-// Failsafe
-
+// Fail safe
 if (!globals::is_set('ERROR')) {
-    redirect('dashboard');
+    redirect(links::get('login'));
 }
 
 ?>

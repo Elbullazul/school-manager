@@ -1,7 +1,12 @@
 <?php
 
 use Services\labels;
+use Services\users;
 use Services\links;
+
+// go to dashboard if connected
+if (users::connected())
+    redirect(links::get('dashboard'));
 
 ?>
 

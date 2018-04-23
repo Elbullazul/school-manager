@@ -8,39 +8,24 @@
 
 namespace Controllers;
 
-
-use Services\globals;
-use Services\links;
 use Services\paths;
-use Services\xml;
+use Services\globals;
+use Services\titles;
 
 abstract class controller
 {
-    protected $actions = array();
+    protected $directory = '';
 
-    function __construct()
-    {
-        // TODO: load authorized actions; for now, just an array
-        $this->actions = array();
-    }
-
-    function view($tag)
-    {
-        if ($this->is_authorized($tag)) {
-            globals::set('VIEW_TITLE', links::label($tag));
-            globals::set('VIEW_TAG', $tag);
-            globals::set('VIEW', links::get($tag) . '.php');
-
-            load(paths::view('\Templates\master.php'));
-        } else {
-            error('@SYS01');
-        }
-    }
-
-    function is_authorized($action)
-    {
-        return (in_array($action, $this->actions));
-    }
+//    abstract function __construct();
 
     abstract function home();
+
+    function view($view)
+    {
+        globals::set('VIEW_TITLE', titles::get($view));
+        globals::set('VIEW_TAG', $view);    // sidebar tracking
+        globals::set('VIEW', $view . '.php');
+
+        load(paths::template('master.php'));
+    }
 }

@@ -26,21 +26,18 @@ abstract class links
         return $path;
     }
 
-    static function label($tag)
-    {
-        $label = "";
+    static function test($namespace, $tag) {
+        $path = "";
         $file = globals::get('RESOURCES') . '\xml\links.xml';
         $xml = simplexml_load_file($file);
 
         foreach ($xml as $node) {
-            if ($node->tag == $tag) {
-                $label = (string)$node->title;
+            if ($node->tag == $tag && $node->namespace == $namespace) {
+                $path = $node->path;
                 break;
             }
         }
 
-        $title = labels::get($label);
-
-        return $title;
+        return $path;
     }
 }

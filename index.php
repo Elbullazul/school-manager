@@ -1,6 +1,6 @@
 <?php
 
-require_once "Core\methods.php";
+require_once 'Core\methods.php';
 
 // include class file on instantiation
 spl_autoload_register(

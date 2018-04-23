@@ -9,13 +9,15 @@
 namespace Controllers;
 
 
+use Services\globals;
+use Services\links;
+
 class public_controller extends controller
 {
-    function __construct()
-    {
-        // TODO: load authorized actions; for now, just an array
-        $this->actions = array("login", "logout", "connecting");
-    }
+//    public function __construct()
+//    {
+//        $this->directory = globals::get('VIEWS').'/public';
+//    }
 
     function home()
     {

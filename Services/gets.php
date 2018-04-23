@@ -21,11 +21,7 @@ abstract class gets
 
     static function is_set($_key)
     {
-        if (gets::get($_key) != "") {
-            return true;
-        } else {
-            return false;
-        }
+        return gets::get($_key) != "";
     }
 }
 

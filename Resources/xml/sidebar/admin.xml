@@ -1,14 +1,18 @@
 <menuitems>
     <menuitem>
-        <tag>dashboard</tag>
+        <tag>/user/dashboard</tag>
         <label>@PA04</label>
     </menuitem>
     <menuitem>
-        <tag>general</tag>
+        <tag>/manage/general</tag>
         <label>@PA06</label>
     </menuitem>
     <menuitem>
-        <tag>logout</tag>
+        <tag>/view/general</tag>
+        <label>@PA12</label>
+    </menuitem>
+    <menuitem>
+        <tag>/user/logout</tag>
         <label>@UI11</label>
     </menuitem>
 </menuitems>

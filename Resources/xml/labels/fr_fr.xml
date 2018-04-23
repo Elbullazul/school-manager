@@ -88,6 +88,37 @@
         <text>Gérer</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA07</key>
+        <text>Horaires</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA08</key>
+        <text>Consulter les horaires</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA09</key>
+        <text>Créer un horaire</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA10</key>
+        <text>Modifier un horaire</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA11</key>
+        <text>Détruire un horaire</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA12</key>
+        <text>Consulter</text>
+        <comment></comment>
+    </label>
+
     <!-- UI labels -->
     <label>
         <key>@UI01</key>

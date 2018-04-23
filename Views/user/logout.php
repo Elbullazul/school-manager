@@ -1,7 +1,7 @@
 <?php
 
 use Services\users;
+use Services\links;
 
 users::disconnect();
-
-redirect('login');
+redirect(links::get('login'));

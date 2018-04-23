@@ -8,6 +8,7 @@
 
 namespace Core;
 
+use Services\links;
 use Services\paths;
 use Services\urls;
 
@@ -26,13 +27,7 @@ class pseudo_controller
             $this->namespace = $params[0];
             $this->action = $params[1];
         } else {
-            // TODO: if empty go to login
-            error('@SYS01');
-//            if (users::connected()) {
-//                redirect('dashboard');
-//            } else {
-//                redirect('login');
-//            }
+            redirect(links::get('login'));
         }
     }
 
@@ -41,7 +36,8 @@ class pseudo_controller
             $controller = '\Controllers\\'.$this->namespace.'_controller';
             $controller = new $controller();
 
-            $controller->view($this->action);
+            $file = links::test($this->namespace, $this->action);
+            $controller->view($file);
         } else {
             error('@SYS01');
         }

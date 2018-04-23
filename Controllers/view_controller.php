@@ -2,31 +2,31 @@
 /**
  * Created by PhpStorm.
  * User: crime
- * Date: 2018-04-18
- * Time: 14:55
+ * Date: 2018-04-23
+ * Time: 09:01
  */
 
 namespace Controllers;
 
-use Services\globals;
-use Services\links;
 use Core\security;
+use Services\globals;
 
-class manage_controller extends controller
+
+class view_controller extends controller
 {
 //    function __construct()
 //    {
-//        $this->directory = globals::get('VIEWS').'/manage';
+//        $this->directory = globals::get('VIEWS').'/view';
 //    }
 
     function view($tag)
     {
-        security::access();
+        security::access($tag);
         parent::view($tag);
     }
 
     function home()
     {
-        return '/manage/general';
+        return '/view/general';
     }
 }
