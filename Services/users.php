@@ -16,8 +16,8 @@ abstract class users
     static function connect($username, $user_type)
     {
         sessions::set('username', $username);
-        sessions::set('type', $user_type->type());
-        sessions::set('privileges', $user_type->access_level());
+        sessions::set('type', $user_type->get("type"));
+        sessions::set('privileges', $user_type->get("access_level"));
     }
 
     static function connected()
