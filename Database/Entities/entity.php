@@ -2,37 +2,41 @@
 
 namespace Database\Entities;
 
-abstract class Entity
+abstract class entity
 {
     protected $modified_by;   // persist
     protected $date_created;  // persist
     protected $date_modified; // persist
 
-    function modifed_by($_user = NULL)
+    function modified_by()
     {
-        if (!is_null($_user)) {
-            $this->modifed_by = $_user;
-        }
         return $this->modifed_by;
     }
 
-    function date_created($_date = NULL)
+    function date_created()
     {
-        if (!is_null($_date)) {
-            $this->date_created = $_date;
-        }
         return $this->date_created;
     }
 
-    function date_modified($_date = NULL)
+    function date_modified()
     {
-        if (!is_null($_date)) {
-            $this->date_modified = $_date;
-        }
         return $this->date_modified;
     }
 
+    function get($key)
+    {
+        return $this->properties()[$key];
+    }
+
     abstract function properties();
+
+    function metadata() {
+        return array(
+            "date_created" => $this->date_created,
+            "date_modified" => $this->date_modified,
+            "modified_by" => $this->modified_by
+        );
+    }
 }
 
 

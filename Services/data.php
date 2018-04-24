@@ -25,6 +25,29 @@ abstract class data
 
         return $_entity;
     }
+
+    static function find_entities($field, $value, $array) {
+        $entities = array();
+
+        foreach ($array as $entity) {
+            if ($entity->get($field) == $value) {
+                $entities[] = $entity;
+            }
+        }
+
+        return $entities;
+    }
+
+    static function find_entity($field, $value, $array) {
+        foreach ($array as $entity) {
+            if ($entity->get($field) == $value) {
+                return $entity;
+            }
+        }
+
+        return NULL;
+    }
+
 }
 
 ?>

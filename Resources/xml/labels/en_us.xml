@@ -98,6 +98,31 @@
         <text>View schedules</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA09</key>
+        <text>New schedule</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA10</key>
+        <text>Edit schedule</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA11</key>
+        <text>Destroy schedule</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA12</key>
+        <text>View schedule</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA13</key>
+        <text>View</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>

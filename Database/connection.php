@@ -22,7 +22,7 @@ class connection
             $pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
             $pdo_options[PDO::ATTR_EMULATE_PREPARES] = false;
 
-            self::$instance = new PDO('mysql:host=localhost;dbname=application', 'root', '', $pdo_options);
+            self::$instance = new PDO('mysql:host=localhost;dbname=application;charset=utf8', 'root', '', $pdo_options);
         }
         return self::$instance;
     }

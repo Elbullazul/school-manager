@@ -2,43 +2,31 @@
 
 namespace Database\Entities;
 
-class user_type_entity extends Entity
+class user_type_entity extends entity
 {
     private $type_id;
     private $access_level;
     private $type;
     private $description;
 
-    function type_id($_type_id = NULL)
+    function type_id($_type_id)
     {
-        if (!is_null($_type_id)) {
-            $this->type_id = $_type_id;
-        }
-        return $this->type_id;
+        $this->type_id = $_type_id;
     }
 
-    function access_level($_access_level = NULL)
+    function access_level($_access_level)
     {
-        if (!is_null($_access_level)) {
-            $this->access_level = $_access_level;
-        }
-        return $this->access_level;
+        $this->access_level = $_access_level;
     }
 
-    function type($_type = NULL)
+    function type($_type)
     {
-        if (!is_null($_type)) {
-            $this->type = $_type;
-        }
-        return $this->type;
+        $this->type = $_type;
     }
 
-    function description($_description = NULL)
+    function description($_description)
     {
-        if (!is_null($_description)) {
-            $this->description = $_description;
-        }
-        return $this->description;
+        $this->description = $_description;
     }
 
     function properties()
@@ -47,10 +35,7 @@ class user_type_entity extends Entity
             "type_id" => $this->type_id,
             "access_level" => $this->access_level,
             "type" => $this->type,
-            "description" => $this->description,
-            "date_created" => $this->date_created,
-            "date_modified" => $this->date_modified,
-            "modified_by" => $this->modified_by
+            "description" => $this->description
         );
     }
 }

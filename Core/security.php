@@ -8,8 +8,8 @@
 
 namespace Core;
 
-use Database\Repositories\user_repository;
-use Database\Repositories\user_type_repository;
+use Database\Repositories\users_repository;
+use Database\Repositories\user_types_repository;
 use Services\flashes;
 use Services\links;
 use Services\users;
@@ -43,15 +43,15 @@ abstract class security
         if (!empty($bundle["username"]) && !empty($bundle["password"])) {
 
             // load user entity
-            $repo = new user_repository();
-            $user = $repo->find_by_username($bundle["username"]);
+            $repo = new users_repository();
+            $user = $repo->find('username', $bundle["username"]);
 
             if (!empty($user)) {
-                if ($user->password() == $bundle["password"]) {
+                if ($user->get("password") == $bundle["password"]) {
 
                     // load privileges
-                    $repo = new user_type_repository();
-                    $user_type = $repo->find_by_id($user->user_type());
+                    $repo = new user_types_repository();
+                    $user_type = $repo->find('type_id', $user->get("user_type"));
 
                     if (!empty($user_type)) {
                         users::connect($bundle["username"], $user_type);

@@ -10,7 +10,6 @@ use Services\globals;
 <head>
     <title><?= globals::get_once('VIEW_TITLE'); ?></title>
 
-
     <!-- JQuery 3.3.1 -->
     <script type="text/javascript" src="<?= paths::resource('jquery-3.3.1/jquery-3.3.1.min.js'); ?>"></script>
 

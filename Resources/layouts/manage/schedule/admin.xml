@@ -4,6 +4,10 @@
         <label>@PA09</label>
     </menuitem>
     <menuitem>
+        <tag>/view/schedule</tag>
+        <label>@PA12</label>
+    </menuitem>
+    <menuitem>
         <tag>/edit/schedule</tag>
         <label>@PA10</label>
     </menuitem>

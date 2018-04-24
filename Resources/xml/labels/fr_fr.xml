@@ -115,10 +115,14 @@
     </label>
     <label>
         <key>@PA12</key>
-        <text>Consulter</text>
+        <text>Consulter un horaire</text>
         <comment></comment>
     </label>
-
+    <label>
+        <key>@PA13</key>
+        <text>Visualiser</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>
@@ -214,5 +218,10 @@
         <key>@UI19</key>
         <text>Gestion des utilisateurs</text>
         <comment>Actions récurrentes du tableau de bord</comment>
+    </label>
+    <label>
+        <key>@UI20</key>
+        <text>Local</text>
+        <comment></comment>
     </label>
 </labels>

@@ -2,44 +2,31 @@
 
 namespace Database\Entities;
 
-class user_entity extends Entity
+class user_entity extends entity
 {
-
     private $user_id;
     private $username;
     private $user_type;
     private $password;
 
-    function user_id($_user_id = NULL)
+    function user_id($_user_id)
     {
-        if (!is_null($_user_id)) {
-            $this->user_id = $_user_id;
-        }
-        return $this->user_id;
+        $this->user_id = $_user_id;
     }
 
-    function username($_username = NULL)
+    function username($_username)
     {
-        if (!is_null($_username)) {
-            $this->username = $_username;
-        }
-        return $this->username;
+        $this->username = $_username;
     }
 
-    function user_type($_user_type = NULL)
+    function user_type($_user_type)
     {
-        if (!is_null($_user_type)) {
-            $this->user_type = $_user_type;
-        }
-        return $this->user_type;
+        $this->user_type = $_user_type;
     }
 
-    function password($_password = NULL)
+    function password($_password)
     {
-        if (!is_null($_password)) {
-            $this->password = $_password;
-        }
-        return $this->password;
+        $this->password = $_password;
     }
 
     function properties()
@@ -48,10 +35,7 @@ class user_entity extends Entity
             "user_id" => $this->user_id,
             "username" => $this->username,
             "user_type" => $this->user_type,
-            "password" => $this->password,
-            "date_created" => $this->date_created,
-            "date_modified" => $this->date_modified,
-            "modified_by" => $this->modified_by
+            "password" => $this->password
         );
     }
 }

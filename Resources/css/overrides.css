@@ -145,3 +145,23 @@ button a:active {
 .accessible {
     font-size: 24px;
 }
+
+/* Schedule */
+.period {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(0,0,0,0.05);
+}
+
+.course {
+    border: 1px solid gray;
+    font-size: 12px;
+}
+
+.course.empty {
+    border: none;
+    background-color: rgba(0,0,0,0.1);
+}
+
+.schedule {
+}
