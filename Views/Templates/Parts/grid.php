@@ -8,7 +8,7 @@ use Services\links;
 use Services\xml;
 
 // TODO: load menu file
-$file = str_replace('.php', '', globals::get('VIEW')) . '/' . users::type() . '.xml';
+$file = str_replace('.php', '', $FILE) . '/' . users::type() . '.xml';
 $griditems = xml::parse(paths::layout($file));
 
 // If no available actions

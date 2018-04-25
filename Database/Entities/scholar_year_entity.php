@@ -14,12 +14,44 @@ class scholar_year_entity extends entity
     private $begins;
     private $ends;
 
-    function begins($_begins) {
-        $this->begins = $_begins;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
-    function ends($_ends) {
-        $this->ends = $_ends;
+    /**
+     * @return mixed
+     */
+    public function getBegins()
+    {
+        return $this->begins;
+    }
+
+    /**
+     * @param mixed $begins
+     */
+    public function setBegins($begins)
+    {
+        $this->begins = $begins;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnds()
+    {
+        return $this->ends;
+    }
+
+    /**
+     * @param mixed $ends
+     */
+    public function setEnds($ends)
+    {
+        $this->ends = $ends;
     }
 
     function properties()

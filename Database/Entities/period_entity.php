@@ -15,14 +15,44 @@ class period_entity extends entity
     private $begins;
     private $ends;
 
-    function begins($_begins)
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        $this->begins = $_begins;
+        return $this->id;
     }
 
-    function ends($_ends)
+    /**
+     * @return mixed
+     */
+    public function getBegins()
     {
-        $this->ends = $_ends;
+        return $this->begins;
+    }
+
+    /**
+     * @param mixed $begins
+     */
+    public function setBegins($begins)
+    {
+        $this->begins = $begins;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnds()
+    {
+        return $this->ends;
+    }
+
+    /**
+     * @param mixed $ends
+     */
+    public function setEnds($ends)
+    {
+        $this->ends = $ends;
     }
 
     function properties()

@@ -14,10 +14,13 @@ use Core\security;
 
 class manage_controller extends controller
 {
-//    function __construct()
-//    {
-//        $this->directory = globals::get('VIEWS').'/manage';
-//    }
+    function general() {
+        $this->view(links::get('manage-general'));
+    }
+
+    function schedule() {
+        $this->view(links::get('manage-schedule'));
+    }
 
     function view($tag)
     {
@@ -27,6 +30,6 @@ class manage_controller extends controller
 
     function home()
     {
-        return '/manage/general';
+        return links::get('manage-general');
     }
 }

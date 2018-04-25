@@ -26,7 +26,7 @@ abstract class links
         return $path;
     }
 
-    static function test($namespace, $tag) {
+    static function full_path($namespace, $tag) {
         $path = "";
         $file = globals::get('RESOURCES') . '\xml\links.xml';
         $xml = simplexml_load_file($file);

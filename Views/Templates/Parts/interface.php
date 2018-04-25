@@ -7,14 +7,14 @@ use Services\paths;
 <div class="row container-fluid h-100">
     <nav class="col-sm-3 col-md-2 sidebar d-none d-md-block">
         <?php
-        load(paths::part('sidebar.php'));
+        load(paths::part('sidebar.php'), $data);
         ?>
     </nav>
 
     <div class="col-sm-9 col-md-10 pt-3">
         <div class="row container">
             <?php
-            load(paths::part('grid.php'));
+            load(paths::part('grid.php'), $data);
             ?>
         </div>
         <div class="spacer-30">

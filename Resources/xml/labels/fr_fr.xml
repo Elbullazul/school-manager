@@ -123,6 +123,21 @@
         <text>Visualiser</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA14</key>
+        <text>Créer</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA15</key>
+        <text>Créer un cours</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA16</key>
+        <text>Ajouter des compétences</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>
@@ -222,6 +237,21 @@
     <label>
         <key>@UI20</key>
         <text>Local</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI21</key>
+        <text>Niveau</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI22</key>
+        <text>Nom du cours</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI23</key>
+        <text>Code du cours</text>
         <comment></comment>
     </label>
 </labels>

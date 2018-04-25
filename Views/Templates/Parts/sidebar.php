@@ -14,7 +14,7 @@ use Services\globals;
 
     <?php
 
-    $current_view = globals::get('VIEW_TAG');
+    $current_view = $TAG;
 
     // TODO: load menu file
     $file = "sidebar\\" . users::type() . '.xml';

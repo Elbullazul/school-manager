@@ -14,8 +14,28 @@ class scholar_cycle_entity extends entity
     private $id;
     private $name;
 
-    function name($_name) {
-        $this->name = $_name;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     function properties()

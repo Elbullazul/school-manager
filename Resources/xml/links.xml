@@ -2,55 +2,66 @@
     <link>
         <tag>login</tag>
         <title>@PA01</title>
-        <namespace>public</namespace>
         <path>/public/login</path>
     </link>
     <link>
         <tag>connecting</tag>
         <title>@PA02</title>
-        <namespace>public</namespace>
         <path>/public/connecting</path>
     </link>
     <link>
         <tag>logout</tag>
         <title>@PA03</title>
-        <namespace>user</namespace>
         <path>/user/logout</path>
     </link>
     <link>
         <tag>dashboard</tag>
         <title>@PA04</title>
-        <namespace>user</namespace>
         <path>/user/dashboard</path>
     </link>
     <link>
         <tag>error</tag>
         <title>@PA05</title>
-        <namespace>public</namespace>
         <path>/public/error</path>
     </link>
     <link>
-        <tag>general</tag>
+        <tag>manage-general</tag>
         <title>@PA06</title>
-        <namespace>manage</namespace>
         <path>/manage/general</path>
     </link>
     <link>
-        <tag>schedule</tag>
+        <tag>manage-schedule</tag>
         <title>@PA07</title>
-        <namespace>manage</namespace>
         <path>/manage/schedule</path>
     </link>
     <link>
-        <tag>general</tag>
+        <tag>view-general</tag>
         <title>@PA06</title>
-        <namespace>view</namespace>
         <path>/view/general</path>
     </link>
     <link>
-        <tag>schedule</tag>
+        <tag>view-schedule</tag>
         <title>@PA08</title>
-        <namespace>view</namespace>
         <path>/view/schedule</path>
+    </link>
+    <link>
+        <tag>create-general</tag>
+        <title>@PA14</title>
+        <path>/create/general</path>
+    </link>
+    <link>
+        <tag>create-schedule</tag>
+        <title>@PA09</title>
+        <path>/create/schedule</path>
+    </link>
+    <link>
+        <tag>create-course</tag>
+        <title>@PA15</title>
+        <path>/create/course</path>
+    </link>
+    <link>
+        <tag>course-competences</tag>
+        <title>@PA16</title>
+        <path>/create/course-competences</path>
     </link>
 </links>

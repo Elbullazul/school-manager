@@ -9,6 +9,11 @@ abstract class paths
         return globals::get('PARTS') . '\\' . $_file;
     }
 
+    static function modal($_file)
+    {
+        return globals::get('VIEWS') . '..\Templates\Modals\\' . $_file;
+    }
+
     static function view($_view)
     {
         return globals::get('VIEWS') . $_view;

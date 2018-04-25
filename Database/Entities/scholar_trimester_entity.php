@@ -16,16 +16,60 @@ class scholar_trimester_entity extends entity
     private $ends;
     private $scholar_year_id;
 
-    function begins($_begins) {
-        $this->begins = $_begins;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
-    function ends($_ends) {
-        $this->ends = $_ends;
+    /**
+     * @return mixed
+     */
+    public function getBegins()
+    {
+        return $this->begins;
     }
 
-    function scholar_year_id($_scholar_year_id) {
-        $this->scholar_year_id = $_scholar_year_id;
+    /**
+     * @param mixed $begins
+     */
+    public function setBegins($begins)
+    {
+        $this->begins = $begins;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnds()
+    {
+        return $this->ends;
+    }
+
+    /**
+     * @param mixed $ends
+     */
+    public function setEnds($ends)
+    {
+        $this->ends = $ends;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getScholarYearId()
+    {
+        return $this->scholar_year_id;
+    }
+
+    /**
+     * @param mixed $scholar_year_id
+     */
+    public function setScholarYearId($scholar_year_id)
+    {
+        $this->scholar_year_id = $scholar_year_id;
     }
 
     function properties()

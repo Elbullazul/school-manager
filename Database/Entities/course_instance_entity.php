@@ -19,39 +19,108 @@ class course_instance_entity extends entity
     private $day_id;
     private $class_id;
 
-    function id($_id)
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        $this->id = $_id;
+        return $this->id;
     }
 
-    function trimester_id($_trimester_id)
+    /**
+     * @return mixed
+     */
+    public function getTrimesterId()
     {
-        $this->trimester_id = $_trimester_id;
+        return $this->trimester_id;
     }
 
-    function course_id($_course_id)
+    /**
+     * @param mixed $trimester_id
+     */
+    public function setTrimesterId($trimester_id)
     {
-        $this->course_id = $_course_id;
+        $this->trimester_id = $trimester_id;
     }
 
-    function teacher_id($_teacher_id)
+    /**
+     * @return mixed
+     */
+    public function getCourseId()
     {
-        $this->teacher_id = $_teacher_id;
+        return $this->course_id;
     }
 
-    function period_id($_period_id)
+    /**
+     * @param mixed $course_id
+     */
+    public function setCourseId($course_id)
     {
-        $this->period_id = $_period_id;
+        $this->course_id = $course_id;
     }
 
-    function day_id($_day_id)
+    /**
+     * @return mixed
+     */
+    public function getTeacherId()
     {
-        $this->day_id = $_day_id;
+        return $this->teacher_id;
     }
 
-    function class_id($_class_id)
+    /**
+     * @param mixed $teacher_id
+     */
+    public function setTeacherId($teacher_id)
     {
-        $this->class_id = $_class_id;
+        $this->teacher_id = $teacher_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPeriodId()
+    {
+        return $this->period_id;
+    }
+
+    /**
+     * @param mixed $period_id
+     */
+    public function setPeriodId($period_id)
+    {
+        $this->period_id = $period_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDayId()
+    {
+        return $this->day_id;
+    }
+
+    /**
+     * @param mixed $day_id
+     */
+    public function setDayId($day_id)
+    {
+        $this->day_id = $day_id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClassId()
+    {
+        return $this->class_id;
+    }
+
+    /**
+     * @param mixed $class_id
+     */
+    public function setClassId($class_id)
+    {
+        $this->class_id = $class_id;
     }
 
     function properties()

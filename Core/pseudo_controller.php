@@ -32,14 +32,20 @@ class pseudo_controller
     }
 
     function start() {
-        if (file_exists(paths::view('\\' . $this->query . '.php'))) {
-            $controller = '\Controllers\\'.$this->namespace.'_controller';
-            $controller = new $controller();
 
-            $file = links::test($this->namespace, $this->action);
-            $controller->view($file);
-        } else {
+        $controller = '\Controllers\\'.$this->namespace.'_controller';
+
+        if (!class_exists($controller)) {
             error('@SYS01');
+        } else {
+            $controller = new $controller();
+            $func = $this->action;
+
+            if (!method_exists($controller, $func)) {
+                error('@SYS01');
+            } else {
+                $controller->$func();
+            }
         }
     }
 }

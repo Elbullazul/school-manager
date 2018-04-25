@@ -10,14 +10,19 @@ namespace Controllers;
 
 use Core\security;
 use Services\globals;
+use Services\links;
 
 
 class view_controller extends controller
 {
-//    function __construct()
-//    {
-//        $this->directory = globals::get('VIEWS').'/view';
-//    }
+    function general() {
+        $this->view(links::get('view-general'));
+    }
+
+    function schedule()
+    {
+        $this->view(links::get('view-schedule'));
+    }
 
     function view($tag)
     {

@@ -123,6 +123,16 @@
         <text>View</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA14</key>
+        <text>Create</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@PA15</key>
+        <text>Create course</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>
@@ -218,5 +228,10 @@
         <key>@UI19</key>
         <text>User management</text>
         <comment>Dashboard recurrent actions</comment>
+    </label>
+    <label>
+        <key>@UI20</key>
+        <text>Class</text>
+        <comment></comment>
     </label>
 </labels>

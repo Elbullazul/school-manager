@@ -14,18 +14,14 @@ use Services\titles;
 
 abstract class controller
 {
-    protected $directory = '';
-
-//    abstract function __construct();
-
     abstract function home();
 
     function view($view)
     {
-        globals::set('VIEW_TITLE', titles::get($view));
-        globals::set('VIEW_TAG', $view);    // sidebar tracking
-        globals::set('VIEW', $view . '.php');
+        $data['TITLE'] = titles::get($view);
+        $data['TAG'] = $view;
+        $data['FILE'] = $view.'.php';
 
-        load(paths::template('master.php'));
+        load(paths::template('master.php'), $data);
     }
 }

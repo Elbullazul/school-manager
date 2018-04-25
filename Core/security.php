@@ -47,11 +47,11 @@ abstract class security
             $user = $repo->find('username', $bundle["username"]);
 
             if (!empty($user)) {
-                if ($user->get("password") == $bundle["password"]) {
+                if ($user->getPassword() == $bundle["password"]) {
 
                     // load privileges
                     $repo = new user_types_repository();
-                    $user_type = $repo->find('type_id', $user->get("user_type"));
+                    $user_type = $repo->find('type_id', $user->getUserType());
 
                     if (!empty($user_type)) {
                         users::connect($bundle["username"], $user_type);

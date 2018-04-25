@@ -8,16 +8,22 @@
 
 namespace Controllers;
 
-
-use Services\globals;
+use Services\posts;
 use Services\links;
+use Core\security;
 
 class public_controller extends controller
 {
-//    public function __construct()
-//    {
-//        $this->directory = globals::get('VIEWS').'/public';
-//    }
+    function login() {
+        parent::view(links::get('login'));
+    }
+
+    function connecting() {
+        $pw = posts::get("inputPassword");
+        $usr = posts::get("inputUser");
+
+        security::authenticate(array("username" => $usr, "password" => $pw));
+    }
 
     function home()
     {

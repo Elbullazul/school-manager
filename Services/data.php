@@ -26,11 +26,11 @@ abstract class data
         return $_entity;
     }
 
-    static function find_entities($field, $value, $array) {
+    static function find_entities($method, $value, $array) {
         $entities = array();
 
         foreach ($array as $entity) {
-            if ($entity->get($field) == $value) {
+            if ($entity->$method() == $value) {
                 $entities[] = $entity;
             }
         }
@@ -38,9 +38,9 @@ abstract class data
         return $entities;
     }
 
-    static function find_entity($field, $value, $array) {
+    static function find_entity($method, $value, $array) {
         foreach ($array as $entity) {
-            if ($entity->get($field) == $value) {
+            if ($entity->$method() == $value) {
                 return $entity;
             }
         }

@@ -9,15 +9,25 @@
 namespace Controllers;
 
 use Core\security;
-use Services\globals;
+use Services\users;
 use Services\links;
+use Services\labels;
 
 class user_controller extends controller
 {
-//    public function __construct()
-//    {
-//        $this->directory = globals::get('VIEWS').'/user';
-//    }
+    public function __call($name, $arguments)
+    {
+        error(labels::get('@SYS01'));
+    }
+
+    function dashboard() {
+        $this->view(links::get('dashboard'));
+    }
+
+    function logout() {
+        users::disconnect();
+        redirect(links::get('login'));
+    }
 
     function view($view)
     {

@@ -9,24 +9,60 @@ class user_type_entity extends entity
     private $type;
     private $description;
 
-    function type_id($_type_id)
+    /**
+     * @return mixed
+     */
+    public function getTypeId()
     {
-        $this->type_id = $_type_id;
+        return $this->type_id;
     }
 
-    function access_level($_access_level)
+    /**
+     * @return mixed
+     */
+    public function getAccessLevel()
     {
-        $this->access_level = $_access_level;
+        return $this->access_level;
     }
 
-    function type($_type)
+    /**
+     * @param mixed $access_level
+     */
+    public function setAccessLevel($access_level)
     {
-        $this->type = $_type;
+        $this->access_level = $access_level;
     }
 
-    function description($_description)
+    /**
+     * @return mixed
+     */
+    public function getType()
     {
-        $this->description = $_description;
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 
     function properties()
@@ -39,5 +75,3 @@ class user_type_entity extends entity
         );
     }
 }
-
-?>

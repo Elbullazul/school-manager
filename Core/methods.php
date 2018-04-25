@@ -26,8 +26,12 @@ function error($label)
     load(paths::view('\public\error.php'));
 }
 
-function load($file)
+function load($file, $data = array())
 {
+    foreach ($data as $index => $value){
+        $$index = $value;
+    }
+
     require_once $file;
 }
 

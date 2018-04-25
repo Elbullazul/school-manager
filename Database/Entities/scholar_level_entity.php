@@ -15,12 +15,44 @@ class scholar_level_entity extends entity
     private $name;
     private $cycle_id;
 
-    function name($_name) {
-        $this->name = $_name;
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
-    function cycle_id($_cycle_id) {
-        $this->cycle_id = $_cycle_id;
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCycleId()
+    {
+        return $this->cycle_id;
+    }
+
+    /**
+     * @param mixed $cycle_id
+     */
+    public function setCycleId($cycle_id)
+    {
+        $this->cycle_id = $cycle_id;
     }
 
     function properties()

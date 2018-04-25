@@ -1,14 +1,13 @@
 <?php
 
 use Services\paths;
-use Services\globals;
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title><?= globals::get_once('VIEW_TITLE'); ?></title>
+    <title><?= $TITLE; ?></title>
 
     <!-- JQuery 3.3.1 -->
     <script type="text/javascript" src="<?= paths::resource('jquery-3.3.1/jquery-3.3.1.min.js'); ?>"></script>
@@ -36,7 +35,7 @@ use Services\globals;
 <?php
 load(paths::part('header.php'));
 load(paths::part('show-flashes.php'));
-load(paths::view(globals::get('VIEW')));
+load(paths::view($FILE), $data);
 load(paths::part('footer.php'));
 ?>
 </body>

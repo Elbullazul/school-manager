@@ -1,2 +1,2 @@
 <?php
-load(\Services\paths::part('interface.php'));
+load(\Services\paths::part('interface.php'), $data);

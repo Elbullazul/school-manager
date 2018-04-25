@@ -8,17 +8,26 @@ abstract class entity
     protected $date_created;  // persist
     protected $date_modified; // persist
 
-    function modified_by()
+    /**
+     * @return mixed
+     */
+    public function getModifiedBy()
     {
-        return $this->modifed_by;
+        return $this->modified_by;
     }
 
-    function date_created()
+    /**
+     * @return mixed
+     */
+    public function getDateCreated()
     {
         return $this->date_created;
     }
 
-    function date_modified()
+    /**
+     * @return mixed
+     */
+    public function getDateModified()
     {
         return $this->date_modified;
     }

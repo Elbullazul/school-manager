@@ -16,24 +16,68 @@ class course_entity extends entity
     private $name;
     private $level_id;
 
-    function id($_id)
+    /**
+     * @return mixed
+     */
+    public function getId()
     {
-        $this->id = $_id;
+        return $this->id;
     }
 
-    function code($_code)
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
     {
-        $this->code = $_code;
+        $this->id = $id;
     }
 
-    function name($_name)
+    /**
+     * @return mixed
+     */
+    public function getCode()
     {
-        $this->name = $_name;
+        return $this->code;
     }
 
-    function level_id($_level_id)
+    /**
+     * @param mixed $code
+     */
+    public function setCode($code)
     {
-        $this->level_id = $_level_id;
+        $this->code = $code;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLevelId()
+    {
+        return $this->level_id;
+    }
+
+    /**
+     * @param mixed $level_id
+     */
+    public function setLevelId($level_id)
+    {
+        $this->level_id = $level_id;
     }
 
     function properties()
