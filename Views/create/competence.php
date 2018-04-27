@@ -37,7 +37,16 @@ $competences_count = count($competences);
 
                 // add to input
                 var comps = competenceInput.attr('value');
-                competenceInput.attr('value', [comps, competence_id]);
+                if (comps != "") {
+                    values = JSON.parse(comps);
+                    values.push(competence_id);
+                    values = JSON.stringify(values);
+                }
+                else {
+                    values = JSON.stringify([competence_id]);
+                }
+
+                competenceInput.attr('value', values);
 
                 button.text('×');
             } else {
@@ -45,7 +54,18 @@ $competences_count = count($competences);
                 button.addClass('btn-success');
 
                 // remove from input
-                competenceInput.attr('value', '');
+                var comps = competenceInput.attr('value');
+
+                var index = comps.indexOf(competence_id);
+                if (index > -1) {
+                    values = JSON.parse(comps);
+                    values = values.splice(index, 1);
+                    values = JSON.stringify(values);
+                } else {
+                    values = '';
+                }
+
+                competenceInput.attr('value', values);
 
                 button.text('+');
             }
@@ -106,8 +126,6 @@ $competences_count = count($competences);
         competence.attr("id", "competence_" + count);
 
         var element = document.getElementById('inputCompetences');
-//        element.value = [name, code, desc, pond];
-
         competence.removeClass('d-none');
 
         $('#form-competences').append(competence);
@@ -169,7 +187,7 @@ load(paths::part('back-button.php'));
 
                     ?>
                 </table>
-                <input type="hidden" value="" id="competences" name="competences" required="">
+                <input type="hidden" value="[]" id="competences" name="competences[]" required="">
                 <button type="button" class="btn btn-block" type="button"
                         data-toggle="modal" data-target="#myModal">
                     <?= labels::get('@UI39'); ?>
