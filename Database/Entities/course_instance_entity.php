@@ -123,18 +123,4 @@ class course_instance_entity extends entity
         $this->class_id = $class_id;
     }
 
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "trimester_id" => $this->trimester_id,
-            "course_id" => $this->course_id,
-            "teacher_id" => $this->teacher_id,
-            "period_id" => $this->period_id,
-            "day_id" => $this->day_id,
-            "class_id" => $this->class_id
-        );
-
-    }
-
 }

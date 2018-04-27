@@ -14,6 +14,8 @@ class scholar_trimester_entity extends entity
     private $id;
     private $begins;
     private $ends;
+    private $name;
+    private $trimester_rank;
     private $scholar_year_id;
 
     /**
@@ -59,6 +61,38 @@ class scholar_trimester_entity extends entity
     /**
      * @return mixed
      */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTrimesterRank()
+    {
+        return $this->trimester_rank;
+    }
+
+    /**
+     * @param mixed $trimester_rank
+     */
+    public function setTrimesterRank($trimester_rank)
+    {
+        $this->trimester_rank = $trimester_rank;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getScholarYearId()
     {
         return $this->scholar_year_id;
@@ -70,16 +104,6 @@ class scholar_trimester_entity extends entity
     public function setScholarYearId($scholar_year_id)
     {
         $this->scholar_year_id = $scholar_year_id;
-    }
-
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "begins" => $this->begins,
-            "ends" => $this->ends,
-            "scholar_year_id" => $this->scholar_year_id
-        );
     }
 
 }

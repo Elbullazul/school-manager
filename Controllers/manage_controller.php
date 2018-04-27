@@ -22,10 +22,10 @@ class manage_controller extends controller
         $this->view(links::get('manage-schedule'));
     }
 
-    function view($tag)
+    function view($tag, $data = array())
     {
         security::access();
-        parent::view($tag);
+        parent::view($tag, $data);
     }
 
     function home()

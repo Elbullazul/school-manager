@@ -54,13 +54,4 @@ class scholar_year_entity extends entity
         $this->ends = $ends;
     }
 
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "begins" => $this->begins,
-            "ends" => $this->ends
-        );
-    }
-
 }

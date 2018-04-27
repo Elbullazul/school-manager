@@ -37,7 +37,7 @@ if (!globals::is_set('ERROR')) {
         <?= globals::get('ERROR'); ?>
     </h3>
     <br/>
-    <button class="btn" onclick="history.go(-1);">Back</button>
+    <button class="btn" onclick="history.go(-1);"><?= labels::get('@UI24'); ?></button>
 </div>
 </body>
 </html>

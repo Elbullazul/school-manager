@@ -11,7 +11,7 @@ namespace Services;
 
 abstract class date
 {
-    static function get()
+    static function now()
     {
         return date('Y-m-d');
     }

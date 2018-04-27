@@ -18,7 +18,13 @@ class application {
         globals::set('RESOURCES', __DIR__.'\..\Resources');
         labels::set_locale();
 
-        $crutch = new pseudo_controller();
-        $crutch->start();
+        // different processing with AJAX calls
+        if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {
+            $ajax = new ajax_service();
+            $ajax->start();
+        } else {
+            $controller = new pseudo_controller();
+            $controller->start();
+        }
     }
 }

@@ -97,27 +97,27 @@ button a:active {
     padding-bottom: 30px;
 }
 
-.alert {
+.alert-solid {
     border-radius: 0;
     border: none;
 }
 
-.alert-danger {
+.alert-solid.alert-danger {
     color: #fff !important;
     background-color: #ba2222 !important;
 }
 
-.alert-success {
+.alert-solid.alert-success {
     color: #fff !important;
     background-color: #22ba22 !important;
 }
 
-.alert-warning {
+.alert-solid.alert-warning {
     color: #fff !important;
     background-color: #eeba22 !important;
 }
 
-.alert-info {
+.alert-solid.alert-info {
     color: #000;
     background-color: #dedede;
 }
@@ -163,5 +163,14 @@ button a:active {
     background-color: rgba(0,0,0,0.1);
 }
 
+.day {
+    background-color: rgba(0,0,0,0.2);
+}
+
 .schedule {
+}
+
+.template_competence {
+    margin-top: 5px;
+    background-color: #f1f1f1;
 }

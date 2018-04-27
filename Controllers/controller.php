@@ -16,11 +16,11 @@ abstract class controller
 {
     abstract function home();
 
-    function view($view)
+    function view($view, $data = array())
     {
         $data['TITLE'] = titles::get($view);
         $data['TAG'] = $view;
-        $data['FILE'] = $view.'.php';
+        $data['FILE'] = $view . '.php';
 
         load(paths::template('master.php'), $data);
     }

@@ -65,13 +65,4 @@ class user_type_entity extends entity
         $this->description = $description;
     }
 
-    function properties()
-    {
-        return array(
-            "type_id" => $this->type_id,
-            "access_level" => $this->access_level,
-            "type" => $this->type,
-            "description" => $this->description
-        );
-    }
 }

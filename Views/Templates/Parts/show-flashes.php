@@ -8,7 +8,7 @@ $flashes = flashes::get();
 if (!empty($flashes)) {
     foreach ($flashes as $type => $messages) {
         foreach ($messages as $index => $message) {
-            $html = '<div class="alert-'.flashes::get_name($type).' alert text-center alert-dismissible">';
+            $html = '<div class="alert-'.flashes::get_name($type).' alert alert-solid text-center alert-dismissible">';
             $html = $html.labels::get($message['text']);
 
             if ($message['sticky'] == false)

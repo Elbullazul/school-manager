@@ -21,11 +21,7 @@ abstract class posts
 
     static function is_set($_key)
     {
-        if (posts::get($_key) != "") {
-            return true;
-        } else {
-            return false;
-        }
+        return (isset($_POST[$_key]) && !empty($_POST[$_key]));
     }
 }
 

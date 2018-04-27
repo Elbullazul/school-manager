@@ -55,13 +55,4 @@ class scholar_level_entity extends entity
         $this->cycle_id = $cycle_id;
     }
 
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "name" => $this->name,
-            "cycle_id" => $this->cycle_id
-        );
-    }
-
 }

@@ -80,14 +80,4 @@ class course_entity extends entity
         $this->level_id = $level_id;
     }
 
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "code" => $this->code,
-            "name" => $this->name,
-            "level_id" => $this->level_id
-        );
-    }
-
 }

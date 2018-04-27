@@ -32,13 +32,6 @@ abstract class entity
         return $this->date_modified;
     }
 
-    function get($key)
-    {
-        return $this->properties()[$key];
-    }
-
-    abstract function properties();
-
     function metadata() {
         return array(
             "date_created" => $this->date_created,

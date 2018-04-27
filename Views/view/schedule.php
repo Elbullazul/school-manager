@@ -3,86 +3,74 @@
 use Services\data;
 use Services\paths;
 use Services\labels;
-use Database\Repositories\days_repository;
-use Database\Repositories\periods_repository;
-use Database\Repositories\classes_repository;
-use Database\Repositories\courses_repository;
-use Database\Repositories\courses_instances_repository;
 
 ?>
 
+<script>
+    function printSchedule() {
+        window.print();
+    }
+</script>
+
+<?php
+load(paths::part('back-button.php'));
+?>
+
 <div class="row container-fluid h-100">
-    <nav class="col-sm-3 col-md-2 sidebar d-none d-md-block">
+    <div class="schedule col-md-12 m-3 ">
         <?php
-        load(paths::part('sidebar.php'), $data);
-        ?>
-    </nav>
 
-    <div class="col-sm-9 col-md-10 pt-3">
-        <div class="schedule">
-            <?php
+        $days = $data['DAYS'];
+        $periods = $data['PERIODS'];
+        $courses = $data['COURSES'];
+        $trimester = $data['TRIMESTER'];
 
-            $repo = new courses_instances_repository();
-            $courses = $repo->find_current('2017-2018 T1');
+        // TODO: load content and display
 
-            if (!is_array($courses))
-                $courses = array($courses);
+        echo '<h1>' . labels::get('@UI15') . ' ' . $trimester['id'] . '</h1>';
 
-            // load days and periods
-            $repo = new days_repository();
-            $days = $repo->fetch_all();
+        // display day names
+        echo '<div class="row"><div class="col-md-2"></div>';   // empty period column
+        foreach ($days as $day) {
+            $name = $day['name'];
 
-            $repo = new periods_repository();
-            $periods = $repo->fetch_all();
+            echo '<div class="col-md-2 day">' . $name . '</div>';
+        }
 
-            // TODO: load content and display
+        echo '</div>';
 
-            foreach ($periods as $period) {
-                echo '<div class="row">';
+        foreach ($periods as $period_id => $period) {
+            echo '<div class="row">';
 
-                $begins = $period->getBegins();
-                $begins = substr($begins, 0, strlen($begins) - 3);
+            $begins = $period['begins'];
+            $ends = $period['ends'];
 
-                $ends = $period->getEnds();
-                $ends = substr($ends, 0, strlen($ends) - 3);
+            echo "<div class='col-md-2 period'>$begins - $ends</div>";
 
-                echo "<div class='col-md-2 period'>$begins - $ends</div>";
+            foreach ($days as $day_id => $day) {
+                $current = data::get_course($day_id, $period_id, $courses);
 
-                foreach ($days as $day) {
-
-                    $html = "<div class='col-md-2 course empty'></div>";
-
-                    // get day courses
-                    $entities = data::find_entities('getDayId', $day->getId(), $courses);
-
-                    if (!is_null($entities)) {
-                        $entity = data::find_entity('getPeriodId', $period->getId(), $entities);
-                        if (!is_null($entity)) {
-                            $html = '<div class="col-md-2 text-center course">';
-
-                            // find course data
-                            $repo = new courses_repository();
-                            $course_data = $repo->find('id', $entity->getCourseId());
-
-                            $html = $html . '<b>' . $course_data->getName() . '</b>';
-                            $html = $html . '<p class="mb-0">' . $course_data->getCode() . '</p></br>';
-
-                            $repo = new classes_repository();
-                            $class = $repo->find('id', $entity->getClassId());
-
-                            $html = $html . '<p class="mb-0">' . labels::get('@UI20') . ': ' . $class->getCode() . '</p>';
-                            $html = $html . '</div>';
-                        }
-                    }
-                    echo $html;
+                if (!is_null($current)) {
+                    echo '<div class="col-md-2 text-center course">';
+                    echo '<b>' . $current['name'] . '</b>';
+                    echo '<p class="mb-0">' . $current['code'] . '</p></br>';
+                    echo '<p class="mb-0">' . labels::get('@UI20') . ': ' . $current['class'] . '</p>';
+                    echo '</div>';
+                } else {
+                    echo "<div class='col-md-2 course empty'></div>";
                 }
+            }
 
-                echo '</div>';
-            } ?>
-        </div>
+            echo '</div>';
+        } ?>
     </div>
-
-    <div class="spacer-30">
-    </div>
+    <div class="spacer-10"></div>
 
 </div>
+<?php
+load(paths::part('print-button.php'));
+?>
+<div class="spacer-30">
+</div>
+
+<!--</div>-->

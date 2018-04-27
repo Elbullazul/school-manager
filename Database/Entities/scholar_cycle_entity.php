@@ -37,13 +37,4 @@ class scholar_cycle_entity extends entity
     {
         $this->name = $name;
     }
-
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "name" => $this->name
-        );
-    }
-
 }

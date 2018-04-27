@@ -1,6 +1,7 @@
 <!--
   Naming convention:
   - @SYSXX: System text, used for events, errors or exceptions
+  - @PAXX: Page name or page title for display in menus
   - @UIXX: Display labels for text in web pages
 
   TEMPLATE
@@ -232,6 +233,11 @@
     <label>
         <key>@UI20</key>
         <text>Class</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI24</key>
+        <text>Back</text>
         <comment></comment>
     </label>
 </labels>

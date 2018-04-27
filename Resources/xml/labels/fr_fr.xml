@@ -1,6 +1,7 @@
 <!--
   Naming convention:
   - @SYSXX: System text, used for events, errors or exceptions
+  - @PAXX: Page name or page title for display in menus
   - @UIXX: Display labels for text in webpages
 
   TEMPLATE
@@ -252,6 +253,91 @@
     <label>
         <key>@UI23</key>
         <text>Code du cours</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI24</key>
+        <text>Retour</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI25</key>
+        <text>Imprimer</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI26</key>
+        <text>Pondération</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI27</key>
+        <text>Nom</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI28</key>
+        <text>Code</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI29</key>
+        <text>Description</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI30</key>
+        <text>Créer une compétence</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI31</key>
+        <text>Trimestres pour lesquels cette compétence est valide</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI32</key>
+        <text>1er Trimestre</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI33</key>
+        <text>2e Trimestre</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI34</key>
+        <text>3e Trimestre</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI35</key>
+        <text>Compétence ajoutée avec succès</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI36</key>
+        <text>Continuer</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI37</key>
+        <text>Détails du cours</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI38</key>
+        <text>Cours</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI39</key>
+        <text>Créer une compétence</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI40</key>
+        <text>Terminer</text>
         <comment></comment>
     </label>
 </labels>

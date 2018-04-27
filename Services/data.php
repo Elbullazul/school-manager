@@ -4,29 +4,8 @@ namespace Services;
 
 abstract class data
 {
-    static function to_model($_entity, $_model)
+    static function find_entities($method, $value, $array)
     {
-        foreach ($_entity->properties() as $field => $value) {
-            if (array_key_exists($field, $_model->properties())) {
-                $_model->$field($value);
-            }
-        }
-
-        return $_model;
-    }
-
-    static function to_entity($_model, $_entity)
-    {
-        foreach ($_model->properties() as $field => $value) {
-            if (array_key_exists($field, $_entity->properties())) {
-                $_entity->$field($value);
-            }
-        }
-
-        return $_entity;
-    }
-
-    static function find_entities($method, $value, $array) {
         $entities = array();
 
         foreach ($array as $entity) {
@@ -38,7 +17,8 @@ abstract class data
         return $entities;
     }
 
-    static function find_entity($method, $value, $array) {
+    static function find_entity($method, $value, $array)
+    {
         foreach ($array as $entity) {
             if ($entity->$method() == $value) {
                 return $entity;
@@ -46,6 +26,29 @@ abstract class data
         }
 
         return NULL;
+    }
+
+    static function search_sub_array($key, $value, $array)
+    {
+        foreach ($array as $tuple) {
+            if ($tuple[$key] == $value) {
+                return $tuple;
+            }
+        }
+
+        return NULL;
+    }
+
+    static function get_course($day, $period, $courses) {
+        foreach ($courses as $course) {
+            if ($course['day'] == $day && $course['period'] == $period) {
+                return $course;
+            }
+        }
+    }
+
+    static function unix_path($path) {
+        return str_replace("\\", '/', $path);
     }
 
 }

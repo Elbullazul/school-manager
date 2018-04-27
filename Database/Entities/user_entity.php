@@ -64,14 +64,4 @@ class user_entity extends entity
     {
         $this->password = $password;
     }
-
-    function properties()
-    {
-        return array(
-            "user_id" => $this->user_id,
-            "username" => $this->username,
-            "user_type" => $this->user_type,
-            "password" => $this->password
-        );
-    }
 }

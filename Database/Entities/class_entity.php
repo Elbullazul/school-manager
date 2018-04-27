@@ -55,13 +55,4 @@ class class_entity extends entity
         $this->description = $description;
     }
 
-    function properties()
-    {
-        return array(
-            "id" => $this->id,
-            "code" => $this->code,
-            "description" => $this->description
-        );
-    }
-
 }

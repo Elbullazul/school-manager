@@ -60,8 +60,13 @@
         <path>/create/course</path>
     </link>
     <link>
-        <tag>course-competences</tag>
+        <tag>create-competence</tag>
         <title>@PA16</title>
-        <path>/create/course-competences</path>
+        <path>/create/competence</path>
+    </link>
+    <link>
+        <tag>create-write</tag>
+        <title>@PA16</title>
+        <path>/create/write</path>
     </link>
 </links>
