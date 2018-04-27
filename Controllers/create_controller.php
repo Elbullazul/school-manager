@@ -77,6 +77,10 @@ class create_controller extends controller
 
     function write() {
         dump($_POST);
+
+        $ftp = explode(',',$_POST['competences']);
+
+        dump($ftp);
     }
 
     function view($tag, $data = array())

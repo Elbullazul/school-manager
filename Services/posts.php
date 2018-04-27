@@ -21,7 +21,7 @@ abstract class posts
 
     static function is_set($_key)
     {
-        return (isset($_POST[$_key]) && !empty($_POST[$_key]));
+        return (isset($_POST[$_key]));
     }
 }
 

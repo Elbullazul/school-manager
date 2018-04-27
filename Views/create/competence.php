@@ -29,7 +29,6 @@ $competences_count = count($competences);
             var divId = $(button.parent()).parent().attr('id');
             var competence_id = divId.replace('competence_', '');
             var competenceInput = $('#competences');
-            console.log(competence_id);
 
             if (button.hasClass('btn-success')) {
                 button.removeClass('btn-success');
@@ -38,12 +37,10 @@ $competences_count = count($competences);
                 // add to input
                 var comps = competenceInput.attr('value');
                 if (comps != "") {
-                    values = JSON.parse(comps);
-                    values.push(competence_id);
-                    values = JSON.stringify(values);
+                    values = comps + ',' + competence_id;
                 }
                 else {
-                    values = JSON.stringify([competence_id]);
+                    values = competence_id;
                 }
 
                 competenceInput.attr('value', values);
@@ -56,11 +53,10 @@ $competences_count = count($competences);
                 // remove from input
                 var comps = competenceInput.attr('value');
 
-                var index = comps.indexOf(competence_id);
-                if (index > -1) {
-                    values = JSON.parse(comps);
-                    values = values.splice(index, 1);
-                    values = JSON.stringify(values);
+                if (comps.indexOf(competence_id) !== -1) {
+                    values = comps.replace(competence_id + ',', ''); // if any index
+                    values = values.replace(',' + competence_id, ''); // if last index
+                    values = values.replace(competence_id, '');  // if only index
                 } else {
                     values = '';
                 }
@@ -96,7 +92,8 @@ $competences_count = count($competences);
                 pond_t3: pond3
             },
             success: function (result) {
-//                $("#messages").html(result);
+                // DEBUG
+                $("#messages").html(result);
                 $.notify({
                         message: result
                     }, {
@@ -166,7 +163,7 @@ load(paths::part('back-button.php'));
                     <tr id="template_competence" class="template_competence d-none container-fluid form-control">
                         <th class="content col-md-10 border-0"></th>
                         <th class="pr-0 border-0">
-                            <button class="btn btn-success btn-toggle">+</button>
+                            <button type="button" class="btn btn-success btn-toggle">+</button>
                         </th>
                     </tr>
                     <?php
@@ -187,7 +184,7 @@ load(paths::part('back-button.php'));
 
                     ?>
                 </table>
-                <input type="hidden" value="[]" id="competences" name="competences[]" required="">
+                <input type="hidden" value="" id="competences" name="competences" required="">
                 <button type="button" class="btn btn-block" type="button"
                         data-toggle="modal" data-target="#myModal">
                     <?= labels::get('@UI39'); ?>

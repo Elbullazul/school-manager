@@ -45,8 +45,6 @@ class ajax_service
     // accepted callbacks
     function save_competence()
     {
-        dump($_POST);
-
         if (!is_null($_POST)) {
             if (posts::is_set('name') &&
                 posts::is_set('code') &&
@@ -76,9 +74,9 @@ class ajax_service
                 foreach ($trimesters as $rank => $ponderation) {
                     $trim_pond = new competence_ponderation_entity();
                     $trim_pond->setTrimesterRank($rank);
-                    $trim_pond->getCompetenceId()
+                    $trim_pond->getCompetenceId();
 
-                    $t_repo->save();
+                    $t_repo->save($trim_pond);
                 }
 
 //                foreach ($trimesters as $current_year_trimester_id) {
