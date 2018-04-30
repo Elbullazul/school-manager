@@ -18,9 +18,98 @@ $competences_count = count($competences);
 ?>
 
 <script>
+    // Page insertion
+    var count = <?= $competences_count; ?>;    // TODO: competence count
+
     // Modal
     $(document).ready(function () {
-        $('#myModal').on('show.bs.modal', function () {
+        $('#competence-form').validate({
+            rules: {
+                inputComp1Pond: {
+                    required: true,
+                    min: 0,
+                    max: 100,
+                    number: true
+                },
+                inputComp2Pond: {
+                    required: true,
+                    min: 0,
+                    max: 100
+                },
+                inputComp3Pond: {
+                    required: true,
+                    min: 0,
+                    max: 100
+                }
+            },
+            messages: {
+                inputComp1Pond: {
+                    required: "Cancel your subscription!",
+                    min: "Must be higher or equal to zero",
+                    max: "Must be lower or equal to 100"
+                },
+                inputComp2Pond: {
+                    required: "Cancel your subscription!",
+                    min: "Must be higher or equal to zero",
+                    max: "Must be lower or equal to 100"
+                },
+                inputComp3Pond: {
+                    required: "Cancel your subscription!",
+                    min: "Must be higher or equal to zero",
+                    max: "Must be lower or equal to 100"
+                }
+            },
+            highlight: function (element) {
+                $(element).closest('.control-group')
+                    .removeClass('success').addClass('danger');
+            },
+            success: function (element) {
+                element.addClass('valid').closest('.control-group')
+                    .removeClass('danger').addClass('success');
+                // remove label
+                element.remove();
+            },
+            submitHandler: function (form) {
+                count++;
+                var name = $('#inputCompName').val();
+                var code = $('#inputCompCode').val();
+                var desc = $('#inputCompDesc').val();
+                var pondt1 = $('#inputComp1Pond').val();
+                var pondt2 = $('#inputComp2Pond').val();
+                var pondt3 = $('#inputComp3Pond').val();
+
+                $.ajax({
+                    type: $(form).attr('method'),
+                    url: "<?= '/ajax/save_competence'; ?>", // TODO: Include in links eventually
+                    data: {
+                        name: name,
+                        code: code,
+                        description: desc,
+                        ponderations: [pondt1, pondt2, pondt3]
+                    },
+                    success: function (result) {
+                        // DEBUG
+                        $("#messages").html(result);
+                        console.log('Saved data successfully');
+                        $.notify({
+                                message: result
+                            }, {
+                                type: 'success'
+                            }
+                        );
+                        addCompetenceDOM(name, code, desc);
+                    },
+                    error: function (xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        console.log('Error ocurred');
+                    }
+                });
+
+                $('#competence-modal').modal('hide');
+            }
+        });
+
+        $('#competence-modal').on('show.bs.modal', function () {
             removeData(this);
         });
 
@@ -69,54 +158,9 @@ $competences_count = count($competences);
         });
     });
 
-    function save() {
-        console.log('Sending data to server...');
-
-        count++;
-        var name = document.getElementById('inputCompName').value;
-        var code = document.getElementById('inputCompCode').value;
-        var desc = document.getElementById('inputCompDesc').value;
-        var pond1 = document.getElementById('inputComp1Pond').value;
-        var pond2 = document.getElementById('inputComp2Pond').value;
-        var pond3 = document.getElementById('inputComp3Pond').value;
-
-        console.log()
-
-        $.ajax({
-            type: 'POST',
-            url: "<?= '/ajax/save_competence'; ?>", // TODO: Include in links eventually
-            data: {
-                name: name,
-                code: code,
-                desc: desc,
-                pond_t1: pond1,
-                pond_t2: pond2,
-                pond_t3: pond3
-            },
-            success: function (result) {
-                // DEBUG
-                $("#messages").html(result);
-                $.notify({
-                        message: result
-                    }, {
-                        type: 'success'
-                    }
-                );
-                addCompetenceDOM(name, code, desc);
-            },
-            error: function (xhr, status, error) {
-                var err = eval("(" + xhr.responseText + ")");
-                console.log('Error ocurred');
-            }
-        });
-    };
-
     function removeData(modal) {
         $(modal).find('input,textarea').val('');
     }
-
-    // Page insertion
-    var count = <?= $competences_count; ?>;    // TODO: competence count
 
     function addCompetenceDOM(name, code, description) {
         var competence = $('#template_competence').clone(true, true);
@@ -127,7 +171,7 @@ $competences_count = count($competences);
         var element = document.getElementById('inputCompetences');
         competence.removeClass('d-none');
 
-        $('#form-competences').append(competence);
+        $('#table-competences').append(competence);
     }
 
 </script>
@@ -139,7 +183,7 @@ load(paths::modal('competence-dialog.php'));
 <?php
 load(paths::part('back-button.php'));
 ?>
-
+<a href="">text</a>
 <div class="row container-fluid h-100">
     <div class="col-md-3"></div>
     <div class="col-md-6 pt-3">
@@ -147,9 +191,9 @@ load(paths::part('back-button.php'));
             <div class="course-condensed">
                 <?php
                 echo '<h5>' . labels::get('@UI37') . '</h5>';
-                echo '<small class="mb-0"><b>' . labels::get('@UI27') . '</b>: ' . $course['name'] . '</small></br>';
-                echo '<small class="mb-0"><b>' . labels::get('@UI28') . '</b>: ' . $course['code'] . '</small></br>';
-                echo '<small class="mb-0"><b>' . labels::get('@UI21') . '</b>: ' . $level . '</small>';
+                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI27') . '</b>: ' . $course['name'] . '</small></br>';
+                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI28') . '</b>: ' . $course['code'] . '</small></br>';
+                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI21') . '</b>: ' . $level . '</small>';
 
                 ?>
             </div>
@@ -161,7 +205,7 @@ load(paths::part('back-button.php'));
                     </h2>
                     <div id="messages"></div>
                 </div>
-                <table id="form-competences" class="table">
+                <table id="table-competences" class="table">
                     <tr id="template_competence" class="template_competence d-none container-fluid form-control">
                         <th class="content col-md-10 border-0"></th>
                         <th class="pr-0 border-0">
@@ -191,7 +235,7 @@ load(paths::part('back-button.php'));
                 <input type="hidden" value="<?= $course['level']; ?>" id="inputLevel" name="course[level]" required="">
                 <input type="hidden" value="" id="competences" name="competences" required="">
                 <button type="button" class="btn btn-block" type="button"
-                        data-toggle="modal" data-target="#myModal">
+                        data-toggle="modal" data-target="#competence-modal">
                     <?= labels::get('@UI39'); ?>
                 </button>
                 <div class='spacer-10'></div>

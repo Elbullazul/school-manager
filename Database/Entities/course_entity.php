@@ -8,7 +8,6 @@
 
 namespace Database\Entities;
 
-
 use Objects\Models\course_model;
 
 class course_entity extends entity
@@ -88,7 +87,8 @@ class course_entity extends entity
         $model->setId($this->id);
         $model->setName($this->name);
         $model->setCode($this->code);
-        $model->setLevelId($this->level_id);
+        // TODO: Set Level from manager
+//        $model->setLevelId($this->level_id);
 
         return $model;
     }

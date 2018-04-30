@@ -100,17 +100,17 @@ class query_builder
             $parts = explode(" ", $condition);
 
             $column = $parts[0];
-            $operator = $parts[0];
-            $value = $parts[0];
+            $operator = $parts[1];
+            $value = $parts[2];
 
-            if ($sql_condition != "") {
+            if ($sql_condition == "") {
                 $sql_condition = $column . ' ' . $operator . ' \'' . $value . '\'';
             } else {
                 $sql_condition = $this->AND.' '. $column . ' ' . $operator . ' \'' . $value . '\'';
             }
         }
 
-        return $condition;
+        return $sql_condition;
     }
 
     function clear()

@@ -8,13 +8,16 @@
 
 namespace Objects\Models;
 
+use Database\Entities\course_entity;
 
 class course_model extends model
 {
     private $id;
     private $code;
     private $name;
-    private $level_id;
+    private $level; // find level when pooling from repo
+    private $competences;
+    private $dependencies;  // TODO: Implement dependencies
 
     /**
      * @return mixed
@@ -67,17 +70,59 @@ class course_model extends model
     /**
      * @return mixed
      */
-    public function getLevelId()
+    public function getLevel()
     {
-        return $this->level_id;
+        return $this->level;
     }
 
     /**
-     * @param mixed $level_id
+     * @param mixed $level
      */
-    public function setLevelId($level_id)
+    public function setLevel($level)
     {
-        $this->level_id = $level_id;
+        $this->level = $level;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCompetences()
+    {
+        return $this->competences;
+    }
+
+    /**
+     * @param mixed $competences
+     */
+    public function setCompetences($competences)
+    {
+        $this->competences = $competences;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDependencies()
+    {
+        return $this->dependencies;
+    }
+
+    /**
+     * @param mixed $dependencies
+     */
+    public function setDependencies(array $dependencies)
+    {
+        $this->dependencies = $dependencies;
+    }
+
+    function to_entity()
+    {
+        $entity = new course_entity();
+        $entity->setId($this->id);
+        $entity->setName($this->name);
+        $entity->setCode($this->code);
+        $entity->setLevelId($this->level_id->getId());
+
+        return $entity;
+    }
 }

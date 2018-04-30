@@ -10,8 +10,12 @@ namespace Core;
 
 use Database\Entities\competence_entity;
 use Database\Entities\competence_ponderation_entity;
+use Database\Managers\competence_ponderations_manager;
+use Database\Managers\competences_manager;
 use Database\Repositories\competence_ponderations_repository;
 use Database\Repositories\competences_repository;
+use Objects\Factories\competence_ponderations_factory;
+use Objects\Factories\competences_factory;
 use Services\posts;
 use Services\urls;
 use Services\labels;
@@ -33,7 +37,8 @@ class ajax_service
 
     function __call($name, $arguments)
     {
-        // TODO: Cause AJAX Error
+        // Invalid request
+        http_response_code(400);
     }
 
     function start()
@@ -45,55 +50,29 @@ class ajax_service
     // accepted callbacks
     function save_competence()
     {
-        if (!is_null($_POST)) {
-            if (posts::is_set('name') &&
-                posts::is_set('code') &&
-                posts::is_set('desc') &&
-                posts::is_set('pond_t1') &&
-                posts::is_set('pond_t2') &&
-                posts::is_set('pond_t3')
-            ) {
-                $entity = new competence_entity();  // TODO: Use manager instead
-                $entity->setName(posts::get('name'));
-                $entity->setCode(posts::get('code'));
-                $entity->setDescription(posts::get('desc'));
+        if (posts::exists()) {
+            if (posts::are_set('name', 'code', 'description', 'ponderations')) {
+                $bundle = posts::get_all();
+                $bundle['id'] = NULL;
 
-                $repo = new competences_repository();
-                $repo->save($entity);
-                $ID = $repo->get_last_id();
+                $competences_manager = new competences_manager();
+                $competence_model = competences_factory::construct($bundle);
+                $ID = $competences_manager->save_get_id($competence_model);
 
-                $trimesters = array();
+                $competence_ponderations_manager = new competence_ponderations_manager();
 
-                // if all are selected, set to NULL
-                $trimesters[1] = posts::get('pond_t1');
-                $trimesters[2] = posts::get('pond_t2');
-                $trimesters[3] = posts::get('pond_t3');
+                foreach ($bundle['ponderations'] as $rank => $ponderation) {
+                    $ponderation_bundle = ['competence_id' => $ID, 'trimester_rank' => ($rank + 1), 'ponderation' => $ponderation];
 
-                $repo = new competence_ponderations_repository();
-
-                foreach ($trimesters as $rank => $ponderation) {
-
-                    $trim_pond = new competence_ponderation_entity();   // TODO: Use manager instead
-                    $trim_pond->setCompetenceId($ID);
-                    $trim_pond->setTrimesterRank($rank);
-                    $trim_pond->setPonderation(posts::get('pond_t'.$rank));
-
-                    $repo->save($trim_pond);
+                    $competence_ponderations_model = competence_ponderations_factory::construct($ponderation_bundle);
+                    $competence_ponderations_manager->save($competence_ponderations_model);
                 }
-
-//                foreach ($trimesters as $current_year_trimester_id) {
-                    // get trimester id by result index when sorted by name/id
-//                    $trimester = $t_repo->get_year_trimester($current_year_trimester_id);
-//
-//                    $entity->setTrimesterId($trimester);
-//                }
-
-//                $ID = $repo->save($trimesters);
-
                 echo labels::get('@UI35');
             } else {
-                echo labels::get('@SYS01');
+                http_response_code(400);
             }
+        } else {
+            http_response_code(400);
         }
     }
 }

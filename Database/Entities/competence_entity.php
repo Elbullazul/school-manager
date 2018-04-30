@@ -89,6 +89,7 @@ class competence_entity extends entity
         $model->setDescription($this->description);
         $model->setId($this->id);
         $model->setName($this->name);
+        // TODO: Manager must include ponderations
 
         return $model;
     }

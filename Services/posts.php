@@ -23,6 +23,22 @@ abstract class posts
     {
         return (isset($_POST[$_key]));
     }
+
+    static function are_set() {
+
+        $keys = func_get_args();
+
+        foreach ( $keys as $key) {
+            if (!self::is_set($key))
+                return false;
+        }
+
+        return true;
+    }
+
+    static function exists() {
+        return !is_null($_POST);
+    }
 }
 
 ?>

@@ -2,15 +2,8 @@
 
 namespace Objects\Models;
 
-abstract class model
+use Objects\Interfaces\entitizable;
+
+abstract class model implements entitizable
 {
-    abstract function to_entity();
-    /*
-     * $entity = new entity();
-     * $entity->setField($this->field);
-     * return entity;
-     */
 }
-
-
-?>

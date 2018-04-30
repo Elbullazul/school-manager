@@ -16,6 +16,7 @@ class competence_model extends model
     private $name;
     private $code;
     private $description;
+    private $ponderations;
 
     /**
      * @return mixed
@@ -79,6 +80,22 @@ class competence_model extends model
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPonderations()
+    {
+        return $this->ponderations;
+    }
+
+    /**
+     * @param mixed $ponderations
+     */
+    public function setPonderations(array $ponderations)
+    {
+        $this->ponderations = $ponderations;
     }
 
     function to_entity()

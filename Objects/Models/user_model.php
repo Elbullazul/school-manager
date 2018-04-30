@@ -20,6 +20,14 @@ class user_model extends model
     }
 
     /**
+     * @param mixed $user_id
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+    }
+
+    /**
      * @return mixed
      */
     public function getUsername()
@@ -76,5 +84,9 @@ class user_model extends model
         $entity->setUserType($this->user_type);
 
         return $entity;
+    }
+
+    function check_user_password($user_model) {
+        return $this->password == $user_model->getPassword();
     }
 }

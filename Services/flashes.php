@@ -4,12 +4,12 @@ namespace Services;
 
 abstract class flashes
 {
-    /* inspired by https://github.com/plasticbrain/PhpFlashMessages */
+    /* inspired by PhpFlashMessages: https://github.com/plasticbrain/PhpFlashMessages */
 
-    static $INFO = '1';
-    static $SUCCESS = '2';
-    static $WARNING = '3';
-    static $DANGER = '4';
+    const INFO = '1';
+    const SUCCESS = '2';
+    const WARNING = '3';
+    const DANGER = '4';
 
     static function get()
     {

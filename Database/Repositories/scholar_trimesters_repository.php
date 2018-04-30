@@ -74,7 +74,7 @@ class scholar_trimesters_repository extends repository
             'modified_by',
             'date_created',
             'date_modified'
-        )->from($this->table)->where('begins <= \''.date::now().'\'')->and('ends >= \''.date::now().'\'');
+        )->from($this->table)->where('begins <= '.date::now())->and('ends >= '.date::now());
         $ret = $engine->execute();
 
         return $ret;

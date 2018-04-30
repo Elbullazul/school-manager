@@ -13,11 +13,11 @@ use Core\security;
 
 abstract class users
 {
-    static function connect($username, $user_type)
+    static function connect($user_model)
     {
-        sessions::set('username', $username);
-        sessions::set('type', $user_type->getType());
-        sessions::set('privileges', $user_type->getAccessLevel());
+        sessions::set('username', $user_model->getUsername());
+        sessions::set('type', $user_model->getUserType()->getType());
+        sessions::set('privileges', $user_model->getUserType()->getAccessLevel());
     }
 
     static function connected()
@@ -38,7 +38,7 @@ abstract class users
         if(self::connected())
             return sessions::get('privileges');
         else
-            return security::$PRIVILEGES['PUBLIC'];
+            return security::PRIVILEGES['PUBLIC'];
     }
 
     static function disconnect()

@@ -2,7 +2,9 @@
 
 namespace Database\Entities;
 
-abstract class entity
+use Objects\Interfaces\modelizable;
+
+abstract class entity implements modelizable
 {
     protected $modified_by;   // persist
     protected $date_created;  // persist
@@ -31,9 +33,4 @@ abstract class entity
     {
         return $this->date_modified;
     }
-
-    abstract function to_model();
 }
-
-
-?>

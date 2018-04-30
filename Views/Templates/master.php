@@ -12,6 +12,9 @@ use Services\paths;
     <!-- JQuery 3.3.1 -->
     <script type="text/javascript" src="<?= paths::resource('jquery-3.3.1/jquery-3.3.1.min.js'); ?>"></script>
 
+    <!-- JQuery Validate -->
+    <script type="text/javascript" src="<?= paths::resource('jquery-validation-1.17.0/jquery.validate.min.js'); ?>"></script>
+
     <!-- bootstrap JavaScript -->
     <script type="text/javascript"
             src="<?= paths::resource('bootstrap-4.0.0/js/bootstrap.bundle.min.js'); ?>"></script>

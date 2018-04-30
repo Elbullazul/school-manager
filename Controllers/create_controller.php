@@ -11,10 +11,12 @@ namespace Controllers;
 use Core\security;
 use Database\Entities\course_competence_entity;
 use Database\Entities\course_entity;
+use Database\Managers\scholar_levels_manager;
 use Database\Repositories\course_competences_repository;
 use Database\Repositories\courses_repository;
 use Database\Repositories\scholar_cycles_repository;
 use Database\Repositories\scholar_levels_repository;
+use Objects\Factories\scholar_levels_factory;
 use Services\flashes;
 use Services\links;
 use Services\posts;
@@ -29,18 +31,23 @@ class create_controller extends controller
 
     function course()
     {
+        // TODO: Use manager
+        $level_manager = new scholar_levels_manager();
+        $level_models = $level_manager->fetch_all();
 
-        $repo = new scholar_levels_repository();
+//        $repo = new scholar_levels_repository();
         $c_repo = new scholar_cycles_repository();
-        $levels = $repo->fetch_all();
+//        $levels = $repo->fetch_all();
 
+        $levels = [];
         $the_levels = array();
 
-        foreach ($levels as $level) {
-            $ID = $level->getId();
+        foreach ($level_models as $level_model) {
 
-            $the_levels[$ID]['name'] = $level->getName();
-            $cycle = $c_repo->find('id', $level->getCycleId());
+            $ID = $level_model->getId();
+
+            $the_levels[$ID]['name'] = $level_model->getName();
+            $cycle = $c_repo->find('id', $level_model->getCycleId());
             $the_levels[$ID]['cycle'] = $cycle->getName();
         }
 
@@ -59,6 +66,7 @@ class create_controller extends controller
 
         $the_competences = array();
 
+        // TODO: Use manager
         foreach ($competences as $competence) {
             $ID = $competence->getId();
 
@@ -107,7 +115,7 @@ class create_controller extends controller
             $repo->save($course_competence);
         }
 
-        flashes::set('@UI41',flashes::$SUCCESS, true);
+        flashes::set('@UI41',flashes::SUCCESS, true);
 
         redirect($this->home());
     }
