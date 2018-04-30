@@ -8,6 +8,8 @@
 
 namespace Database\Entities;
 
+use Objects\Models\scholar_year_model;
+
 class scholar_year_entity extends entity
 {
     private $id;
@@ -20,6 +22,14 @@ class scholar_year_entity extends entity
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -52,6 +62,16 @@ class scholar_year_entity extends entity
     public function setEnds($ends)
     {
         $this->ends = $ends;
+    }
+
+    function to_model()
+    {
+        $model = new scholar_year_model();
+        $model->setId($this->id);
+        $model->setEnds($this->ends);
+        $model->setBegins($this->begins);
+
+        return $model;
     }
 
 }

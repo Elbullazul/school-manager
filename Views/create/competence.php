@@ -80,6 +80,8 @@ $competences_count = count($competences);
         var pond2 = document.getElementById('inputComp2Pond').value;
         var pond3 = document.getElementById('inputComp3Pond').value;
 
+        console.log()
+
         $.ajax({
             type: 'POST',
             url: "<?= '/ajax/save_competence'; ?>", // TODO: Include in links eventually
@@ -184,6 +186,9 @@ load(paths::part('back-button.php'));
 
                     ?>
                 </table>
+                <input type="hidden" value="<?= $course['name']; ?>" id="inputName" name="course[name]" required="">
+                <input type="hidden" value="<?= $course['code']; ?>" id="inputCode" name="course[code]" required="">
+                <input type="hidden" value="<?= $course['level']; ?>" id="inputLevel" name="course[level]" required="">
                 <input type="hidden" value="" id="competences" name="competences" required="">
                 <button type="button" class="btn btn-block" type="button"
                         data-toggle="modal" data-target="#myModal">

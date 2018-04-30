@@ -8,8 +8,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 use Database\Entities\course_instance_entity;
 
 class courses_instances_repository extends repository
@@ -22,80 +21,54 @@ class courses_instances_repository extends repository
 
     function find($field, $value)
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              id,
-              trimester_id,
-              course_id,
-              teacher_id,
-              period_id,
-              day_id,
-              class_id,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.$field = :$field";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'id',
+            'trimester_id',
+            'course_id',
+            'teacher_id',
+            'period_id',
+            'day_id',
+            'class_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
 
-        $data = $Cnn->prepare($cmd);
-
-        $data->bindValue($field, $value, PDO::PARAM_STR);
-        $data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $data->execute();
-        $instance = $data->fetch();
-
-        if (!$instance) {
-            $instance = new $this->entity();
-        }
-
-        return $instance;
+        return $ret;
     }
 
-    function find_current($trimester_id) {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              id,
-              trimester_id,
-              course_id,
-              teacher_id,
-              period_id,
-              day_id,
-              class_id,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.trimester_id = :trimester_id";
+    function find_all($field, $value)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'trimester_id',
+            'course_id',
+            'teacher_id',
+            'period_id',
+            'day_id',
+            'class_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
 
-        $data = $Cnn->prepare($cmd);
-
-        $data->bindValue('trimester_id', $trimester_id, PDO::PARAM_STR);
-        $data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $data->execute();
-        $instance = $data->fetch();
-
-        if (!$instance) {
-            $instance = new $this->entity();
-        }
-
-        return $instance;
+        return $ret;
     }
 
-    function save($_model)
+    function save($model)
     {
         // TODO: Implement save() method.
     }
 
-    function update($_model, $_new_model)
+    function update($field, $value, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($_model)
-    {
-        // TODO: Implement destroy() method.
     }
 
 }

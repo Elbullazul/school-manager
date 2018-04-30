@@ -3,15 +3,14 @@
  * Created by PhpStorm.
  * User: crime
  * Date: 2018-04-24
- * Time: 13:09
+ * Time: 13:33
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
+use Database\Entities\scholar_year_entity;
 
-use Objects\Models\period_model;
-
-class period_entity extends entity
+class scholar_year_model extends model
 {
     private $id;
     private $begins;
@@ -65,13 +64,14 @@ class period_entity extends entity
         $this->ends = $ends;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new period_model();
-        $model->setId($this->id);
-        $model->setBegins($this->begins);
-        $model->setEnds($this->ends);
+        $entity = new scholar_year_entity();
+        $entity->setId($this->id);
+        $entity->setEnds($this->ends);
+        $entity->setBegins($this->begins);
 
-        return $model;
+        return $entity;
     }
+
 }

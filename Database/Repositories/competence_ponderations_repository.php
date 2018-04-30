@@ -8,6 +8,7 @@
 
 namespace Database\Repositories;
 
+use Database\query_builder;
 use Database\Entities\competence_ponderation_entity;
 
 class competence_ponderations_repository extends repository
@@ -20,45 +21,50 @@ class competence_ponderations_repository extends repository
 
     function find($field, $value)
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              competence_id,
-              trimester_rank,
-              ponderation,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.$field = :$field";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'competence_id',
+            'trimester_rank',
+            'ponderation',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
 
-        $data = $Cnn->prepare($cmd);
-
-        $data->bindValue($field, $value, PDO::PARAM_STR);
-        $data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $data->execute();
-        $entity = $data->fetch();
-
-        if (!$entity) {
-            $entity = new $this->entity();
-        }
-
-        return $entity;
+        return $ret;
     }
 
-    function save($_model)
+    function find_all($field, $value)
     {
-        // TODO: Implement save() method.
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'competence_id',
+            'trimester_rank',
+            'ponderation',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
+
+        return $ret;
     }
 
-    function update($_model, $_new_model)
+    function save($model)
+    {
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->insert($this->table, ['competence_id', 'trimester_rank', 'ponderation'])
+            ->values($model->getCompetenceId(), $model->getTrimesterRank(), $model->getPonderation());
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function update($field, $value, $model)
     {
         // TODO: Implement update() method.
     }
-
-    function destroy($_model)
-    {
-        // TODO: Implement destroy() method.
-    }
-
 }

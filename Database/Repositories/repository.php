@@ -2,8 +2,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 
 abstract class repository
 {
@@ -14,29 +13,45 @@ abstract class repository
 
     abstract function find($field, $value);
 
-    abstract function save($_model);
+    abstract function find_all($field, $value);
 
-    abstract function update($_model, $_new_model);
+    abstract function save($model);
 
-    abstract function destroy($_model);
+    abstract function update($field, $value, $model);
+
+    function destroy($field, $value) {
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->delete($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function destroy_all() {
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->delete($this->table);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
 
     function fetch_all()
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT *
-            FROM $this->table";
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select('*')->from($this->table);
+        $ret = $engine->execute();
 
-        $table_data = $Cnn->prepare($cmd);
+        return $ret;
+    }
 
-        $table_data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $table_data->execute();
-        $data = $table_data->fetchAll();
+    function get_last_id()
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select('id')->from($this->table)->order_by('date_created')->desc()->limit(1);
+        $ret = $engine->execute();
 
-        if (!$data) {
-            $data = new $this->entity();
-        }
-
-        return $data;
+        // TODO: is this OK?
+        return $ret->getId();
     }
 }
 

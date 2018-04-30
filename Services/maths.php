@@ -10,10 +10,10 @@ namespace Services;
 
 abstract class maths
 {
-    public $EQUALS = '=';
-    public $GREATER = '>';
-    public $LESSER = '<';
-    public $GREATER_EQUALS = '>=';
-    public $LESSER_EQUALS = '<=';
-    public $NOT_EQUALS = '!=';
+    public static $EQUALS = ' = ';
+    public static $GREATER = '>';
+    public static $LESSER = '<';
+    public static $GREATER_EQUALS = '>=';
+    public static $LESSER_EQUALS = '<=';
+    public static $NOT_EQUALS = '!=';
 }

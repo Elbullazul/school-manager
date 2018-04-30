@@ -2,19 +2,17 @@
 /**
  * Created by PhpStorm.
  * User: crime
- * Date: 2018-04-26
- * Time: 20:45
+ * Date: 2018-04-24
+ * Time: 16:41
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
+use Database\Entities\class_entity;
 
-use Objects\Models\competence_model;
-
-class competence_entity extends entity
+class class_model extends model
 {
     private $id;
-    private $name;
     private $code;
     private $description;
 
@@ -32,22 +30,6 @@ class competence_entity extends entity
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
     /**
@@ -82,15 +64,13 @@ class competence_entity extends entity
         $this->description = $description;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new competence_model();
-        $model->setCode($this->code);
-        $model->setDescription($this->description);
-        $model->setId($this->id);
-        $model->setName($this->name);
+        $entity = new class_entity();
+        $entity->setId($this->id);
+        $entity->setCode($this->code);
+        $entity->setDescription($this->description);
 
-        return $model;
+        return $entity;
     }
-
 }

@@ -6,12 +6,11 @@
  * Time: 20:45
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
+use Database\Entities\competence_entity;
 
-use Objects\Models\competence_model;
-
-class competence_entity extends entity
+class competence_model extends model
 {
     private $id;
     private $name;
@@ -82,15 +81,15 @@ class competence_entity extends entity
         $this->description = $description;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new competence_model();
-        $model->setCode($this->code);
-        $model->setDescription($this->description);
-        $model->setId($this->id);
-        $model->setName($this->name);
+        $entity = new competence_entity();
+        $entity->setId($this->id);
+        $entity->setName($this->name);
+        $entity->setCode($this->code);
+        $entity->setDescription($this->description);
 
-        return $model;
+        return $entity;
     }
 
 }

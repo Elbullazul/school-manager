@@ -32,13 +32,7 @@ abstract class entity
         return $this->date_modified;
     }
 
-    function metadata() {
-        return array(
-            "date_created" => $this->date_created,
-            "date_modified" => $this->date_modified,
-            "modified_by" => $this->modified_by
-        );
-    }
+    abstract function to_model();
 }
 
 

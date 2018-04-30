@@ -6,12 +6,12 @@
  * Time: 13:06
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\day_model;
+use Database\Entities\day_entity;
 
-class day_entity extends entity
+class day_model extends model
 {
     private $id;
     private $name;
@@ -48,13 +48,13 @@ class day_entity extends entity
         $this->name = $name;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new day_model();
-        $model->setId($this->id);
-        $model->setName($this->name);
+        $entity = new day_entity();
+        $entity->setId($this->id);
+        $entity->setName($this->name);
 
-        return $model;
+        return $entity;
     }
 
 }

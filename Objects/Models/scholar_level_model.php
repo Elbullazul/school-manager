@@ -6,12 +6,11 @@
  * Time: 13:55
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
+use Database\Entities\scholar_level_entity;
 
-use Objects\Models\scholar_level_model;
-
-class scholar_level_entity extends entity
+class scholar_level_model extends model
 {
     private $id;
     private $name;
@@ -65,14 +64,14 @@ class scholar_level_entity extends entity
         $this->cycle_id = $cycle_id;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new  scholar_level_model();
-        $model->setId($this->id);
-        $model->setName($this->name);
-        $model->setCycleId($this->cycle_id);
+        $entity = new  scholar_level_entity();
+        $entity->setId($this->id);
+        $entity->setName($this->name);
+        $entity->setCycleId($this->cycle_id);
 
-        return $model;
+        return $entity;
     }
 
 }

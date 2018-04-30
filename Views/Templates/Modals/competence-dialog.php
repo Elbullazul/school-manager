@@ -31,15 +31,15 @@ use Services\labels;
                               placeholder="<?= labels::get('@UI29'); ?>" required="" autofocus=""></textarea>
                     <div class='spacer-5'></div>
 
-                    <input type="number" min="0" max="100" id="inputComp1Pond" name="inputCompDesc" class="form-control"
+                    <input type="number" min="0" max="100" id="inputComp1Pond" name="inputComp1Pond" class="form-control"
                            placeholder="<?= labels::get('@UI26').': '.labels::get('@UI32'); ?>" required="" autofocus="">
                     <div class='spacer-5'></div>
 
-                    <input type="number" min="0" max="100" id="inputComp2Pond" name="inputCompDesc" class="form-control"
+                    <input type="number" min="0" max="100" id="inputComp2Pond" name="inputComp2Pond" class="form-control"
                            placeholder="<?= labels::get('@UI26').': '.labels::get('@UI33'); ?>" required="" autofocus="">
                     <div class='spacer-5'></div>
 
-                    <input type="number" min="0" max="100" id="inputComp3Pond" name="inputCompDesc" class="form-control"
+                    <input type="number" min="0" max="100" id="inputComp3Pond" name="inputComp3Pond" class="form-control"
                            placeholder="<?= labels::get('@UI26').': '.labels::get('@UI34'); ?>" required="" autofocus="">
                     <div class='spacer-5'></div>
 

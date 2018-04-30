@@ -2,8 +2,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 use Database\Entities\user_type_entity;
 
 class user_types_repository extends repository
@@ -16,44 +15,46 @@ class user_types_repository extends repository
 
     function find($field, $value)
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              type_id,
-              access_level,
-              type,
-              description,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.$field = :$field";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'type_id',
+            'access_level',
+            'type',
+            'description',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
 
-        $user_data = $Cnn->prepare($cmd);
-
-        $user_data->bindValue($field, $value, PDO::PARAM_STR);
-        $user_data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $user_data->execute();
-        $user_type = $user_data->fetch();
-
-        if (!$user_type) {
-            $user_type = new $this->entity();
-        }
-
-        return $user_type;
+        return $ret;
     }
 
-    function save($_model)
+    function find_all($field, $value)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'type_id',
+            'access_level',
+            'type',
+            'description',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function save($model)
     {
         return false;
     }
 
-    function update($_model, $_new_model)
-    {
-        return false;
-    }
-
-    function destroy($_model)
+    function update($field, $value, $model)
     {
         return false;
     }

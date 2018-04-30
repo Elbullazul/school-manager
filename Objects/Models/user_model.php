@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Entities;
+namespace Objects\Models;
 
-use Objects\Models\user_model;
+use Database\Entities\user_entity;
 
-class user_entity extends entity
+class user_model extends model
 {
     private $user_id;
     private $username;
@@ -17,14 +17,6 @@ class user_entity extends entity
     public function getUserId()
     {
         return $this->user_id;
-    }
-
-    /**
-     * @param mixed $user_id
-     */
-    public function setUserId($user_id)
-    {
-        $this->user_id = $user_id;
     }
 
     /**
@@ -75,14 +67,14 @@ class user_entity extends entity
         $this->password = $password;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new user_model();
-        $model->setUserId($this->user_id);
-        $model->setPassword($this->password);
-        $model->setUsername($this->username);
-        $model->setUserType($this->user_type);
+        $entity = new user_entity();
+        $entity->setUserId($this->user_id);
+        $entity->setPassword($this->password);
+        $entity->setUsername($this->username);
+        $entity->setUserType($this->user_type);
 
-        return $model;
+        return $entity;
     }
 }

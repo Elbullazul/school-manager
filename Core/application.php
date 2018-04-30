@@ -2,8 +2,8 @@
 
 namespace Core;
 
-use \Services\globals;
 use \Services\labels;
+use \Services\globals;
 
 class application {
 

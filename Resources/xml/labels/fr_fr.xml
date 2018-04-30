@@ -340,4 +340,9 @@
         <text>Terminer</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@UI41</key>
+        <text>Le processus de création à réussi</text>
+        <comment></comment>
+    </label>
 </labels>

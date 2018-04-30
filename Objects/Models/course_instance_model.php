@@ -6,16 +6,15 @@
  * Time: 13:18
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
+use Database\Entities\course_instance_entity;
 
-use Objects\Models\course_instance_model;
-
-class course_instance_entity extends entity
+class course_instance_model extends model
 {
     private $id;
-    private $trimester_id;
     private $course_id;
+    private $trimester_id;
     private $teacher_id;
     private $period_id;
     private $day_id;
@@ -133,18 +132,18 @@ class course_instance_entity extends entity
         $this->class_id = $class_id;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new course_instance_model();
-        $model->setId($this->id);
-        $model->setCourseId($this->course_id);
-        $model->setTrimesterId($this->trimester_id);
-        $model->setClassId($this->class_id);
-        $model->setDayId($this->day_id);
-        $model->setPeriodId($this->period_id);
-        $model->setTeacherId($this->teacher_id);
+        $entity = new course_instance_entity();
+        $entity->setId($this->id);
+        $entity->setCourseId($this->course_id);
+        $entity->setTrimesterId($this->trimester_id);
+        $entity->setClassId($this->class_id);
+        $entity->setDayId($this->day_id);
+        $entity->setPeriodId($this->period_id);
+        $entity->setTeacherId($this->teacher_id);
 
-        return $model;
+        return $entity;
     }
 
 }

@@ -6,12 +6,12 @@
  * Time: 13:38
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\scholar_trimester_model;
+use Database\Entities\scholar_trimester_entity;
 
-class scholar_trimester_entity extends entity
+class scholar_trimester_model extends model
 {
     private $id;
     private $begins;
@@ -116,17 +116,17 @@ class scholar_trimester_entity extends entity
         $this->scholar_year_id = $scholar_year_id;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new scholar_trimester_model();
-        $model->setId($this->id);
-        $model->setBegins($this->begins);
-        $model->setEnds($this->ends);
-        $model->setName($this->name);
-        $model->setTrimesterRank($this->trimester_rank);
-        $model->setScholarYearId($this->scholar_year_id);
+        $entity = new scholar_trimester_entity();
+        $entity->setId($this->id);
+        $entity->setBegins($this->begins);
+        $entity->setEnds($this->ends);
+        $entity->setName($this->name);
+        $entity->setTrimesterRank($this->trimester_rank);
+        $entity->setScholarYearId($this->scholar_year_id);
 
-        return $model;
+        return $entity;
     }
 
 }

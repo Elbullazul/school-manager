@@ -6,12 +6,10 @@
  * Time: 10:30
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\course_model;
-
-class course_entity extends entity
+class course_model extends model
 {
     private $id;
     private $code;
@@ -80,17 +78,6 @@ class course_entity extends entity
     public function setLevelId($level_id)
     {
         $this->level_id = $level_id;
-    }
-
-    function to_model()
-    {
-        $model = new course_model();
-        $model->setId($this->id);
-        $model->setName($this->name);
-        $model->setCode($this->code);
-        $model->setLevelId($this->level_id);
-
-        return $model;
     }
 
 }

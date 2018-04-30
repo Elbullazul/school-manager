@@ -6,12 +6,12 @@
  * Time: 13:09
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\period_model;
+use Database\Entities\period_entity;
 
-class period_entity extends entity
+class period_model extends model
 {
     private $id;
     private $begins;
@@ -65,13 +65,13 @@ class period_entity extends entity
         $this->ends = $ends;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new period_model();
-        $model->setId($this->id);
-        $model->setBegins($this->begins);
-        $model->setEnds($this->ends);
+        $entity = new period_entity();
+        $entity->setId($this->id);
+        $entity->setBegins($this->begins);
+        $entity->setEnds($this->ends);
 
-        return $model;
+        return $entity;
     }
 }

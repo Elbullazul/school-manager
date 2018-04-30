@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Entities;
+namespace Objects\Models;
 
-use Objects\Models\user_type_model;
+use Database\Entities\user_type_entity;
 
-class user_type_entity extends entity
+class user_type_model extends model
 {
     private $type_id;
     private $access_level;
@@ -75,14 +75,15 @@ class user_type_entity extends entity
         $this->description = $description;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new user_type_model();
-        $model->setType($this->type);
-        $model->setTypeId($this->type_id);
-        $model->setDescription($this->description);
-        $model->setAccessLevel($this->access_level);
+        $entity = new user_type_entity();
+        $entity->setType($this->type);
+        $entity->setTypeId($this->type_id);
+        $entity->setDescription($this->description);
+        $entity->setAccessLevel($this->access_level);
 
-        return $model;
+        return $entity;
     }
+
 }

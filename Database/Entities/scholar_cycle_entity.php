@@ -9,6 +9,8 @@
 namespace Database\Entities;
 
 
+use Objects\Models\scholar_cycle_model;
+
 class scholar_cycle_entity extends entity
 {
     private $id;
@@ -20,6 +22,14 @@ class scholar_cycle_entity extends entity
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -37,4 +47,14 @@ class scholar_cycle_entity extends entity
     {
         $this->name = $name;
     }
+
+    function to_model()
+    {
+        $model = new scholar_cycle_model();
+        $model->setId($this->id);
+        $model->setName($this->name);
+
+        return $model;
+    }
+
 }

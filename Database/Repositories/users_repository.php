@@ -2,8 +2,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 use Database\Entities\user_entity;
 
 class users_repository extends repository
@@ -16,31 +15,38 @@ class users_repository extends repository
 
     function find($field, $value)
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              user_id,
-              username,
-              type_id as user_type,
-              password,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.$field = :$field";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'user_id',
+            'username',
+            'user_type',
+            'password',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
 
-        $user_data = $Cnn->prepare($cmd);
+        return $ret;
+    }
 
-        $user_data->bindValue($field, $value, PDO::PARAM_STR);
-        $user_data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $user_data->execute();
-        $user = $user_data->fetch();
+    function find_all($field, $value)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'user_id',
+            'username',
+            'user_type',
+            'password',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
 
-        if (!$user) {
-            $user = new $this->entity();
-        }
-
-        return $user;
+        return $ret;
     }
 
     function save($_model)
@@ -48,15 +54,9 @@ class users_repository extends repository
         return false;
     }
 
-    function update($_model, $_new_model)
+    function update($field, $value, $model)
     {
         return false;
     }
 
-    function destroy($_model)
-    {
-        return false;
-    }
 }
-
-?>

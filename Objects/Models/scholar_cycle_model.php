@@ -3,15 +3,15 @@
  * Created by PhpStorm.
  * User: crime
  * Date: 2018-04-24
- * Time: 13:06
+ * Time: 13:51
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\day_model;
+use Database\Entities\scholar_cycle_entity;
 
-class day_entity extends entity
+class scholar_cycle_model extends model
 {
     private $id;
     private $name;
@@ -48,13 +48,12 @@ class day_entity extends entity
         $this->name = $name;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new day_model();
-        $model->setId($this->id);
-        $model->setName($this->name);
+        $entity = new scholar_cycle_entity();
+        $entity->setId($this->id);
+        $entity->setName($this->name);
 
-        return $model;
+        return $entity;
     }
-
 }

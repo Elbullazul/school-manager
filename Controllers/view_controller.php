@@ -35,7 +35,7 @@ class view_controller extends controller
 
         // load course instances
         $repo = new courses_instances_repository();
-        $course_instances = $repo->find_current($trimester->getId()); // TODO: get trimester automatically
+        $course_instances = $repo->find('trimester_id', '\''.$trimester->getId().'\''); // TODO: get trimester automatically
 
         // wrap for processing
         if (!is_array($course_instances))

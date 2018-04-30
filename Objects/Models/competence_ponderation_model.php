@@ -6,12 +6,12 @@
  * Time: 09:23
  */
 
-namespace Database\Entities;
+namespace Objects\Models;
 
 
-use Objects\Models\competence_ponderation_model;
+use Database\Entities\competence_ponderation_entity;
 
-class competence_ponderation_entity extends entity
+class competence_ponderation_model extends model
 {
     private $competence_id;
     private $trimester_rank;
@@ -65,14 +65,14 @@ class competence_ponderation_entity extends entity
         $this->ponderation = $ponderation;
     }
 
-    function to_model()
+    function to_entity()
     {
-        $model = new competence_ponderation_model();
-        $model->setCompetenceId($this->competence_id);
-        $model->setTrimesterRank($this->trimester_rank);
-        $model->setPonderation($this->ponderation);
+        $entity = new competence_ponderation_entity();
+        $entity->setPonderation($this->ponderation);
+        $entity->setCompetenceId($this->competence_id);
+        $entity->setTrimesterRank($this->trimester_rank);
 
-        return $model;
+        return $entity;
     }
 
 }

@@ -8,8 +8,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 use Database\Entities\scholar_trimester_entity;
 use Services\date;
 
@@ -23,63 +22,62 @@ class scholar_trimesters_repository extends repository
 
     function find($field, $value)
     {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              id,
-              begins,
-              ends,
-              scholar_year_id,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.$field = :$field";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            'name',
+            'rank as trimester_rank',   // TODO: Fix in BD
+            'scholar_year_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
 
-        $data = $Cnn->prepare($cmd);
-
-        $data->bindValue($field, $value, PDO::PARAM_STR);
-        $data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $data->execute();
-        $entity = $data->fetch();
-
-        if (!$entity) {
-            $entity = new $this->entity();
-        }
-
-        return $entity;
+        return $ret;
     }
 
+    function find_all($field, $value)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            'name',
+            'rank as trimester_rank',
+            'scholar_year_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    // TODO: Move this to manager
     function find_current() {
-        $Cnn = connection::getInstance();
-        $cmd = "SELECT
-              id,
-              begins,
-              ends,
-              name,
-              rank,
-              scholar_year_id,
-              -- entity fields
-              modified_by,
-              date_created,
-              date_modified
-            FROM $this->table
-            WHERE $this->table.begins <= :begins
-            AND $this->table.ends >= :ends";
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            'name',
+            'rank as trimester_rank',
+            'scholar_year_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where('begins <= \''.date::now().'\'')->and('ends >= \''.date::now().'\'');
+        $ret = $engine->execute();
 
-        $data = $Cnn->prepare($cmd);
-
-        $data->bindValue('begins', date::now(), PDO::PARAM_STR);
-        $data->bindValue('ends', date::now(), PDO::PARAM_STR);
-        $data->setFetchMode(PDO::FETCH_CLASS, $this->entity, array());
-        $data->execute();
-        $entity = $data->fetch();
-
-        if (!$entity) {
-            $entity = new $this->entity();
-        }
-
-        return $entity;
+        return $ret;
     }
 
     function save($_model)
@@ -87,14 +85,9 @@ class scholar_trimesters_repository extends repository
         // TODO: Implement save() method.
     }
 
-    function update($_model, $_new_model)
+    function update($field, $value, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($_model)
-    {
-        // TODO: Implement destroy() method.
     }
 
 }

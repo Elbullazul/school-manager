@@ -53,30 +53,32 @@ class ajax_service
                 posts::is_set('pond_t2') &&
                 posts::is_set('pond_t3')
             ) {
-                $entity = new competence_entity();
+                $entity = new competence_entity();  // TODO: Use manager instead
                 $entity->setName(posts::get('name'));
                 $entity->setCode(posts::get('code'));
                 $entity->setDescription(posts::get('desc'));
 
+                $repo = new competences_repository();
+                $repo->save($entity);
+                $ID = $repo->get_last_id();
+
                 $trimesters = array();
 
                 // if all are selected, set to NULL
-                $trimesters[] = [1 => posts::get('pond_t1')];
-                $trimesters[] = [2 => posts::get('pond_t2')];
-                $trimesters[] = [3 => posts::get('pond_t3')];
+                $trimesters[1] = posts::get('pond_t1');
+                $trimesters[2] = posts::get('pond_t2');
+                $trimesters[3] = posts::get('pond_t3');
 
-                $repo = new competences_repository();
-                $t_repo = new competence_ponderations_repository();
-
-                // save course
-                $repo->save($entity);
+                $repo = new competence_ponderations_repository();
 
                 foreach ($trimesters as $rank => $ponderation) {
-                    $trim_pond = new competence_ponderation_entity();
-                    $trim_pond->setTrimesterRank($rank);
-                    $trim_pond->getCompetenceId();
 
-                    $t_repo->save($trim_pond);
+                    $trim_pond = new competence_ponderation_entity();   // TODO: Use manager instead
+                    $trim_pond->setCompetenceId($ID);
+                    $trim_pond->setTrimesterRank($rank);
+                    $trim_pond->setPonderation(posts::get('pond_t'.$rank));
+
+                    $repo->save($trim_pond);
                 }
 
 //                foreach ($trimesters as $current_year_trimester_id) {

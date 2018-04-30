@@ -9,8 +9,13 @@
 namespace Controllers;
 
 use Core\security;
+use Database\Entities\course_competence_entity;
+use Database\Entities\course_entity;
+use Database\Repositories\course_competences_repository;
+use Database\Repositories\courses_repository;
 use Database\Repositories\scholar_cycles_repository;
 use Database\Repositories\scholar_levels_repository;
+use Services\flashes;
 use Services\links;
 use Services\posts;
 use Database\Repositories\competences_repository;
@@ -22,7 +27,8 @@ class create_controller extends controller
         $this->view(links::get('create-general'));
     }
 
-    function course() {
+    function course()
+    {
 
         $repo = new scholar_levels_repository();
         $c_repo = new scholar_cycles_repository();
@@ -45,7 +51,8 @@ class create_controller extends controller
         $this->view(links::get('create-course'), $bundle);
     }
 
-    function competence() {
+    function competence()
+    {
         // load competences
         $repo = new competences_repository();
         $competences = $repo->fetch_all();
@@ -75,12 +82,34 @@ class create_controller extends controller
         $this->view(links::get('create-competence'), $bundle);
     }
 
-    function write() {
+    function write()
+    {
         dump($_POST);
 
-        $ftp = explode(',',$_POST['competences']);
+        $course_data = $_POST['course'];
+        $competence_ids = explode(',', $_POST['competences']);
 
-        dump($ftp);
+        $course = new course_entity();  // TODO: Use manager instead
+        $course->setName($course_data['name']);
+        $course->setCode($course_data['code']);
+        $course->setLevelId($course_data['level']);
+
+        $repo = new courses_repository();
+        $course_ID = $repo->save($course);
+
+        $repo = new course_competences_repository();
+
+        foreach ($competence_ids as $competence_id) {
+            $course_competence = new course_competence_entity();    // TODO: Use manager instead
+            $course_competence->setCompetenceId($competence_id);
+            $course_competence->setCourseId($course_ID);
+
+            $repo->save($course_competence);
+        }
+
+        flashes::set('@UI41',flashes::$SUCCESS, true);
+
+        redirect($this->home());
     }
 
     function view($tag, $data = array())

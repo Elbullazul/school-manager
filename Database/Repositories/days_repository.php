@@ -8,8 +8,7 @@
 
 namespace Database\Repositories;
 
-use \PDO;
-use Database\connection;
+use Database\query_builder;
 use Database\Entities\day_entity;
 
 class days_repository extends repository
@@ -22,22 +21,44 @@ class days_repository extends repository
 
     function find($field, $value)
     {
-        // TODO: Implement find() method.
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'id',
+            'name',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
+
+        return $ret;
     }
 
-    function save($_model)
+    function find_all($field, $value)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'name',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function save($model)
     {
         // TODO: Implement save() method.
     }
 
-    function update($_model, $_new_model)
+    function update($field, $value, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($_model)
-    {
-        // TODO: Implement destroy() method.
     }
 
 }

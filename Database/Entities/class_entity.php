@@ -9,6 +9,8 @@
 namespace Database\Entities;
 
 
+use Objects\Models\class_model;
+
 class class_entity extends entity
 {
     private $id;
@@ -21,6 +23,14 @@ class class_entity extends entity
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
     }
 
     /**
@@ -53,6 +63,16 @@ class class_entity extends entity
     public function setDescription($description)
     {
         $this->description = $description;
+    }
+
+    function to_model()
+    {
+        $model = new class_model();
+        $model->setId($this->id);
+        $model->setDescription($this->description);
+        $model->setCode($this->code);
+
+        return $model;
     }
 
 }
