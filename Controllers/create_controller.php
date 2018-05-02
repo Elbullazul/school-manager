@@ -80,8 +80,6 @@ class create_controller extends controller
 
     function write()
     {
-        dump($_POST);
-
         $course_data = $_POST['course'];
         $competence_ids = explode(',', $_POST['competences']);
 

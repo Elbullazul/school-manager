@@ -32,8 +32,6 @@ class users_manager extends manager
         $users_repository = new users_repository();
         $user_entity = $users_repository->find('username', $model->getUsername());
 
-        dump($user_entity);
-
         // TODO: concat user type
         $user_types_manager = new user_types_manager();
         $user_type_model = $user_types_manager->find_from_user($user_entity);

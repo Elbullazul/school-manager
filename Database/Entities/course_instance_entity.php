@@ -139,10 +139,10 @@ class course_instance_entity extends entity
         $model->setId($this->id);
         $model->setCourseId($this->course_id);
         $model->setTrimesterId($this->trimester_id);
-        $model->setClassId($this->class_id);
-        $model->setDayId($this->day_id);
-        $model->setPeriodId($this->period_id);
         $model->setTeacherId($this->teacher_id);
+//        $model->setClassId($this->class_id);
+//        $model->setDayId($this->day_id);
+//        $model->setPeriodId($this->period_id);
 
         return $model;
     }

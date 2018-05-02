@@ -60,7 +60,6 @@ class scholar_trimesters_repository extends repository
         return $ret;
     }
 
-    // TODO: Move this to manager
     function find_current() {
         $engine = new query_builder($this->entity, query_builder::FETCH);
         $engine->select(

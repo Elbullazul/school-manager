@@ -19,7 +19,7 @@ class application {
         labels::set_locale();
 
         // TODO: Remove when going live
-//        tests::run('courses');
+//        tests::run('courses_instances');
 
         // different processing with AJAX calls
         if (!empty($_SERVER['HTTP_X_REQUESTED_WITH'])) {

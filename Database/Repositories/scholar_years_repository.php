@@ -10,6 +10,7 @@ namespace Database\Repositories;
 
 use Database\query_builder;
 use Database\Entities\scholar_year_entity;
+use Services\date;
 
 class scholar_years_repository extends repository
 {
@@ -31,6 +32,22 @@ class scholar_years_repository extends repository
             'date_created',
             'date_modified'
         )->from($this->table)->where($field . ' = ' . $value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function find_current() {
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where('begins <= '.date::now())->and('ends >= '.date::now());
         $ret = $engine->execute();
 
         return $ret;

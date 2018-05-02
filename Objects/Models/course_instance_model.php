@@ -16,9 +16,9 @@ class course_instance_model extends model
     private $course_id;
     private $trimester_id;
     private $teacher_id;
-    private $period_id;
-    private $day_id;
-    private $class_id;
+    private $period;
+    private $day;
+    private $class;
 
     /**
      * @return mixed
@@ -87,49 +87,49 @@ class course_instance_model extends model
     /**
      * @return mixed
      */
-    public function getPeriodId()
+    public function getPeriod()
     {
-        return $this->period_id;
+        return $this->period;
     }
 
     /**
-     * @param mixed $period_id
+     * @param mixed $period
      */
-    public function setPeriodId($period_id)
+    public function setPeriod($period)
     {
-        $this->period_id = $period_id;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDayId()
-    {
-        return $this->day_id;
-    }
-
-    /**
-     * @param mixed $day_id
-     */
-    public function setDayId($day_id)
-    {
-        $this->day_id = $day_id;
+        $this->period = $period;
     }
 
     /**
      * @return mixed
      */
-    public function getClassId()
+    public function getDay()
     {
-        return $this->class_id;
+        return $this->dayd;
     }
 
     /**
-     * @param mixed $class_id
+     * @param mixed $day
      */
-    public function setClassId($class_id)
+    public function setDay($day)
     {
-        $this->class_id = $class_id;
+        $this->day = $day;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * @param mixed $class
+     */
+    public function setClass($class)
+    {
+        $this->class = $class;
     }
 
     function to_entity()
@@ -140,8 +140,8 @@ class course_instance_model extends model
         $entity->setTrimesterId($this->trimester_id);
         $entity->setClassId($this->class_id);
         $entity->setDayId($this->day_id);
-        $entity->setPeriodId($this->period_id);
-        $entity->setTeacherId($this->teacher_id);
+//        $entity->setPeriodId($this->period_id);
+//        $entity->setTeacherId($this->teacher_id);
 
         return $entity;
     }

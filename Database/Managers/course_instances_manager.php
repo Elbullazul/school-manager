@@ -10,28 +10,72 @@ namespace Database\Managers;
 
 use Objects\Factories\course_instances_factory;
 use Database\Repositories\courses_instances_repository;
+use Services\date;
 
 class course_instances_manager extends manager
 {
+    private function search_concatenate($course_instance_entity) {
+        $course_instance_model = course_instances_factory::construct_from_entity($course_instance_entity);
+
+        // load day
+        $days_manager = new days_manager();
+        $day_model = $days_manager->find_from_course_instance($course_instance_entity);
+
+        // load period
+        $periods_manager = new periods_manager();
+        $period_model = $periods_manager->find_from_course_instance($course_instance_entity);
+
+        // load class
+        $classes_manager = new classes_manager();
+        $class_model = $classes_manager->find_from_course_instance($course_instance_entity);
+
+        // assemble final model
+        $course_instance_model->setDay($day_model);
+        $course_instance_model->setPeriod($period_model);
+        $course_instance_model->setClass($class_model);
+
+        return $course_instance_model;
+    }
+
     // TODO: Implement concat of data
     function find($model)
     {
-        $repository = new courses_instances_repository();
-        $entity = $repository->find('id', $model->getId());
+        $course_instance_repository = new courses_instances_repository();
+        $course_instance_entity = $course_instance_repository->find('id', $model->getId());
 
-        $ret = course_instances_factory::construct_from_entity($entity);
+        $course_instance_model = self::search_concatenate($course_instance_entity);
 
-        return $ret;
+        return $course_instance_model;
     }
 
     function fetch_all()
     {
-        $repository = new courses_instances_repository();
-        $entities = $repository->fetch_all();
+        $course_instance_repository = new courses_instances_repository();
+        $course_instance_entities = $course_instance_repository->fetch_all();
 
-        $ret = course_instances_factory::construct_from_entities($entities);
+        $course_instance_models = [];
 
-        return $ret;
+        foreach ($course_instance_entities as $course_instance_entity) {
+            $course_instance_models[] = self::search_concatenate($course_instance_entity);
+        }
+
+        return $course_instance_models;
+    }
+
+    function fetch_current() {
+        $trimesters_manager = new scholar_trimesters_manager();
+        $trimester_model = $trimesters_manager->find_current();
+
+        $course_instance_repository = new courses_instances_repository();
+        $course_instance_entities = $course_instance_repository->find_all('trimester_id', $trimester_model->getId());
+
+        $course_instance_models = [];
+
+        foreach ($course_instance_entities as $course_instance_entity) {
+            $course_instance_models[] = self::search_concatenate($course_instance_entity);
+        }
+
+        return $course_instance_models;
     }
 
     function save($model)

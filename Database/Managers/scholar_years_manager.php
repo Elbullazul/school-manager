@@ -3,46 +3,48 @@
  * Created by PhpStorm.
  * User: crime
  * Date: 2018-05-02
- * Time: 09:55
+ * Time: 10:37
  */
 
 namespace Database\Managers;
 
-use Objects\Factories\days_factory;
-use Database\Repositories\days_repository;
+use Objects\Factories\scholar_years_factory;
+use Database\Repositories\scholar_years_repository;
 
-class days_manager extends manager
+class scholar_years_manager extends manager
 {
     function find($model)
     {
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
         $entity = $repository->find('id', $model->getId());
-        $ret = days_factory::construct_from_entity($entity);
+
+        $ret = scholar_years_factory::construct_from_entity($entity);
 
         return $ret;
     }
 
-    function find_from_course_instance($model)
-    {
-        $repository = new days_repository();
-        $entity = $repository->find('id', $model->getDayId());
-        $ret = days_factory::construct_from_entity($entity);
+    function find_current() {
+        $repository = new scholar_years_repository();
+        $entity = $repository->find_current();
+
+        $ret = scholar_years_factory::construct_from_entity($entity);
 
         return $ret;
     }
 
     function fetch_all()
     {
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
         $entities = $repository->fetch_all();
-        $ret = days_factory::construct_from_entities($entities);
+
+        $ret = scholar_years_factory::construct_from_entities($entities);
 
         return $ret;
     }
 
     function save($model)
     {
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
         $ret = $repository->save($model);
 
         return $ret;
@@ -51,13 +53,14 @@ class days_manager extends manager
     function save_all(array $models)
     {
         $ret = [];
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
 
         foreach ($models as $model) {
             $ret[] = $repository->save($model);
         }
 
-        return $ret;    }
+        return $ret;
+    }
 
     function update($unique_id, $model)
     {
@@ -66,7 +69,7 @@ class days_manager extends manager
 
     function destroy($model)
     {
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
         $ret = $repository->destroy('id', $model->getId());
 
         return $ret;
@@ -74,7 +77,7 @@ class days_manager extends manager
 
     function destroy_all()
     {
-        $repository = new days_repository();
+        $repository = new scholar_years_repository();
         $ret = $repository->destroy_all();
 
         return $ret;

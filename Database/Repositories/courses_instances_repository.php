@@ -10,6 +10,7 @@ namespace Database\Repositories;
 
 use Database\query_builder;
 use Database\Entities\course_instance_entity;
+use Services\date;
 
 class courses_instances_repository extends repository
 {
@@ -56,6 +57,27 @@ class courses_instances_repository extends repository
             'date_created',
             'date_modified'
         )->from($this->table)->where($field.' = '.$value);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function find_current($trimester_id)
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'trimester_id',
+            'course_id',
+            'teacher_id',
+            'period_id',
+            'day_id',
+            'class_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where('trimester_id = '.$trimester_id);
         $ret = $engine->execute();
 
         return $ret;

@@ -16,15 +16,21 @@ class classes_manager extends manager
     function find($model)
     {
         $repository = new classes_repository();
-        $entity = $repository->find($model->getId());
+        $entity = $repository->find('id', $model->getId());
 
         $ret = classes_factory::construct_from_entity($entity);
 
         return $ret;
     }
 
-    function find_all($model)
+    function find_from_course_instance($model)
     {
+        $repository = new classes_repository();
+        $entity = $repository->find('id', $model->getClassId());
+
+        $ret = classes_factory::construct_from_entity($entity);
+
+        return $ret;
     }
 
     function fetch_all()
