@@ -79,8 +79,6 @@ use Services\labels;
                     </button>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>

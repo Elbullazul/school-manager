@@ -139,10 +139,15 @@
         <text>Ajouter des compétences</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@PA17</key>
+        <text>Absences</text>
+        <comment></comment>
+    </label>
     <!-- UI labels -->
     <label>
         <key>@UI01</key>
-        <text>Système de gestion scolaire</text>
+        <text>Gestion scolaire</text>
         <comment></comment>
     </label>
     <label>
@@ -343,6 +348,26 @@
     <label>
         <key>@UI41</key>
         <text>Le processus de création à réussi</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI42</key>
+        <text>Le code saisi est déja en cours d'utilisation</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI43</key>
+        <text>Ce champ est obligatoire</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI44</key>
+        <text>La valeur doit être plus grande ou égale à 0</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI45</key>
+        <text>La valeur doit être plus petite ou égale à 100</text>
         <comment></comment>
     </label>
 </labels>

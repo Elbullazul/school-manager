@@ -37,8 +37,10 @@ abstract class posts
     }
 
     static function exists() {
-        return !is_null($_POST);
+        return isset($_POST);
+    }
+
+    static function empty() {
+        return empty($_POST);
     }
 }
-
-?>

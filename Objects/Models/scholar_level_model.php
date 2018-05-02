@@ -14,7 +14,7 @@ class scholar_level_model extends model
 {
     private $id;
     private $name;
-    private $cycle_id;
+    private $cycle;
 
     /**
      * @return mixed
@@ -51,17 +51,17 @@ class scholar_level_model extends model
     /**
      * @return mixed
      */
-    public function getCycleId()
+    public function getCycle()
     {
-        return $this->cycle_id;
+        return $this->cycle;
     }
 
     /**
      * @param mixed $cycle_id
      */
-    public function setCycleId($cycle_id)
+    public function setCycle($cycle)
     {
-        $this->cycle_id = $cycle_id;
+        $this->cycle = $cycle;
     }
 
     function to_entity()
@@ -69,7 +69,7 @@ class scholar_level_model extends model
         $entity = new  scholar_level_entity();
         $entity->setId($this->id);
         $entity->setName($this->name);
-        $entity->setCycleId($this->cycle_id);
+//        $entity->setCycleId($this->cycle_id->getId());
 
         return $entity;
     }

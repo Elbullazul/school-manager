@@ -8,12 +8,14 @@
 
 namespace Services;
 
+use const Core\RESOURCES;
+
 abstract class links
 {
     static function get($tag)
     {
         $path = "";
-        $file = globals::get('RESOURCES') . '\xml\links.xml';
+        $file = RESOURCES . '\xml\links.xml';
         $xml = simplexml_load_file($file);
 
         foreach ($xml as $node) {
@@ -28,7 +30,7 @@ abstract class links
 
     static function full_path($namespace, $tag) {
         $path = "";
-        $file = globals::get('RESOURCES') . '\xml\links.xml';
+        $file = RESOURCES . '\xml\links.xml';
         $xml = simplexml_load_file($file);
 
         foreach ($xml as $node) {

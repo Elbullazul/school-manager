@@ -12,7 +12,7 @@ abstract class manager
 {
     abstract function find($model);
 
-    abstract function find_all($model);
+//    abstract function find_all($model);
 
     abstract function fetch_all();  // implemented in repo
 

@@ -12,7 +12,7 @@ class scholar_trimesters_manager extends manager
 {
     function find($model)
     {
-        // TODO: Implement find() method.
+
     }
 
     function find_all($model)

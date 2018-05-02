@@ -9,7 +9,6 @@
 namespace Controllers;
 
 use Services\paths;
-use Services\globals;
 use Services\titles;
 
 abstract class controller

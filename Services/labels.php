@@ -2,14 +2,16 @@
 
 namespace Services;
 
+use const Core\RESOURCES;
+
 abstract class labels
 {
     static $locale = 'en_us';
 
     static function get($_label)
     {
-        $text = "";
-        $file = globals::get('RESOURCES').'\xml\labels\\' . self::$locale . '.xml';
+        $text = "Localization error";
+        $file = RESOURCES.'\xml\labels\\' . self::$locale . '.xml';
         $xml = simplexml_load_file($file);
 
         foreach ($xml as $node) {

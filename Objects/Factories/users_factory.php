@@ -10,7 +10,7 @@ namespace Objects\Factories;
 
 use Objects\Models\user_model;
 
-class users_factory extends factory
+abstract class users_factory extends factory
 {
     static function construct_empty()
     {
@@ -30,23 +30,6 @@ class users_factory extends factory
         } else {
             return NULL;
         }
-    }
-
-    static function construct_from_entity($entity)
-    {
-        $model = $entity->to_model();
-        return $model;
-    }
-
-    static function construct_from_entities(array $entities)
-    {
-        $models = [];
-
-        foreach ($entities as $entity) {
-            $models[] = $entity->to_model();
-        }
-
-        return $models;
     }
 
 }

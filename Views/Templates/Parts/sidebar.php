@@ -5,7 +5,6 @@ use Services\users;
 use Services\paths;
 use Services\labels;
 use Services\links;
-use Services\globals;
 
 ?>
 

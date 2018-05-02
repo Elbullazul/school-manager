@@ -13,46 +13,73 @@ use Database\Repositories\scholar_levels_repository;
 
 class scholar_levels_manager extends manager
 {
-    // TODO: Get Cycle info when loading
-
     function find($model)
     {
-        $repository = new scholar_levels_repository();
-        $entity = $repository->find('id', $model->getId());
+        $level_repository = new scholar_levels_repository();
+        $level_entity = $level_repository->find('id', $model->getId());
 
-        $ret = scholar_levels_factory::construct_from_entity($entity);
+        $cycles_manager = new scholar_cycles_manager();
+        $cycle_model = $cycles_manager->find_from_level($level_entity);
 
-        return $ret;
+        $level_model = scholar_levels_factory::construct_from_entity($level_entity);
+        $level_model->setCycle($cycle_model);
+
+        return $level_model;
     }
 
     function find_from_course($model)
     {
-        $repository = new scholar_levels_repository();
-        $entity = $repository->find('id', $model->getLevelId());
+        $level_repository = new scholar_levels_repository();
+        $level_entity = $level_repository->find('id', $model->getLevelId());
 
-        $ret = scholar_levels_factory::construct_from_entity($entity);
+        $cycles_manager = new scholar_cycles_manager();
+        $cycle_model = $cycles_manager->find_from_level($level_entity);
 
-        return $ret;
+        $level_model = scholar_levels_factory::construct_from_entity($level_entity);
+        $level_model->setCycle($cycle_model);
+
+        return $level_model;
     }
 
-    function find_all($model)
-    {
-        $repository = new scholar_levels_repository();
-        $entities = $repository->find_all('id', $model->getId());
-
-        $ret = scholar_levels_factory::construct_from_entities($entities);
-
-        return $ret;
-    }
+    // TODO: Remove if invalid or restore if OK
+//    function find_all($model)
+//    {
+//        $level_repository = new scholar_levels_repository();
+//        $cycles_manager = new scholar_cycles_manager();
+//
+//        $level_models = [];
+//        $level_entities = $level_repository->find_all('id', $model->getId());
+//
+//        foreach ($level_entities as $level_entity) {
+//            $cycle_model = $cycles_manager->find_from_level($level_entity);
+//
+//            $level_model = scholar_levels_factory::construct_from_entity($level_entity);
+//            $level_model->setCycle($cycle_model);
+//
+//            $level_models[] = $level_model;
+//        }
+//
+//        return $level_models;
+//    }
 
     function fetch_all()
     {
-        $repository = new scholar_levels_repository();
-        $entities = $repository->fetch_all();
+        $level_repository = new scholar_levels_repository();
+        $cycles_manager = new scholar_cycles_manager();
 
-        $ret = scholar_levels_factory::construct_from_entities($entities);
+        $level_models = [];
+        $level_entities = $level_repository->fetch_all();
 
-        return $ret;
+        foreach ($level_entities as $level_entity) {
+            $cycle_model = $cycles_manager->find_from_level($level_entity);
+
+            $level_model = scholar_levels_factory::construct_from_entity($level_entity);
+            $level_model->setCycle($cycle_model);
+
+            $level_models[] = $level_model;
+        }
+
+        return $level_models;
     }
 
     function save($model)

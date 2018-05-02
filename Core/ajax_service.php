@@ -8,14 +8,12 @@
 
 namespace Core;
 
-use Database\Entities\competence_entity;
-use Database\Entities\competence_ponderation_entity;
 use Database\Managers\competence_ponderations_manager;
 use Database\Managers\competences_manager;
-use Database\Repositories\competence_ponderations_repository;
-use Database\Repositories\competences_repository;
+use Database\Managers\courses_manager;
 use Objects\Factories\competence_ponderations_factory;
 use Objects\Factories\competences_factory;
+use Objects\Factories\courses_factory;
 use Services\posts;
 use Services\urls;
 use Services\labels;
@@ -45,6 +43,32 @@ class ajax_service
     {
         $action = $this->action;
         $this->$action();
+    }
+
+    function is_valid_code()
+    {
+        if (posts::exists()) {
+            if (posts::is_set('course_code')) {
+
+                $code = posts::get('course_code');
+                $course_model = courses_factory::construct
+                ([
+                    'id' => NULL, 'code' => $code, 'name' => NULL,
+                    'level' => NULL, 'competences' => NULL, 'dependencies' => []
+                ]);
+
+                $course_manager = new courses_manager();
+
+                // DOC: JQuery expects the response encoded in JSON
+                if (!$course_manager->exists($course_model)) {
+                    echo json_encode(true);
+                } else {
+                    echo json_encode(false);
+                }
+            }
+        } else {
+            http_response_code(400);
+        }
     }
 
     // accepted callbacks

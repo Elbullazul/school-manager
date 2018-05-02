@@ -3,4 +3,8 @@
         <tag>/manage/schedule</tag>
         <label>@PA07</label>
     </menuitem>
+    <menuitem>
+        <tag>/manage/attendance</tag>
+        <label>@PA17</label>
+    </menuitem>
 </menuitems>

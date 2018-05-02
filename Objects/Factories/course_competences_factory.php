@@ -10,7 +10,7 @@ namespace Objects\Factories;
 
 use Objects\Models\course_competence_model;
 
-class course_competences_factory extends factory
+abstract class course_competences_factory extends factory
 {
     static function construct_empty()
     {
@@ -28,23 +28,6 @@ class course_competences_factory extends factory
         } else {
             return NULL;
         }
-    }
-
-    static function construct_from_entity($entity)
-    {
-        $model = $entity->to_model();
-        return $model;
-    }
-
-    static function construct_from_entities(array $entities)
-    {
-        $models = [];
-
-        foreach ($entities as $entity) {
-            $models[] = $entity->to_model();
-        }
-
-        return $models;
     }
 
 }

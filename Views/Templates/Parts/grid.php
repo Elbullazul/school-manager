@@ -1,6 +1,5 @@
 <?php
 
-use Services\globals;
 use Services\users;
 use Services\paths;
 use Services\labels;
@@ -28,9 +27,9 @@ if (!is_array($griditems)) {
         $lbl = labels::get($label);
 
         // TODO: Implement this in cleaner manner
-        $html = '<a class="link-no-underline col-sm-4 center-block grid-item" href="' . $lnk . '">';
+        $html = '<a class="link-no-underline col-sm-3 center-block grid-item" href="' . $lnk . '">';
         $html = $html . '<div class="row img-container text-center"><img class="img-fluid" src="' . paths::resource('img/placeholder.png') . '"/>';
-        $html = $html . '</div><div class="row text-center"><h2 class="container-fluid">' . $lbl . '</h2></div></a>';
+        $html = $html . '</div><div class="row text-center"><h4 class="container-fluid pt-3">' . $lbl . '</h4></div></a>';
 
         echo $html;
     }

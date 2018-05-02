@@ -14,7 +14,20 @@ abstract class factory
 
     abstract static function construct(array $bundle);
 
-    abstract static function construct_from_entity($entity);
+    static function construct_from_entity($entity)
+    {
+        $model = $entity->to_model();
+        return $model;
+    }
 
-    abstract static function construct_from_entities(array $entities);
+    static function construct_from_entities(array $entities)
+    {
+        $models = [];
+
+        foreach ($entities as $entity) {
+            $models[] = $entity->to_model();
+        }
+
+        return $models;
+    }
 }

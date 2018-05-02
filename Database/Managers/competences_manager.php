@@ -33,15 +33,16 @@ class competences_manager extends manager
         return $ret;
     }
 
-    function find_all($model)
-    {
-        $repository = new competences_repository();
-        $entity = $repository->find_all('id', $model->getId());
-
-        $ret = competences_factory::construct_from_entities($entity);
-
-        return $ret;
-    }
+    // TODO: Remove if invalid or restore if OK
+//    function find_all($model)
+//    {
+//        $repository = new competences_repository();
+//        $entity = $repository->find_all('id', $model->getId());
+//
+//        $ret = competences_factory::construct_from_entities($entity);
+//
+//        return $ret;
+//    }
 
     function find_all_from_course_competence($model)
     {

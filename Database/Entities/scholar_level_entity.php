@@ -70,7 +70,7 @@ class scholar_level_entity extends entity
         $model = new  scholar_level_model();
         $model->setId($this->id);
         $model->setName($this->name);
-        $model->setCycleId($this->cycle_id);
+//        $model->setCycleId($this->cycle_id);
 
         return $model;
     }

@@ -8,7 +8,7 @@
 
 namespace Tests;
 
-use Services\globals;
+use const Core\ROOT;
 
 abstract class tests
 {
@@ -16,6 +16,6 @@ abstract class tests
     const users = 'users';
 
     static function run($type) {
-        load(globals::get('ROOT').'\Tests\\'.$type.'_tests.php');
+        load(ROOT.'\Tests\\'.$type.'_tests.php');
     }
 }

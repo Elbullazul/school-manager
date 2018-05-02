@@ -25,6 +25,15 @@ $competences_count = count($competences);
     $(document).ready(function () {
         $('#competence-form').validate({
             rules: {
+                inputCompName: {
+                    required: true
+                },
+                inputCompCode: {
+                    required: true
+                },
+                inputCompDesc: {
+                    required: true
+                },
                 inputComp1Pond: {
                     required: true,
                     min: 0,
@@ -43,20 +52,29 @@ $competences_count = count($competences);
                 }
             },
             messages: {
+                inputCompName: {
+                    required: "<?= labels::get('@UI43'); ?>"
+                },
+                inputCompCode: {
+                    required: "<?= labels::get('@UI43'); ?>"
+                },
+                inputCompDesc: {
+                    required: "<?= labels::get('@UI43'); ?>"
+                },
                 inputComp1Pond: {
-                    required: "Cancel your subscription!",
-                    min: "Must be higher or equal to zero",
-                    max: "Must be lower or equal to 100"
+                    required: "<?= labels::get('@UI43'); ?>",
+                    min: "<?= labels::get('@UI44'); ?>",
+                    max: "<?= labels::get('@UI45'); ?>"
                 },
                 inputComp2Pond: {
-                    required: "Cancel your subscription!",
-                    min: "Must be higher or equal to zero",
-                    max: "Must be lower or equal to 100"
+                    required: "<?= labels::get('@UI43'); ?>",
+                    min: "<?= labels::get('@UI44'); ?>",
+                    max: "<?= labels::get('@UI45'); ?>"
                 },
                 inputComp3Pond: {
-                    required: "Cancel your subscription!",
-                    min: "Must be higher or equal to zero",
-                    max: "Must be lower or equal to 100"
+                    required: "<?= labels::get('@UI43'); ?>",
+                    min: "<?= labels::get('@UI44'); ?>",
+                    max: "<?= labels::get('@UI45'); ?>"
                 }
             },
             highlight: function (element) {
@@ -90,7 +108,6 @@ $competences_count = count($competences);
                     success: function (result) {
                         // DEBUG
                         $("#messages").html(result);
-                        console.log('Saved data successfully');
                         $.notify({
                                 message: result
                             }, {
@@ -101,7 +118,6 @@ $competences_count = count($competences);
                     },
                     error: function (xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
-                        console.log('Error ocurred');
                     }
                 });
 
@@ -154,7 +170,6 @@ $competences_count = count($competences);
 
                 button.text('+');
             }
-//            console.log($($this.parent()).parent().attr('id'));
         });
     });
 

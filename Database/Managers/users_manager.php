@@ -18,7 +18,6 @@ class users_manager extends manager
         $users_repository = new users_repository();
         $user_entity = $users_repository->find('user_id', $model->getUserId());
 
-        // TODO: concat user type
         $user_types_manager = new user_types_manager();
         $user_type_model = $user_types_manager->find_from_user($user_entity);
 
@@ -26,12 +25,6 @@ class users_manager extends manager
         $user_model->setUserType($user_type_model);
 
         return $user_model;
-    }
-
-    // TODO: This HAS to be removed
-    function find_all($model)
-    {
-        return NULL;
     }
 
     function find_by_username($model)

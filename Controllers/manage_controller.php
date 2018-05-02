@@ -8,7 +8,6 @@
 
 namespace Controllers;
 
-use Services\globals;
 use Services\links;
 use Core\security;
 

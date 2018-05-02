@@ -2,21 +2,20 @@
 
 namespace Core;
 
-use \Services\labels;
-use \Services\globals;
+use Services\labels;
 use Tests\tests;
+
+const ROOT = __DIR__.'\..';
+const VIEWS = __DIR__.'\..\Views';
+const PARTS = __DIR__.'\..\Views\Templates\Parts';
+const RESOURCES = __DIR__.'\..\Resources';
+const PLUGINS = __DIR__.'\..\Plugins';
 
 class application {
 
     function __construct() {
 
         session_start();
-
-        // Set Superglobal variables
-        globals::set('ROOT', __DIR__.'\..');
-        globals::set('VIEWS', __DIR__.'\..\Views');
-        globals::set('PARTS', __DIR__.'\..\Views\Templates\Parts');
-        globals::set('RESOURCES', __DIR__.'\..\Resources');
         labels::set_locale();
 
         // TODO: Remove when going live

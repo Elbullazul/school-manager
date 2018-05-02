@@ -10,7 +10,7 @@ namespace Objects\Factories;
 
 use Objects\Models\competence_ponderation_model;
 
-class competence_ponderations_factory extends factory
+abstract class competence_ponderations_factory extends factory
 {
     static function construct_empty()
     {
@@ -30,22 +30,4 @@ class competence_ponderations_factory extends factory
             return NULL;
         }
     }
-
-    static function construct_from_entity($entity)
-    {
-        $model = $entity->to_model();
-        return $model;
-    }
-
-    static function construct_from_entities(array $entities)
-    {
-        $models = [];
-
-        foreach ($entities as $entity) {
-            $models[] = $entity->to_model();
-        }
-
-        return $models;
-    }
-
 }

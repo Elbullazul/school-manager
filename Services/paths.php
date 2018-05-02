@@ -2,26 +2,30 @@
 
 namespace Services;
 
+use const Core\PARTS;
+use const Core\ROOT;
+use const Core\VIEWS;
+
 abstract class paths
 {
     static function part($_file)
     {
-        return globals::get('PARTS') . '\\' . $_file;
+        return PARTS . '\\' . $_file;
     }
 
     static function modal($_file)
     {
-        return globals::get('VIEWS') . '..\Templates\Modals\\' . $_file;
+        return VIEWS . '..\Templates\Modals\\' . $_file;
     }
 
     static function view($_view)
     {
-        return globals::get('VIEWS') . $_view;
+        return VIEWS . $_view;
     }
 
     static function template($_view)
     {
-        return globals::get('VIEWS').'\Templates\\' . $_view;
+        return VIEWS.'\Templates\\' . $_view;
     }
 
     static function resource($_path)
@@ -30,11 +34,11 @@ abstract class paths
     }
 
     static function xml($file) {
-        return globals::get('ROOT').'\Resources\xml\\'.$file;
+        return ROOT.'\Resources\xml\\'.$file;
     }
 
     static function layout($file) {
-        return globals::get('ROOT').'\Resources\layouts\\'.$file;
+        return ROOT.'\Resources\layouts\\'.$file;
     }
 }
 

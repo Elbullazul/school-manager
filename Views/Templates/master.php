@@ -47,7 +47,7 @@ use Services\paths;
 </head>
 <body>
 <?php
-load(paths::part('header.php'));
+load(paths::part('header.php', $data));
 load(paths::part('show-flashes.php'));
 load(paths::view($FILE), $data);
 load(paths::part('footer.php'));

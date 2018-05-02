@@ -8,6 +8,7 @@
 
 namespace Database\Managers;
 
+use const Core\ROOT;
 use Objects\Factories\courses_factory;
 use Database\Repositories\courses_repository;
 
@@ -57,19 +58,36 @@ class courses_manager extends manager
         return $course_model;
     }
 
-    function find_all($model)
-    {
+    function find_from_instance($model) {
         $courses_repository = new courses_repository();
-        $course_entities = $courses_repository->find_all('id', $model->getId());
+        $course_entity = $courses_repository->find('id', $model->getCourseId());
 
-        $course_models = [];
+        $course_model = self::search_concatenate($course_entity);
 
-        foreach ($course_entities as $course_entity) {
-            $course_models[] = self::search_concatenate($course_entity);
-        }
-
-        return $course_models;
+        return $course_model;
     }
+
+    function exists($model) {
+        $courses_repository = new courses_repository();
+        $ret = $courses_repository->find('code', $model->getCode());
+
+        return $ret;
+    }
+
+    // TODO: Remove if invalid or restore if OK
+//    function find_all($model)
+//    {
+//        $courses_repository = new courses_repository();
+//        $course_entities = $courses_repository->find_all('id', $model->getId());
+//
+//        $course_models = [];
+//
+//        foreach ($course_entities as $course_entity) {
+//            $course_models[] = self::search_concatenate($course_entity);
+//        }
+//
+//        return $course_models;
+//    }
 
     function fetch_all()
     {

@@ -11,6 +11,7 @@ namespace Controllers;
 use Core\security;
 use Database\Entities\course_competence_entity;
 use Database\Entities\course_entity;
+use Database\Managers\scholar_cycles_manager;
 use Database\Managers\scholar_levels_manager;
 use Database\Repositories\course_competences_repository;
 use Database\Repositories\courses_repository;
@@ -31,28 +32,11 @@ class create_controller extends controller
 
     function course()
     {
-        // TODO: Use manager
         $level_manager = new scholar_levels_manager();
         $level_models = $level_manager->fetch_all();
 
-//        $repo = new scholar_levels_repository();
-        $c_repo = new scholar_cycles_repository();
-//        $levels = $repo->fetch_all();
-
-        $levels = [];
-        $the_levels = array();
-
-        foreach ($level_models as $level_model) {
-
-            $ID = $level_model->getId();
-
-            $the_levels[$ID]['name'] = $level_model->getName();
-            $cycle = $c_repo->find('id', $level_model->getCycleId());
-            $the_levels[$ID]['cycle'] = $cycle->getName();
-        }
-
         $bundle = array(
-            'LEVELS' => $the_levels
+            'LEVELS' => $level_models
         );
 
         $this->view(links::get('create-course'), $bundle);
@@ -60,6 +44,10 @@ class create_controller extends controller
 
     function competence()
     {
+        if (posts::empty()) {
+            redirect(links::get('create-course'));
+        }
+
         // load competences
         $repo = new competences_repository();
         $competences = $repo->fetch_all();

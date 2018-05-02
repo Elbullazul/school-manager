@@ -34,11 +34,6 @@ class user_types_manager extends manager
         return $ret;
     }
 
-    function find_all($model)
-    {
-        // TODO: Implement find_all() method.
-    }
-
     function fetch_all()
     {
         // TODO: Implement fetch_all() method.

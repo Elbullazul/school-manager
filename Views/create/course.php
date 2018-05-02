@@ -15,12 +15,51 @@ load(paths::part('back-button.php'));
 
         levelNameDiv.value = levelDiv.options[levelDiv.selectedIndex].text;
     }
+
+    $(document).ready(function () {
+        $('#form-course').validate({
+            rules: {
+                inputLevel: {
+                    required: true
+                },
+                inputName: {
+                    required: true
+                },
+                inputCode: {
+                    required: true,
+                    remote: {
+                        type: $('#form-course').attr('method'),
+                        url: "<?= '/ajax/is_valid_code'; ?>", // TODO: Include in links eventually
+                        data: {
+                            course_code: function () {
+                                return $('#inputCode').val();
+                            }
+                        }
+                    }
+                }
+            },
+            messages: {
+                inputLevel: {
+                    required: "<?= labels::get('@UI43'); ?>"
+                },
+                inputName: {
+                    required: "<?= labels::get('@UI43'); ?>"
+                },
+                inputCode: {
+                    required: "<?= labels::get('@UI43'); ?>",
+                    remote: "<?= labels::get('@UI42'); ?>"
+                }
+            }
+        });
+    });
+
 </script>
 
 <div class="row container-fluid h-100">
     <div class="col-md-3"></div>
     <div class="col-md-6 pt-3">
         <div class="container">
+            <div id="messages"></div>
 
             <form class="form" id="form-course" method="Post" action="<?= links::get('create-competence'); ?>">
                 <h2 class="form-heading">
@@ -38,8 +77,8 @@ load(paths::part('back-button.php'));
                         <?php
                         $levels = $data['LEVELS'];
 
-                        foreach ($levels as $ID => $level) {
-                            echo '<option value="' . $ID . '">' . $level['name'] . '</option>';
+                        foreach ($levels as $level) {
+                            echo '<option value="' . $level->getId() . '">' . $level->getName() . '</option>';
                         }
                         ?>
                     </select>

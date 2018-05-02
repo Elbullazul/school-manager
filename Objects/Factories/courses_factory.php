@@ -34,22 +34,4 @@ abstract class courses_factory extends factory
             return NULL;
         }
     }
-
-    static function construct_from_entity($entity)
-    {
-        $model = $entity->to_model();
-        return $model;
-    }
-
-    static function construct_from_entities(array $entities)
-    {
-        $models = [];
-
-        foreach ($entities as $entity) {
-            $models[] = $entity->to_model();
-        }
-
-        return $models;
-    }
-
 }
