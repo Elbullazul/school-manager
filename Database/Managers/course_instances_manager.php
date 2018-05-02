@@ -10,12 +10,15 @@ namespace Database\Managers;
 
 use Objects\Factories\course_instances_factory;
 use Database\Repositories\courses_instances_repository;
-use Services\date;
 
 class course_instances_manager extends manager
 {
     private function search_concatenate($course_instance_entity) {
         $course_instance_model = course_instances_factory::construct_from_entity($course_instance_entity);
+
+        // load course
+        $courses_manager = new courses_manager();
+        $course_model = $courses_manager->find_from_instance($course_instance_entity);
 
         // load day
         $days_manager = new days_manager();
@@ -30,6 +33,7 @@ class course_instances_manager extends manager
         $class_model = $classes_manager->find_from_course_instance($course_instance_entity);
 
         // assemble final model
+        $course_instance_model->setCourse($course_model);
         $course_instance_model->setDay($day_model);
         $course_instance_model->setPeriod($period_model);
         $course_instance_model->setClass($class_model);

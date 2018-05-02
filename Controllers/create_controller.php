@@ -11,12 +11,17 @@ namespace Controllers;
 use Core\security;
 use Database\Entities\course_competence_entity;
 use Database\Entities\course_entity;
+use Database\Managers\competences_manager;
+use Database\Managers\course_competences_manager;
+use Database\Managers\courses_manager;
 use Database\Managers\scholar_cycles_manager;
 use Database\Managers\scholar_levels_manager;
 use Database\Repositories\course_competences_repository;
 use Database\Repositories\courses_repository;
 use Database\Repositories\scholar_cycles_repository;
 use Database\Repositories\scholar_levels_repository;
+use Objects\Factories\course_competences_factory;
+use Objects\Factories\courses_factory;
 use Objects\Factories\scholar_levels_factory;
 use Services\flashes;
 use Services\links;
@@ -48,31 +53,25 @@ class create_controller extends controller
             redirect(links::get('create-course'));
         }
 
-        // load competences
-        $repo = new competences_repository();
-        $competences = $repo->fetch_all();
+        // NEW
+        $competences_manager = new competences_manager();
+        $competence_models = $competences_manager->fetch_all();
 
-        $the_competences = array();
+        $course_bundle = [
+            'id' => NULL,
+            'code' => posts::get('inputCode'),
+            'name' => posts::get('inputName'),
+            'level' => posts::get('inputLevel'),
+            'competences' => [],
+            'dependencies' => []
+        ];
 
-        // TODO: Use manager
-        foreach ($competences as $competence) {
-            $ID = $competence->getId();
-
-            $the_competences[$ID]['code'] = $competence->getCode();
-            $the_competences[$ID]['name'] = $competence->getName();
-            $the_competences[$ID]['description'] = $competence->getDescription();
-        }
-
-        $level = posts::get('inputLevelName');
-
-        $course['name'] = posts::get('inputName');
-        $course['code'] = posts::get('inputCode');
-        $course['level'] = posts::get('inputLevel');
+        $course_model = courses_factory::construct($course_bundle);
 
         $bundle = array(
-            'COMPETENCES' => $the_competences,
-            'LEVEL' => $level,
-            'COURSE' => $course
+            'COMPETENCES' => $competence_models,
+            'LEVEL' => posts::get('inputLevelName'),
+            'COURSE' => $course_model
         );
 
         $this->view(links::get('create-competence'), $bundle);
@@ -80,29 +79,33 @@ class create_controller extends controller
 
     function write()
     {
-        $course_data = $_POST['course'];
-        $competence_ids = explode(',', $_POST['competences']);
-
-        $course = new course_entity();  // TODO: Use manager instead
-        $course->setName($course_data['name']);
-        $course->setCode($course_data['code']);
-        $course->setLevelId($course_data['level']);
-
-        $repo = new courses_repository();
-        $course_ID = $repo->save($course);
-
-        $repo = new course_competences_repository();
-
-        foreach ($competence_ids as $competence_id) {
-            $course_competence = new course_competence_entity();    // TODO: Use manager instead
-            $course_competence->setCompetenceId($competence_id);
-            $course_competence->setCourseId($course_ID);
-
-            $repo->save($course_competence);
+        if (posts::empty()) {
+            redirect($this->home());
         }
 
-        flashes::set('@UI41',flashes::SUCCESS, true);
+        $data = $_POST['course'];
+        $competence_ids = explode(',', $_POST['competences']);
 
+        $data['id'] = NULL;
+        $data['competences'] = [];
+        $data['dependencies'] = [];
+
+        $course_model = courses_factory::construct($data);
+        $courses_manager = new courses_manager();
+        $course_id = $courses_manager->save_get_id($course_model);
+
+        $course_competences_manager = new course_competences_manager();
+
+        foreach ($competence_ids as $competence_id) {
+            $course_competence_model = course_competences_factory::construct
+            ([
+                'course_id' => $course_id,
+                'competence_id' => $competence_id
+            ]);
+            $course_competences_manager->save($course_competence_model);
+        }
+
+        flashes::set('@UI41', flashes::SUCCESS, true);
         redirect($this->home());
     }
 

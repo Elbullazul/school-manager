@@ -41,7 +41,7 @@ abstract class data
 
     static function get_course($day, $period, $courses) {
         foreach ($courses as $course) {
-            if ($course['day'] == $day && $course['period'] == $period) {
+            if ($course->getDay()->getId() == $day && $course->getPeriod()->getId() == $period) {
                 return $course;
             }
         }

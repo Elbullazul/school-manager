@@ -1,6 +1,5 @@
 <?php
 
-use Services\data;
 use Services\paths;
 use Services\labels;
 
@@ -11,6 +10,14 @@ use Services\labels;
         window.print();
     }
 </script>
+<!-- Print in landscape mode -->
+<style>
+    @media print {
+        @page {
+            size: landscape
+        }
+    }
+</style>
 
 <?php
 load(paths::part('back-button.php'));
@@ -22,55 +29,62 @@ load(paths::part('back-button.php'));
 
         $days = $data['DAYS'];
         $periods = $data['PERIODS'];
-        $courses = $data['COURSES'];
+        $schedule = $data['SCHEDULE'];
         $trimester = $data['TRIMESTER'];
 
-        // TODO: load content and display
-
-        echo '<h1>' . labels::get('@UI15') . ' ' . $trimester['id'] . '</h1>';
-
-        // display day names
-        echo '<div class="row"><div class="col-md-2"></div>';   // empty period column
-        foreach ($days as $day) {
-            $name = $day['name'];
-
-            echo '<div class="col-md-2 day">' . $name . '</div>';
-        }
-
-        echo '</div>';
-
-        foreach ($periods as $period_id => $period) {
-            echo '<div class="row">';
-
-            $begins = $period['begins'];
-            $ends = $period['ends'];
-
-            echo "<div class='col-md-2 period'>$begins - $ends</div>";
-
-            foreach ($days as $day_id => $day) {
-                $current = data::get_course($day_id, $period_id, $courses);
-
-                if (!is_null($current)) {
-                    echo '<div class="col-md-2 text-center course">';
-                    echo '<b>' . $current['name'] . '</b>';
-                    echo '<p class="mb-0">' . $current['code'] . '</p></br>';
-                    echo '<p class="mb-0">' . labels::get('@UI20') . ': ' . $current['class'] . '</p>';
-                    echo '</div>';
-                } else {
-                    echo "<div class='col-md-2 course empty'></div>";
+        // TODO: Fixed cell size for mobile
+        ?>
+        <h1><?= labels::get('@UI15') . ' ' . $trimester->getName(); ?></h1>
+        <table id="schedule" class="table table-bordered table-responsive-md table-fixed">
+            <tr class="table-light">
+                <th></th>   <!-- Empty cell between columns & rows -->
+                <?php
+                foreach ($days as $day) { ?>
+                    <th><?= $day->getName(); ?></th>
+                    <?php
                 }
+                ?>
+            </tr>
+            <?php
+            foreach ($periods as $period) { ?>
+                <tr class="table-light container-fluid">
+                    <td><?= $period->genTag(); ?></td>
+                    <?php
+                    foreach ($days as $day) {
+                        if (isset($schedule[$day->getId()][$period->getId()])) {
+                            $course_instance = $schedule[$day->getId()][$period->getId()];
+                            ?>
+                            <td align="center" class="active-cell cell text-center">
+                                <small>
+                                    <b><?= '(' . $course_instance->getCourse()->getCode() . ')'; ?></b>
+                                    <?= $course_instance->getCourse()->getName(); ?>
+                                    <br>
+                                    <br>
+                                    <?= labels::get('@UI20') . ' ' . $course_instance->getClass()->getCode(); ?>
+                                </small>
+                            </td>
+                            <?php
+                        } else { ?>
+                            <td class="cell">
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                            </td>
+                            <?php
+                        }
+                    }
+                    ?>
+                </tr>
+                <?php
             }
-
-            echo '</div>';
-        } ?>
+            ?>
+        </table>
+        <div class="spacer-10"></div>
     </div>
-    <div class="spacer-10"></div>
-
+    <?php
+    load(paths::part('print-button.php'));
+    ?>
+    <div class="spacer-30">
+    </div>
 </div>
-<?php
-load(paths::part('print-button.php'));
-?>
-<div class="spacer-30">
-</div>
-
-<!--</div>-->

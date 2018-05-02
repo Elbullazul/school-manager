@@ -15,11 +15,11 @@ $course = $data['COURSE'];
 $competences = $data['COMPETENCES'];
 $competences_count = count($competences);
 
+// TODO: Include JS file instead
 ?>
 
 <script>
-    // Page insertion
-    var count = <?= $competences_count; ?>;    // TODO: competence count
+    var count = <?= $competences_count; ?>;
 
     // Modal
     $(document).ready(function () {
@@ -106,8 +106,6 @@ $competences_count = count($competences);
                         ponderations: [pondt1, pondt2, pondt3]
                     },
                     success: function (result) {
-                        // DEBUG
-                        $("#messages").html(result);
                         $.notify({
                                 message: result
                             }, {
@@ -188,7 +186,6 @@ $competences_count = count($competences);
 
         $('#table-competences').append(competence);
     }
-
 </script>
 
 <?php
@@ -198,19 +195,23 @@ load(paths::modal('competence-dialog.php'));
 <?php
 load(paths::part('back-button.php'));
 ?>
-<a href="">text</a>
 <div class="row container-fluid h-100">
     <div class="col-md-3"></div>
     <div class="col-md-6 pt-3">
         <div>
             <div class="course-condensed">
-                <?php
-                echo '<h5>' . labels::get('@UI37') . '</h5>';
-                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI27') . '</b>: ' . $course['name'] . '</small></br>';
-                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI28') . '</b>: ' . $course['code'] . '</small></br>';
-                echo '<small class="mb-0 form-control-static"><b>' . labels::get('@UI21') . '</b>: ' . $level . '</small>';
-
-                ?>
+                <h5><?= labels::get('@UI37'); ?></h5>
+                <small class="mb-0 form-control-static">
+                    <b><?= labels::get('@UI27'); ?></b><?= ': ' . $course->getName(); ?>
+                </small>
+                </br>
+                <small class="mb-0 form-control-static">
+                    <b><?= labels::get('@UI28'); ?></b><?= ': ' . $course->getCode(); ?>
+                </small>
+                </br>
+                <small class="mb-0 form-control-static">
+                    <b><?= labels::get('@UI21'); ?></b><?= ': ' . $level; ?>
+                </small>
             </div>
             <div class="spacer-15"></div>
             <form class="form" method="Post" action="<?= links::get('create-write'); ?>">
@@ -218,36 +219,37 @@ load(paths::part('back-button.php'));
                     <h2>
                         <?= "Ajouter des compétences"; ?>
                     </h2>
-                    <div id="messages"></div>
                 </div>
-                <table id="table-competences" class="table">
-                    <tr id="template_competence" class="template_competence d-none container-fluid form-control">
-                        <th class="content col-md-10 border-0"></th>
-                        <th class="pr-0 border-0">
-                            <button type="button" class="btn btn-success btn-toggle">+</button>
-                        </th>
-                    </tr>
-                    <?php
+                <div class="viewport mb-2">
+                    <table id="table-competences" class="table">
+                        <tr id="template_competence" class="template_competence d-none container-fluid form-control">
+                            <th class="content col-md-10 border-0"></th>
+                            <th class="pr-0 border-0">
+                                <button type="button" class="btn btn-success btn-toggle">+</button>
+                            </th>
+                        </tr>
+                        <?php
 
-                    foreach ($competences as $index => $competence) {
-                        echo '<tr id="competence_' . $index . '" class="template_competence container-fluid form-control">';
-                        echo '<th class="content col-md-10 border-0">';
+                        foreach ($competences as $competence) { ?>
+                            <tr id="competence_<?= $competence->getId(); ?>" class="template_competence container-fluid form-control">
+                                <th class="content col-md-10 border-0">
 
-                        echo '(' . $competence['code'] . ') ' . $competence['name'];
-                        echo '</br><small>' . $competence['description'] . '</small>';
-
-                        echo '</th>';
-                        echo '<th class="pr-0 border-0">';
-                        echo '<button type="button" class="btn btn-success btn-toggle">+</button>';
-                        echo '</th>';
-                        echo '</tr>';
-                    }
-
-                    ?>
-                </table>
-                <input type="hidden" value="<?= $course['name']; ?>" id="inputName" name="course[name]" required="">
-                <input type="hidden" value="<?= $course['code']; ?>" id="inputCode" name="course[code]" required="">
-                <input type="hidden" value="<?= $course['level']; ?>" id="inputLevel" name="course[level]" required="">
+                                    <?= '(' . $competence->getCode() . ') ' . $competence->getName(); ?>
+                                    </br>
+                                    <small><?= $competence->getDescription(); ?></small>
+                                </th>
+                                <th class="pr-0 border-0">
+                                    <button type="button" class="btn btn-success btn-toggle">+</button>
+                                </th>
+                            </tr>
+                            <?php
+                        }
+                        ?>
+                    </table>
+                </div>
+                <input type="hidden" value="<?= $course->getName(); ?>" id="inputName" name="course[name]" required="">
+                <input type="hidden" value="<?= $course->getCode(); ?>" id="inputCode" name="course[code]" required="">
+                <input type="hidden" value="<?= $course->getLevel(); ?>" id="inputLevel" name="course[level]" required="">
                 <input type="hidden" value="" id="competences" name="competences" required="">
                 <button type="button" class="btn btn-block" type="button"
                         data-toggle="modal" data-target="#competence-modal">
@@ -257,7 +259,6 @@ load(paths::part('back-button.php'));
                 <button class="btn btn-primary btn-block btn-lg" type="submit">
                     <?= labels::get('@UI40'); ?>
                 </button>
-
             </form>
             <div class="spacer-10"></div>
         </div>

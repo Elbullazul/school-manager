@@ -150,30 +150,6 @@ button a:active {
     font-size: 24px;
 }
 
-/* Schedule */
-.period {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    background-color: rgba(0,0,0,0.05);
-}
-
-.course {
-    border: 1px solid gray;
-    font-size: 12px;
-}
-
-.course.empty {
-    border: none;
-    background-color: rgba(0,0,0,0.1);
-}
-
-.day {
-    background-color: rgba(0,0,0,0.2);
-}
-
-.schedule {
-}
-
 .template_competence {
     margin-top: 5px;
     background-color: #f1f1f1;
@@ -195,4 +171,21 @@ label.error {
 
 .mobile-menu-toggle.dropdown-toggle::after {
     display:none
+}
+
+.viewport {
+    height: 460px !important;
+    overflow-y: auto;
+}
+
+.table-fixed {
+    table-layout: fixed;
+}
+
+.active-cell {
+    background-color: #f1f1f1 !important;
+}
+
+.cell {
+    padding: 0;
 }

@@ -50,7 +50,6 @@ abstract class repository
         $engine->select('id')->from($this->table)->order_by('date_created')->desc()->limit(1);
         $ret = $engine->execute();
 
-        // TODO: is this OK?
         return $ret->getId();
     }
 }

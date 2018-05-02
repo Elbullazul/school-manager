@@ -54,12 +54,19 @@ class courses_repository extends repository
         return $ret;
     }
 
+    function get_last_id() {
+        $engine = new query_builder($this->entity, query_builder::FETCH);
+        $engine->select('id')->from($this->table)->order_by('date_created')->desc()->limit(1);
+        $ret = $engine->execute();
+
+        return $ret->getId();
+    }
 
     function save($model)
     {
         $engine = new query_builder($this->entity, query_builder::EXECUTE);
         $engine->insert($this->table, ['code', 'name', 'level_id'])
-            ->values($model->getCode(), $model->getName(), $model->getLevelId());
+            ->values($model->getCode(), $model->getName(), $model->getLevel());
         $ret = $engine->execute();
 
         return $ret;

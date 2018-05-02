@@ -112,6 +112,14 @@ class courses_manager extends manager
         return $ret;
     }
 
+    function save_get_id($model)
+    {
+        self::save($model);
+        $repository = new courses_repository();
+
+        return $repository->get_last_id();
+    }
+
     function save_all(array $models)
     {
         $ret = [];

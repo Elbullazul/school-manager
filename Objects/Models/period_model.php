@@ -65,6 +65,14 @@ class period_model extends model
         $this->ends = $ends;
     }
 
+    public function genTag()
+    {
+        $tag = substr($this->begins, 0, strlen($this->begins) - 3) . ' - ';
+        $tag = $tag . substr($this->ends, 0, strlen($this->ends) - 3);
+
+        return $tag;
+    }
+
     function to_entity()
     {
         $entity = new period_entity();

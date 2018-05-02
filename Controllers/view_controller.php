@@ -9,6 +9,13 @@
 namespace Controllers;
 
 use Core\security;
+use Database\Managers\course_instances_manager;
+use Database\Managers\courses_manager;
+use Database\Managers\days_manager;
+use Database\Managers\periods_manager;
+use Database\Managers\scholar_trimesters_manager;
+use Database\Managers\scholar_years_manager;
+use Objects\Models\period_model;
 use Services\links;
 use Database\Repositories\days_repository;
 use Database\Repositories\periods_repository;
@@ -27,71 +34,35 @@ class view_controller extends controller
 
     function schedule()
     {
-        $repo = new scholar_trimesters_repository();
-        $trimester = $repo->find_current();
+        $trimesters_manager = new scholar_trimesters_manager();
+        $trimester_model = $trimesters_manager->find_current();
 
-        $the_trimester['id'] = $trimester->getId();
-        $the_trimester['scholar_year'] = $trimester->getScholarYearId();
+        // TODO: Load schedule for user only
+        $course_instances_manager = new course_instances_manager();
+        $course_instance_models = $course_instances_manager->fetch_current();
 
-        // load course instances
-        $repo = new courses_instances_repository();
-        $course_instances = $repo->find('trimester_id', '\''.$trimester->getId().'\''); // TODO: get trimester automatically
+        $periods_manager = new periods_manager();
+        $period_models = $periods_manager->fetch_all();
 
-        // wrap for processing
-        if (!is_array($course_instances))
-            $course_instances = array($course_instances);
+        $days_manager = new days_manager();
+        $day_models = $days_manager->fetch_all();
 
-        // load days
-        $repo = new days_repository();
-        $days = $repo->fetch_all();
+        // Build schedule array
+        $schedule = [];
 
-        // load periods
-        $repo = new periods_repository();
-        $periods = $repo->fetch_all();
+        foreach ($course_instance_models as $course_instance_model) {
+            $period_id = array_search($course_instance_model->getPeriod(), $period_models);
+            $day_id = array_search($course_instance_model->getDay(), $day_models);
 
-        // pack days
-        foreach ($days as $day) {
-            $ID = $day->getId();
-            $the_days[$ID]['name'] = $day->getName();
-        }
-
-        // pack periods
-        foreach ($periods as $period) {
-            $ID = $period->getId();
-
-            // pack periods
-            $begins = $period->getBegins();
-            $the_periods[$ID]['begins'] = substr($begins, 0, strlen($begins) - 3);
-
-            $ends = $period->getEnds();
-            $the_periods[$ID]['ends'] = substr($ends, 0, strlen($ends) - 3);
-        }
-
-        // TODO: Load schedule by user & user type
-        $repo = new courses_repository();
-        $class_repo = new classes_repository();
-
-        // pack course data
-        foreach ($course_instances as $course_instance) {
-            $ID = $course_instance->getId();
-
-            $the_courses[$ID]['day'] = $course_instance->getDayId();
-            $the_courses[$ID]['period'] = $course_instance->getPeriodId();
-
-            $course = $repo->find('id', $course_instance->getCourseId());
-            $class = $class_repo->find('id', $course_instance->getClassId());
-
-            $the_courses[$ID]['code'] = $course->getCode();
-            $the_courses[$ID]['name'] = $course->getName();
-            $the_courses[$ID]['class'] = $class->getCode();
+            $schedule[($day_id + 1)][($period_id + 1)] = $course_instance_model;
         }
 
         // pack
         $bundle = array(
-            'PERIODS' => $the_periods,
-            'DAYS' => $the_days,
-            'COURSES' => $the_courses,
-            'TRIMESTER' => $the_trimester
+            'SCHEDULE' => $schedule,
+            'PERIODS' => $period_models,
+            'DAYS' => $day_models,
+            'TRIMESTER' => $trimester_model
         );
 
         // load view
