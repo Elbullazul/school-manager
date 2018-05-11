@@ -13,11 +13,14 @@ use Database\Repositories\course_competences_repository;
 
 class course_competences_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new course_competences_repository();
+    }
+
     function find($model)
     {
-        $repository = new course_competences_repository();
-        $entity = $repository->find('course_id', $model->getId());
-
+        $entity = $this->repository->find('course_id', $model->getId());
         $ret = course_competences_factory::construct_from_entity($entity);
 
         return $ret;
@@ -25,9 +28,7 @@ class course_competences_manager extends manager
 
     function find_all($model)
     {
-        $repository = new course_competences_repository();
-        $entities = $repository->find_all('course_id', $model->getId());
-
+        $entities = $this->repository->find_all('course_id', $model->getId());
         $ret = course_competences_factory::construct_from_entities($entities);
 
         return $ret;
@@ -35,30 +36,8 @@ class course_competences_manager extends manager
 
     function fetch_all()
     {
-        $repository = new course_competences_repository();
-        $entities = $repository->fetch_all();
-
+        $entities = $this->repository->fetch_all();
         $ret = course_competences_factory::construct_from_entities($entities);
-
-        return $ret;
-    }
-
-    function save($model)
-    {
-        $repository = new course_competences_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new course_competences_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
 
         return $ret;
     }
@@ -70,16 +49,7 @@ class course_competences_manager extends manager
 
     function destroy($model)
     {
-        $repository = new course_competences_repository();
-        $ret = $repository->destroy('course_id', $model->getId());
-
-        return $ret;
-    }
-
-    function destroy_all()
-    {
-        $repository = new course_competences_repository();
-        $ret = $repository->destroy_all();
+        $ret = $this->repository->destroy('course_id', $model->getId());
 
         return $ret;
     }

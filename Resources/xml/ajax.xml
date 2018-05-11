@@ -1,0 +1,34 @@
+<actions>
+    <action>
+        <tag>validate-course-code</tag>
+        <url>/ajax/is_valid_course_code</url>
+    </action>
+    <action>
+        <tag>save-competence</tag>
+        <url>/ajax/save_competence</url>
+    </action>
+    <action>
+        <tag>get-students-by-course</tag>
+        <url>/ajax/get_students_by_course</url>
+    </action>
+    <action>
+        <tag>validate-trimester-code</tag>
+        <url>/ajax/is_valid_trimester_code</url>
+    </action>
+    <action>
+        <tag>save-trimester</tag>
+        <url>/ajax/save_trimester</url>
+    </action>
+    <action>
+        <tag>save-scholar-year</tag>
+        <url>/ajax/save_scholar_year</url>
+    </action>
+    <action>
+        <tag>validate-scholar-year-code</tag>
+        <url>/ajax/is_valid_scholar_year</url>
+    </action>
+    <action>
+        <tag>load-course-competences</tag>
+        <url>/ajax/load_course_competences</url>
+    </action>
+</actions>

@@ -6,7 +6,6 @@ use Services\labels;
 use Services\links;
 use Services\xml;
 
-// TODO: load menu file
 $file = str_replace('.php', '', $FILE) . '/' . users::type() . '.xml';
 $griditems = xml::parse(paths::layout($file));
 
@@ -23,14 +22,18 @@ if (!is_array($griditems)) {
         $view = $item["tag"];
         $label = $item["label"];
 
-        $lnk = $view; // TODO : cleanup
+        $lnk = $view;
         $lbl = labels::get($label);
 
-        // TODO: Implement this in cleaner manner
-        $html = '<a class="link-no-underline col-sm-3 center-block grid-item" href="' . $lnk . '">';
-        $html = $html . '<div class="row img-container text-center"><img class="img-fluid" src="' . paths::resource('img/placeholder.png') . '"/>';
-        $html = $html . '</div><div class="row text-center"><h4 class="container-fluid pt-3">' . $lbl . '</h4></div></a>';
-
-        echo $html;
+        ?>
+        <a class="link-no-underline col-sm-3 center-block grid-item" href="<?= $lnk; ?>">
+            <div class="row img-container text-center">
+                <img class="img-fluid" src="<?= paths::resource('img/placeholder.png'); ?>"/>
+            </div>
+            <div class="row text-center">
+                <h4 class="container-fluid pt-3"><?= $lbl; ?></h4>
+            </div>
+        </a>
+        <?php
     }
 }

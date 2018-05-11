@@ -27,19 +27,4 @@ abstract class links
 
         return $path;
     }
-
-    static function full_path($namespace, $tag) {
-        $path = "";
-        $file = RESOURCES . '\xml\links.xml';
-        $xml = simplexml_load_file($file);
-
-        foreach ($xml as $node) {
-            if ($node->tag == $tag && $node->namespace == $namespace) {
-                $path = $node->path;
-                break;
-            }
-        }
-
-        return $path;
-    }
 }

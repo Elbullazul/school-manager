@@ -23,12 +23,12 @@ abstract class course_instances_factory extends factory
         if (count($bundle) == 7) {
             $model = new course_instance_model();
             $model->setId($bundle['id']);
-            $model->setCourseId($bundle['course_id']);
+            $model->setCourse($bundle['course_id']);
             $model->setTeacherId($bundle['teacher_id']);
             $model->setTrimesterId($bundle['trimester_id']);
-            $model->setClassId($bundle['class_id']);
-            $model->setDayId($bundle['day_id']);
-            $model->setPeriodId($bundle['period_id']);
+            $model->setClass($bundle['class_id']);
+            $model->setDay($bundle['day_id']);
+            $model->setPeriod($bundle['period_id']);
 
             return $model;
         } else {

@@ -10,7 +10,7 @@
 
 <div class="checkbox">
     <label>
-        <input class="m-2 check" type="checkbox" id="t1" name="t1" value="1" checked>
-        <? //= labels::get('@UI32'); ?>
+        <input class="m-2 check" type="checkbox" id="<?= $ID; ?>" name="<?= $NAME; ?>" value="1" <?= $CHECKED ? 'checked': ''; ?>>
+        <?= $LABEL; ?>
     </label>
 </div>

@@ -33,7 +33,7 @@ class user_controller extends controller
 
     function view($tag, $data = array())
     {
-        security::access();
+        security::access($tag);
         parent::view($tag, $data);
     }
 

@@ -17,7 +17,7 @@ class scholar_trimester_model extends model
     private $begins;
     private $ends;
     private $name;
-    private $trimester_rank;
+    private $rank;
     private $scholar_year_id;
 
     /**
@@ -87,17 +87,17 @@ class scholar_trimester_model extends model
     /**
      * @return mixed
      */
-    public function getTrimesterRank()
+    public function getRank()
     {
-        return $this->trimester_rank;
+        return $this->rank;
     }
 
     /**
-     * @param mixed $trimester_rank
+     * @param mixed $rank
      */
-    public function setTrimesterRank($trimester_rank)
+    public function setRank($rank)
     {
-        $this->trimester_rank = $trimester_rank;
+        $this->rank = $rank;
     }
 
     /**
@@ -123,7 +123,7 @@ class scholar_trimester_model extends model
         $entity->setBegins($this->begins);
         $entity->setEnds($this->ends);
         $entity->setName($this->name);
-        $entity->setTrimesterRank($this->trimester_rank);
+        $entity->setRank($this->rank);
         $entity->setScholarYearId($this->scholar_year_id);
 
         return $entity;

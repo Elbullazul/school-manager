@@ -9,6 +9,7 @@
 namespace Core;
 
 use Database\Managers\users_manager;
+use Services\access_registry;
 use Services\flashes;
 use Services\links;
 use Services\users;
@@ -53,7 +54,17 @@ abstract class security
 
     static function access()
     {
-        if (!users::connected())
+        if (!users::connected()) {
             redirect(links::get('login'));
+        }
+    }
+
+    static function authorize($tag) {
+        $has_access = access_registry::find($tag);
+
+        if (!$has_access) {
+            flashes::set('@UI46', flashes::DANGER, true);
+            redirect(links::get('dashboard'));
+        }
     }
 }

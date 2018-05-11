@@ -19,6 +19,15 @@ abstract class repository
 
     abstract function update($field, $value, $model);
 
+    function fetch_all()
+    {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select('*')->from($this->table);
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
     function destroy($field, $value) {
         $engine = new query_builder($this->entity, query_builder::EXECUTE);
         $engine->delete($this->table)->where($field.' = '.$value);
@@ -30,15 +39,6 @@ abstract class repository
     function destroy_all() {
         $engine = new query_builder($this->entity, query_builder::EXECUTE);
         $engine->delete($this->table);
-        $ret = $engine->execute();
-
-        return $ret;
-    }
-
-    function fetch_all()
-    {
-        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
-        $engine->select('*')->from($this->table);
         $ret = $engine->execute();
 
         return $ret;

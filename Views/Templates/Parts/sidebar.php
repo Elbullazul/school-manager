@@ -8,14 +8,12 @@ use Services\links;
 
 ?>
 
-<!-- TODO: Make mobile-compatible copy of this module -->
 <ul class="nav nav-pills flex-column flex-md-wrap">
 
     <?php
 
     $current_view = $TAG;
 
-    // TODO: load menu file
     $file = "sidebar\\" . users::type() . '.xml';
     $sidebaritems = xml::parse(paths::xml($file));
 

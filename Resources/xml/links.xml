@@ -55,6 +55,21 @@
         <path>/create/schedule</path>
     </link>
     <link>
+        <tag>create-schedule-courses</tag>
+        <title>@PA09</title>
+        <path>/create/schedule_courses</path>
+    </link>
+    <link>
+        <tag>create-absences</tag>
+        <title>@PA17</title>
+        <path>/create/absences</path>
+    </link>>
+    <link>
+        <tag>create-evaluation</tag>
+        <title>@PA17</title>
+        <path>/create/evaluation</path>
+    </link>
+    <link>
         <tag>create-course</tag>
         <title>@PA15</title>
         <path>/create/course</path>
@@ -65,8 +80,23 @@
         <path>/create/competence</path>
     </link>
     <link>
-        <tag>create-write</tag>
+        <tag>create-write-new-course</tag>
         <title>@PA16</title>
-        <path>/create/write</path>
+        <path>/create/write_new_course</path>
+    </link>
+    <link>
+        <tag>create-write-new-schedule-courses</tag>
+        <title>@PA16</title>
+        <path>/create/write_new_schedule_courses</path>
+    </link>
+    <link>
+        <tag>create-write-new-evaluation</tag>
+        <title>@PA16</title>
+        <path>/create/write_new_evaluation</path>
+    </link>
+    <link>
+        <tag>create-write-new-absence</tag>
+        <title>@PA16</title>
+        <path>/create/write_new_absence</path>
     </link>
 </links>

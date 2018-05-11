@@ -13,6 +13,11 @@ use Database\Repositories\courses_instances_repository;
 
 class course_instances_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new courses_instances_repository();
+    }
+
     private function search_concatenate($course_instance_entity) {
         $course_instance_model = course_instances_factory::construct_from_entity($course_instance_entity);
 
@@ -41,12 +46,9 @@ class course_instances_manager extends manager
         return $course_instance_model;
     }
 
-    // TODO: Implement concat of data
     function find($model)
     {
-        $course_instance_repository = new courses_instances_repository();
-        $course_instance_entity = $course_instance_repository->find('id', $model->getId());
-
+        $course_instance_entity = $this->repository->find('id', $model->getId());
         $course_instance_model = self::search_concatenate($course_instance_entity);
 
         return $course_instance_model;
@@ -54,10 +56,8 @@ class course_instances_manager extends manager
 
     function fetch_all()
     {
-        $course_instance_repository = new courses_instances_repository();
-        $course_instance_entities = $course_instance_repository->fetch_all();
-
         $course_instance_models = [];
+        $course_instance_entities = $this->repository->fetch_all();
 
         foreach ($course_instance_entities as $course_instance_entity) {
             $course_instance_models[] = self::search_concatenate($course_instance_entity);
@@ -70,10 +70,8 @@ class course_instances_manager extends manager
         $trimesters_manager = new scholar_trimesters_manager();
         $trimester_model = $trimesters_manager->find_current();
 
-        $course_instance_repository = new courses_instances_repository();
-        $course_instance_entities = $course_instance_repository->find_all('trimester_id', $trimester_model->getId());
-
         $course_instance_models = [];
+        $course_instance_entities = $this->repository->find_all('trimester_id', $trimester_model->getId());
 
         foreach ($course_instance_entities as $course_instance_entity) {
             $course_instance_models[] = self::search_concatenate($course_instance_entity);
@@ -82,45 +80,9 @@ class course_instances_manager extends manager
         return $course_instance_models;
     }
 
-    function save($model)
-    {
-        $repository = new courses_instances_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new courses_instances_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
-
-        return $ret;
-    }
-
     function update($unique_id, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($model)
-    {
-        $repository = new courses_instances_repository();
-        $ret = $repository->destroy('id', $model->getId());
-
-        return $ret;
-    }
-
-    function destroy_all()
-    {
-        $repository = new courses_instances_repository();
-        $ret = $repository->destroy_all();
-
-        return $ret;
     }
 
 }

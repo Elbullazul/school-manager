@@ -13,11 +13,14 @@ use Database\Repositories\periods_repository;
 
 class periods_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new periods_repository();
+    }
+
     function find($model)
     {
-        $repository = new periods_repository();
-        $entity = $repository->find('id', $model->getId());
-
+        $entity = $this->repository->find('id', $model->getId());
         $ret = periods_factory::construct_from_entity($entity);
 
         return $ret;
@@ -25,8 +28,7 @@ class periods_manager extends manager
 
     function find_from_course_instance($model)
     {
-        $repository = new periods_repository();
-        $entity = $repository->find('id', $model->getDayId());
+        $entity = $this->repository->find('id', $model->getDayId());
         $ret = periods_factory::construct_from_entity($entity);
 
         return $ret;
@@ -34,30 +36,8 @@ class periods_manager extends manager
 
     function fetch_all()
     {
-        $repository = new periods_repository();
-        $entities = $repository->fetch_all();
-
+        $entities = $this->repository->fetch_all();
         $ret = periods_factory::construct_from_entities($entities);
-
-        return $ret;
-    }
-
-    function save($model)
-    {
-        $repository = new periods_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new periods_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
 
         return $ret;
     }
@@ -65,22 +45,6 @@ class periods_manager extends manager
     function update($unique_id, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($model)
-    {
-        $repository = new periods_repository();
-        $ret = $repository->destroy('id', $model->getId());
-
-        return $ret;
-    }
-
-    function destroy_all()
-    {
-        $repository = new periods_repository();
-        $ret = $repository->destroy_all();
-
-        return $ret;
     }
 
 }

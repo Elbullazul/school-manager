@@ -3,6 +3,7 @@
 use Services\links;
 use Services\paths;
 use Services\labels;
+use Core\ajax_service;
 
 load(paths::part('back-button.php'));
 
@@ -29,7 +30,7 @@ load(paths::part('back-button.php'));
                     required: true,
                     remote: {
                         type: $('#form-course').attr('method'),
-                        url: "<?= '/ajax/is_valid_code'; ?>", // TODO: Include in links eventually
+                        url: "<?= ajax_service::get_action_url('validate-course-code'); ?>",
                         data: {
                             course_code: function () {
                                 return $('#inputCode').val();
@@ -75,9 +76,7 @@ load(paths::part('back-button.php'));
                             required="" autofocus="" onchange="setLevelName()">
                         <option disabled selected value><?= labels::get('@UI21'); ?></option>
                         <?php
-                        $levels = $data['LEVELS'];
-
-                        foreach ($levels as $level) {
+                        foreach ($LEVELS as $level) {
                             echo '<option value="' . $level->getId() . '">' . $level->getName() . '</option>';
                         }
                         ?>

@@ -13,20 +13,22 @@ use Database\Repositories\competence_ponderations_repository;
 
 class competence_ponderations_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new competence_ponderations_repository();
+    }
+
     function find($model)
     {
-        $repository = new competence_ponderations_repository();
-        $entity = $repository->find('competence_id', $model->getCompetenceId());
-
+        $entity = $this->repository->find('competence_id', $model->getCompetenceId());
         $ret = competence_ponderations_factory::construct_from_entity($entity);
 
         return $ret;
     }
 
-    function find_from_competence($model) {
-        $repository = new competence_ponderations_repository();
-        $entity = $repository->find('competence_id', $model->getId());
-
+    function find_from_competence($model)
+    {
+        $entity = $this->repository->find('competence_id', $model->getId());
         $ret = competence_ponderations_factory::construct_from_entity($entity);
 
         return $ret;
@@ -34,18 +36,15 @@ class competence_ponderations_manager extends manager
 
     function find_all($model)
     {
-        $repository = new competence_ponderations_repository();
-        $entities = $repository->find_all('competence_id', $model->getCompetenceId());
-
+        $entities = $this->repository->find_all('competence_id', $model->getCompetenceId());
         $ret = competence_ponderations_factory::construct_from_entities($entities);
 
         return $ret;
     }
 
-    function find_all_from_competence($model) {
-        $repository = new competence_ponderations_repository();
-        $entities = $repository->find_all('competence_id', $model->getId());
-
+    function find_all_from_competence($model)
+    {
+        $entities = $this->repository->find_all('competence_id', $model->getId());
         $ret = competence_ponderations_factory::construct_from_entities($entities);
 
         return $ret;
@@ -53,30 +52,8 @@ class competence_ponderations_manager extends manager
 
     function fetch_all()
     {
-        $repository = new competence_ponderations_repository();
-        $entities = $repository->fetch_all();
-
+        $entities = $this->repository->fetch_all();
         $ret = competence_ponderations_factory::construct_from_entities($entities);
-
-        return $ret;
-    }
-
-    function save($model)
-    {
-        $repository = new competence_ponderations_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new competence_ponderations_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
 
         return $ret;
     }
@@ -88,18 +65,10 @@ class competence_ponderations_manager extends manager
 
     function destroy($model)
     {
-        $repository = new competence_ponderations_repository();
-        $ret = $repository->destroy('id', $model->getCompetenceId());
+        $ret = $this->repository->destroy('competence_id', $model->getId());
 
         return $ret;
     }
 
-    function destroy_all()
-    {
-        $repository = new competence_ponderations_repository();
-        $ret = $repository->destroy_all();
-
-        return $ret;
-    }
 
 }

@@ -28,7 +28,7 @@ class scholar_trimesters_repository extends repository
             'begins',
             'ends',
             'name',
-            'rank as trimester_rank',   // TODO: Fix in BD
+            'rank',
             'scholar_year_id',
             /* METADATA */
             'modified_by',
@@ -48,7 +48,7 @@ class scholar_trimesters_repository extends repository
             'begins',
             'ends',
             'name',
-            'rank as trimester_rank',
+            'rank',
             'scholar_year_id',
             /* METADATA */
             'modified_by',
@@ -67,7 +67,7 @@ class scholar_trimesters_repository extends repository
             'begins',
             'ends',
             'name',
-            'rank as trimester_rank',
+            'rank',
             'scholar_year_id',
             /* METADATA */
             'modified_by',
@@ -79,9 +79,34 @@ class scholar_trimesters_repository extends repository
         return $ret;
     }
 
-    function save($_model)
+    function find_current_and_future() {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            'name',
+            'rank',
+            'scholar_year_id',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->where('begins <= '.date::now());
+        $ret = $engine->execute();
+
+        return $ret;
+    }
+
+    function save($model)
     {
-        // TODO: Implement save() method.
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->insert($this->table, ['id', 'name', 'rank', 'scholar_year_id', 'begins', 'ends'])
+            ->values($model->getId(), $model->getName(), $model->getRank(), $model->getScholarYearId(),
+                $model->getBegins(), $model->getEnds());
+        $ret = $engine->execute();
+
+        return $ret;
     }
 
     function update($field, $value, $model)

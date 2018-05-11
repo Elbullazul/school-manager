@@ -8,17 +8,19 @@
 
 namespace Database\Managers;
 
-
-use Database\Repositories\user_types_repository;
 use Objects\Factories\user_types_factory;
+use Database\Repositories\user_types_repository;
 
 class user_types_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new user_types_repository();
+    }
+
     function find($model)
     {
-        $repository = new user_types_repository();
-        $entity = $repository->find('type_id', $model->getTypeId());
-
+        $entity = $this->repository->find('type_id', $model->getTypeId());
         $ret = user_types_factory::construct_from_entity($entity);
 
         return $ret;
@@ -26,9 +28,7 @@ class user_types_manager extends manager
 
     function find_from_user($model)
     {
-        $repository = new user_types_repository();
-        $entity = $repository->find('type_id', $model->getUserType());
-
+        $entity = $this->repository->find('type_id', $model->getUserType());
         $ret = user_types_factory::construct_from_entity($entity);
 
         return $ret;
@@ -36,17 +36,10 @@ class user_types_manager extends manager
 
     function fetch_all()
     {
-        // TODO: Implement fetch_all() method.
-    }
+        $entity = $this->repository->fetch_all();
+        $ret = user_types_factory::construct_from_entities($entity);
 
-    function save($model)
-    {
-        // TODO: Implement save() method.
-    }
-
-    function save_all(array $models)
-    {
-        // TODO: Implement save_all() method.
+        return $ret;
     }
 
     function update($unique_id, $model)
@@ -56,12 +49,9 @@ class user_types_manager extends manager
 
     function destroy($model)
     {
-        // TODO: Implement destroy() method.
-    }
+        $ret = $this->repository->destroy('type_id', $model->getTypeId());
 
-    function destroy_all()
-    {
-        // TODO: Implement destroy_all() method.
+        return $ret;
     }
 
 }

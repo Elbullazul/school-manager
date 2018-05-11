@@ -370,4 +370,34 @@
         <text>La valeur doit être plus petite ou égale à 100</text>
         <comment></comment>
     </label>
+    <label>
+        <key>@UI46</key>
+        <text>Vous n'êtes pas autorisé à accéder à cette page</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI47</key>
+        <text>Trimestre ajouté avec succès</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI48</key>
+        <text>Année scolaire ajouté avec succès</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI49</key>
+        <text>Créer une évaluation</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI50</key>
+        <text>Évaluation enregistrée avec succès</text>
+        <comment></comment>
+    </label>
+    <label>
+        <key>@UI51</key>
+        <text>Horaire enregistré avec succès</text>
+        <comment></comment>
+    </label>
 </labels>

@@ -13,7 +13,7 @@ use Services\links;
 
         <?php
 
-        // TODO: load menu file
+        // TODO: Make a truly mobile menu, with correct options
         $file = "sidebar\\" . users::type() . '.xml';
         $sidebaritems = xml::parse(paths::xml($file));
 

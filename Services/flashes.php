@@ -13,9 +13,10 @@ abstract class flashes
 
     static function get()
     {
-        $flashes = sessions::get('flashes');
+        $flashes = [];
 
         if (sessions::is_set('flashes')) {
+            $flashes = sessions::get('flashes');
             sessions::destroy('flashes');
         }
 
@@ -24,11 +25,10 @@ abstract class flashes
 
     static function set($_msg, $_idx, $sticky = false)
     {
-        // TODO: This should be in the session util class
         $_SESSION['flashes'][$_idx][] = ['text' => $_msg, 'sticky' => $sticky];
     }
 
-    static function get_name($_idx)
+    static function gen_class($_idx)
     {
         switch ($_idx) {
             case 1:
@@ -45,7 +45,7 @@ abstract class flashes
                 break;
         }
 
-        return $type;
+        return 'alert-'.$type;
     }
 }
 

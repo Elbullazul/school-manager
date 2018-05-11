@@ -13,11 +13,14 @@ use Objects\Factories\classes_factory;
 
 class classes_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new classes_repository();
+    }
+
     function find($model)
     {
-        $repository = new classes_repository();
-        $entity = $repository->find('id', $model->getId());
-
+        $entity = $this->repository->find('id', $model->getId());
         $ret = classes_factory::construct_from_entity($entity);
 
         return $ret;
@@ -25,9 +28,7 @@ class classes_manager extends manager
 
     function find_from_course_instance($model)
     {
-        $repository = new classes_repository();
-        $entity = $repository->find('id', $model->getClassId());
-
+        $entity = $this->repository->find('id', $model->getClassId());
         $ret = classes_factory::construct_from_entity($entity);
 
         return $ret;
@@ -35,37 +36,15 @@ class classes_manager extends manager
 
     function fetch_all()
     {
-        $repository = new classes_repository();
-        $entity = $repository->fetch_all();
-
-        $ret = classes_factory::construct_from_entity($entity);
+        $entity = $this->repository->fetch_all();
+        $ret = classes_factory::construct_from_entities($entity);
 
         return $ret;
-    }
-
-    function save($model)
-    {
-        // TODO: Implement save() method.
-    }
-
-    function save_all(array $models)
-    {
-        // TODO: Implement save_all() method.
     }
 
     function update($unique_id, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($model)
-    {
-        // TODO: Implement destroy() method.
-    }
-
-    function destroy_all()
-    {
-        // TODO: Implement destroy_all() method.
     }
 
 }

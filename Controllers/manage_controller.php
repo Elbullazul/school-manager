@@ -8,8 +8,8 @@
 
 namespace Controllers;
 
-use Services\links;
 use Core\security;
+use Services\links;
 
 class manage_controller extends controller
 {
@@ -23,7 +23,7 @@ class manage_controller extends controller
 
     function view($tag, $data = array())
     {
-        security::access();
+        security::access($tag);
         parent::view($tag, $data);
     }
 

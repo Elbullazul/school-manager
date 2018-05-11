@@ -14,7 +14,6 @@ use Services\xml;
 <div class="dropdown-menu dropdown-menu-right text-left">
     <?php
 
-    // TODO: load menu file
     $file = "user-menu\\" . users::type() . '.xml';
     $menuitems = xml::parse(paths::xml($file));
 

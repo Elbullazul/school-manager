@@ -10,19 +10,45 @@ namespace Database\Managers;
 
 abstract class manager
 {
+    protected $repository;
+
+    abstract function __construct();
+
     abstract function find($model);
 
-//    abstract function find_all($model);
+    abstract function fetch_all();
 
-    abstract function fetch_all();  // implemented in repo
+    function save($model)
+    {
+        $ret = $this->repository->save($model);
 
-    abstract function save($model);
+        return $ret;
+    }
 
-    abstract function save_all(array $models);
+    function save_all(array $models)
+    {
+        $ret = [];
+
+        foreach ($models as $model) {
+            $ret[] = $this->repository->save($model);
+        }
+
+        return $ret;
+    }
 
     abstract function update($unique_id, $model);
 
-    abstract function destroy($model);
+    function destroy($model)
+    {
+        $ret = $this->repository->destroy('id', $model->getId());
 
-    abstract function destroy_all();
+        return $ret;
+    }
+
+    function destroy_all()
+    {
+        $ret = $this->repository->destroy_all();
+
+        return $ret;
+    }
 }

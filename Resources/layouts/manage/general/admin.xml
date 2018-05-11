@@ -4,7 +4,7 @@
         <label>@PA07</label>
     </menuitem>
     <menuitem>
-        <tag>/manage/attendance</tag>
+        <tag>/manage/absences</tag>
         <label>@PA17</label>
     </menuitem>
 </menuitems>

@@ -8,7 +8,6 @@
 
 namespace Database\Entities;
 
-
 use Objects\Models\scholar_trimester_model;
 
 class scholar_trimester_entity extends entity
@@ -17,7 +16,7 @@ class scholar_trimester_entity extends entity
     private $begins;
     private $ends;
     private $name;
-    private $trimester_rank;
+    private $rank;
     private $scholar_year_id;
 
     /**
@@ -87,17 +86,17 @@ class scholar_trimester_entity extends entity
     /**
      * @return mixed
      */
-    public function getTrimesterRank()
+    public function getRank()
     {
-        return $this->trimester_rank;
+        return $this->rank;
     }
 
     /**
-     * @param mixed $trimester_rank
+     * @param mixed $rank
      */
-    public function setTrimesterRank($trimester_rank)
+    public function setRank($rank)
     {
-        $this->trimester_rank = $trimester_rank;
+        $this->rank = $rank;
     }
 
     /**
@@ -123,7 +122,7 @@ class scholar_trimester_entity extends entity
         $model->setBegins($this->begins);
         $model->setEnds($this->ends);
         $model->setName($this->name);
-        $model->setTrimesterRank($this->trimester_rank);
+        $model->setRank($this->rank);
         $model->setScholarYearId($this->scholar_year_id);
 
         return $model;

@@ -24,6 +24,8 @@ abstract class scholar_years_factory extends factory
             $model->setId($bundle['id']);
             $model->setBegins($bundle['begins']);
             $model->setEnds($bundle['ends']);
+
+            return $model;
         } else {
             return NULL;
         }

@@ -14,6 +14,11 @@ use Database\Repositories\courses_repository;
 
 class courses_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new courses_repository();
+    }
+
     protected function search_concatenate($course_entity)
     {
         $course_model = courses_factory::construct_from_entity($course_entity);
@@ -50,51 +55,29 @@ class courses_manager extends manager
 
     function find($model)
     {
-        $courses_repository = new courses_repository();
-        $course_entity = $courses_repository->find('id', $model->getId());
-
+        $course_entity = $this->repository->find('id', $model->getId());
         $course_model = self::search_concatenate($course_entity);
 
         return $course_model;
     }
 
     function find_from_instance($model) {
-        $courses_repository = new courses_repository();
-        $course_entity = $courses_repository->find('id', $model->getCourseId());
-
+        $course_entity = $this->repository->find('id', $model->getCourseId());
         $course_model = self::search_concatenate($course_entity);
 
         return $course_model;
     }
 
     function exists($model) {
-        $courses_repository = new courses_repository();
-        $ret = $courses_repository->find('code', $model->getCode());
+        $ret = $this->repository->find('code', $model->getCode());
 
         return $ret;
     }
 
-    // TODO: Remove if invalid or restore if OK
-//    function find_all($model)
-//    {
-//        $courses_repository = new courses_repository();
-//        $course_entities = $courses_repository->find_all('id', $model->getId());
-//
-//        $course_models = [];
-//
-//        foreach ($course_entities as $course_entity) {
-//            $course_models[] = self::search_concatenate($course_entity);
-//        }
-//
-//        return $course_models;
-//    }
-
     function fetch_all()
     {
-        $courses_repository = new courses_repository();
-        $course_entities = $courses_repository->fetch_all();
-
         $course_models = [];
+        $course_entities = $this->repository->fetch_all();
 
         foreach ($course_entities as $course_entity) {
             $course_models[] = self::search_concatenate($course_entity);
@@ -103,54 +86,16 @@ class courses_manager extends manager
         return $course_models;
     }
 
-    // TODO: Move procedures from AJAX/Create controllers here
-    function save($model)
-    {
-        $repository = new courses_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
     function save_get_id($model)
     {
         self::save($model);
-        $repository = new courses_repository();
 
-        return $repository->get_last_id();
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new courses_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
-
-        return $ret;
+        return $this->repository->get_last_id();
     }
 
     function update($unique_id, $model)
     {
         // TODO: Implement update() method.
-    }
-
-    function destroy($model)
-    {
-        $repository = new courses_repository();
-        $ret = $repository->destroy('id', $model->getId());
-
-        return $ret;
-    }
-
-    function destroy_all()
-    {
-        $repository = new courses_repository();
-        $ret = $repository->destroy_all();
-
-        return $ret;
     }
 
 }

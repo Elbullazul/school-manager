@@ -18,7 +18,6 @@ use Services\users;
         <?= labels::get('@UI01'); ?>
     </div>
     <div class="btn-group">
-        <!-- TODO: Load the menu if connected -->
         <?php
         if (users::connected())
             load(paths::part('user-menu.php'));

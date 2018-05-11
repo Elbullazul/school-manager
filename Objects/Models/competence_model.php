@@ -98,6 +98,18 @@ class competence_model extends model
         $this->ponderations = $ponderations;
     }
 
+    public function jsonSerialize()
+    {
+        $json = [
+            'id' => $this->id,
+            'name' => $this->name,
+            'code' => $this->code,
+            'description' => $this->description
+        ];
+
+        return $json;
+    }
+
     function to_entity()
     {
         $entity = new competence_entity();

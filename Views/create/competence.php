@@ -9,6 +9,7 @@
 use Services\paths;
 use Services\labels;
 use Services\links;
+use Core\ajax_service;
 
 $level = $data['LEVEL'];
 $course = $data['COURSE'];
@@ -98,7 +99,7 @@ $competences_count = count($competences);
 
                 $.ajax({
                     type: $(form).attr('method'),
-                    url: "<?= '/ajax/save_competence'; ?>", // TODO: Include in links eventually
+                    url: "<?= ajax_service::get_action_url('save-competence'); ?>",
                     data: {
                         name: name,
                         code: code,
@@ -115,7 +116,11 @@ $competences_count = count($competences);
                         addCompetenceDOM(name, code, desc);
                     },
                     error: function (xhr, status, error) {
-                        var err = eval("(" + xhr.responseText + ")");
+                        $.notify({
+                            message: "<?= labels::get('@SYS05'); ?>"
+                        }, {
+                            type: 'danger'
+                        });
                     }
                 });
 
@@ -214,7 +219,7 @@ load(paths::part('back-button.php'));
                 </small>
             </div>
             <div class="spacer-15"></div>
-            <form class="form" method="Post" action="<?= links::get('create-write'); ?>">
+            <form class="form" method="Post" action="<?= links::get('create-write-new-course'); ?>">
                 <div class="container">
                     <h2>
                         <?= "Ajouter des compétences"; ?>
@@ -251,8 +256,7 @@ load(paths::part('back-button.php'));
                 <input type="hidden" value="<?= $course->getCode(); ?>" id="inputCode" name="course[code]" required="">
                 <input type="hidden" value="<?= $course->getLevel(); ?>" id="inputLevel" name="course[level]" required="">
                 <input type="hidden" value="" id="competences" name="competences" required="">
-                <button type="button" class="btn btn-block" type="button"
-                        data-toggle="modal" data-target="#competence-modal">
+                <button type="button" class="btn btn-block" data-toggle="modal" data-target="#competence-modal">
                     <?= labels::get('@UI39'); ?>
                 </button>
                 <div class='spacer-10'></div>

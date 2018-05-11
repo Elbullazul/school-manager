@@ -24,7 +24,7 @@ abstract class scholar_trimesters_factory extends factory
             $model->setId($bundle['id']);
             $model->setName($bundle['name']);
             $model->setScholarYearId($bundle['scholar_year_id']);
-            $model->setTrimesterRank($bundle['trimester_rank']);
+            $model->setRank($bundle['rank']);
             $model->setBegins($bundle['begins']);
             $model->setEnds($bundle['ends']);
 

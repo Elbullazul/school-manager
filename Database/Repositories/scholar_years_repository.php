@@ -70,10 +70,30 @@ class scholar_years_repository extends repository
         return $ret;
     }
 
+    function fetch_all_newer_first() {
+        $engine = new query_builder($this->entity, query_builder::FETCH_ALL);
+        $engine->select(
+            'id',
+            'begins',
+            'ends',
+            /* METADATA */
+            'modified_by',
+            'date_created',
+            'date_modified'
+        )->from($this->table)->order_by('date_created');
+        $ret = $engine->execute();
 
-    function save($_model)
+        return $ret;
+    }
+
+    function save($model)
     {
-        // TODO: Implement save() method.
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->insert($this->table, ['id', 'begins', 'ends'])
+            ->values($model->getId(), $model->getBegins(), $model->getEnds());
+        $ret = $engine->execute();
+
+        return $ret;
     }
 
     function update($field, $value, $model)

@@ -13,10 +13,14 @@ use Database\Repositories\users_repository;
 
 class users_manager extends manager
 {
+    public function __construct()
+    {
+        $this->repository = new users_repository();
+    }
+
     function find($model)
     {
-        $users_repository = new users_repository();
-        $user_entity = $users_repository->find('user_id', $model->getUserId());
+        $user_entity = $this->repository->find('user_id', $model->getUserId());
 
         $user_types_manager = new user_types_manager();
         $user_type_model = $user_types_manager->find_from_user($user_entity);
@@ -29,8 +33,7 @@ class users_manager extends manager
 
     function find_by_username($model)
     {
-        $users_repository = new users_repository();
-        $user_entity = $users_repository->find('username', $model->getUsername());
+        $user_entity = $this->repository->find('username', $model->getUsername());
 
         // TODO: concat user type
         $user_types_manager = new user_types_manager();
@@ -44,34 +47,12 @@ class users_manager extends manager
 
     function fetch_all()
     {
-        $repository = new users_repository();
-        $entities = $repository->fetch_all();
-
+        $entities = $this->repository->fetch_all();
         $ret = users_factory::construct_from_entities($entities);
 
         return $ret;
     }
-
-    function save($model)
-    {
-        $repository = new users_repository();
-        $ret = $repository->save($model);
-
-        return $ret;
-    }
-
-    function save_all(array $models)
-    {
-        $ret = [];
-        $repository = new users_repository();
-
-        foreach ($models as $model) {
-            $ret[] = $repository->save($model);
-        }
-
-        return $ret;
-    }
-
+    
     function update($unique_id, $model)
     {
         // TODO: Implement update() method.
@@ -79,14 +60,7 @@ class users_manager extends manager
 
     function destroy($model)
     {
-        $repository = new users_repository();
-        $repository->destroy('user_id', $model->getId());
-    }
-
-    function destroy_all()
-    {
-        $repository = new users_repository();
-        $ret = $repository->destroy_all();
+        $ret = $this->repository->destroy('user_id', $model->getId());
 
         return $ret;
     }

@@ -18,6 +18,9 @@ function redirect($view)
     ob_end_clean();
 
     header("Location: " . $view);
+
+    // prevent page loading & using the flashes
+    exit;
 }
 
 function error($label)
@@ -26,16 +29,19 @@ function error($label)
     load(paths::view('\public\error.php'));
 }
 
-function load($file, $data = array())
+function load($file, $data = array(), $load_once = true)
 {
-    foreach ($data as $index => $value){
+    foreach ($data as $index => $value) {
         $$index = $value;
     }
 
-    require_once $file;
+    if ($load_once) {
+        require_once $file;
+    } else {
+        include $file;
+    }
 }
 
-// TODO: Remove this before going live
 function dump($object)
 {
     echo '<pre>';

@@ -8,28 +8,47 @@
 
 namespace Database\Entities;
 
-abstract class person_entity extends entity
+use Objects\Models\person_model;
+
+class person_entity extends entity
 {
-    protected $last_name;
-    protected $first_name;
+    protected $id;
     protected $telephone_number;
+    protected $first_name;
+    protected $last_name;
     protected $birthdate;
     protected $sex;
 
     /**
      * @return mixed
      */
-    public function getLastName()
+    public function getId()
     {
-        return $this->last_name;
+        return $this->id;
     }
 
     /**
-     * @param mixed $last_name
+     * @param mixed $id
      */
-    public function setLastName($last_name)
+    public function setId($id)
     {
-        $this->last_name = $last_name;
+        $this->id = $id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTelephoneNumber()
+    {
+        return $this->telephone_number;
+    }
+
+    /**
+     * @param mixed $telephone_number
+     */
+    public function setTelephoneNumber($telephone_number)
+    {
+        $this->telephone_number = $telephone_number;
     }
 
     /**
@@ -51,17 +70,17 @@ abstract class person_entity extends entity
     /**
      * @return mixed
      */
-    public function getTelephoneNumber()
+    public function getLastName()
     {
-        return $this->telephone_number;
+        return $this->last_name;
     }
 
     /**
-     * @param mixed $telephone_number
+     * @param mixed $last_name
      */
-    public function setTelephoneNumber($telephone_number)
+    public function setLastName($last_name)
     {
-        $this->telephone_number = $telephone_number;
+        $this->last_name = $last_name;
     }
 
     /**
@@ -96,5 +115,17 @@ abstract class person_entity extends entity
         $this->sex = $sex;
     }
 
-    abstract function to_model();
+    function to_model()
+    {
+        $model = new person_model();
+        $model->setId($this->id);
+        $model->setSex($this->sex);
+        $model->setBirthdate($this->birthdate);
+        $model->setFirstName($this->first_name);
+        $model->setLastName($this->last_name);
+        $model->setTelephoneNumber($this->telephone_number);
+
+        return $model;
+    }
+
 }
