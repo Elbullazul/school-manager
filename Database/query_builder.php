@@ -122,6 +122,8 @@ class query_builder
     {
         $result = NULL;
 
+//        dump($this->query);
+
         switch ($this->fetch_mode) {
             case self::FETCH;
             case self::FETCH_ALL:

@@ -9,10 +9,12 @@
 namespace Controllers;
 
 use Core\security;
+use Database\Managers\classes_manager;
 use Database\Managers\days_manager;
 use Database\Managers\evaluations_competences_manager;
 use Database\Managers\evaluations_manager;
 use Database\Managers\periods_manager;
+use Database\Managers\teachers_manager;
 use Objects\Factories\course_instances_factory;
 use Objects\Factories\evaluations_competences_factory;
 use Objects\Factories\evaluations_factory;
@@ -172,8 +174,8 @@ class create_controller extends controller
 //            redirect(links::get('create-schedule'));
 //        }
 
-        $course_instances_manager = new course_instances_manager();
-        $course_instances_models = $course_instances_manager->fetch_current();
+        $courses_manager = new courses_manager();
+        $courses_models = $courses_manager->fetch_all();
 
         $periods_manager = new periods_manager();
         $periods_models = $periods_manager->fetch_all();
@@ -181,10 +183,18 @@ class create_controller extends controller
         $days_manager = new days_manager();
         $days_models = $days_manager->fetch_all();
 
+        $classes_manager = new classes_manager();
+        $classes_models = $classes_manager->fetch_all();
+
+        $teachers_manager = new teachers_manager();
+        $teachers_models = $teachers_manager->fetch_all();
+
         $bundle = array(
-            'COURSES' => $course_instances_models,
+            'COURSES' => $courses_models,
             'PERIODS' => $periods_models,
-            'DAYS' => $days_models
+            'DAYS' => $days_models,
+            'CLASSES' => $classes_models,
+            'TEACHERS' => $teachers_models
         );
 
         $this->view(links::get('create-schedule-courses'), $bundle);
@@ -263,7 +273,8 @@ class create_controller extends controller
         redirect($this->home());
     }
 
-    function write_new_schedule_courses() {
+    function write_new_schedule_courses()
+    {
         if (!posts::exists()) {
             redirect($this->home());
         }
@@ -277,15 +288,16 @@ class create_controller extends controller
             $course_instance_bundle = array(
                 'id' => NULL,
                 'course_id' => $object->course_id,
-                'teacher_id' => NULL,
+                'teacher_id' => $object->teacher_id,
                 'trimester_id' => $object->trimester_id,
-                'class_id' => NULL,
+                'class_id' => $object->class_id,
                 'day_id' => $object->day_id,
                 'period_id' => $object->period_id
             );
 
             $course_instance_model = course_instances_factory::construct($course_instance_bundle);
             $course_instances_manager->save($course_instance_model);
+
         }
 
         flashes::set('@UI51', flashes::SUCCESS, true);
@@ -295,6 +307,8 @@ class create_controller extends controller
     function view($tag, $data = array())
     {
         security::access($tag);
+        // beta
+        security::authorize($tag);
         parent::view($tag, $data);
     }
 

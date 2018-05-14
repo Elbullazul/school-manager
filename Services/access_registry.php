@@ -21,7 +21,9 @@ abstract class access_registry
         $user_type = users::type();
 
         foreach ($xml as $node) {
-            if ($node->tag == $tag && $node->$user_type == 'true') {
+            $node_tag = (string)$node->tag;
+
+            if ($node_tag == $tag && $node->$user_type == 'true') {
                 $has_access = true;
                 break;
             }

@@ -85,7 +85,13 @@ class courses_instances_repository extends repository
 
     function save($model)
     {
-        // TODO: Implement save() method.
+        $engine = new query_builder($this->entity, query_builder::EXECUTE);
+        $engine->insert($this->table, ['trimester_id','course_id','teacher_id','period_id', 'day_id', 'class_id'])
+            ->values($model->getTrimesterId(), $model->getCourse(), $model->getTeacherId(), $model->getPeriod(),
+                $model->getDay(), $model->getClass());
+        $ret = $engine->execute();
+
+        return $ret;
     }
 
     function update($field, $value, $model)

@@ -37,17 +37,17 @@ class teachers_manager extends manager
     function fetch_all()
     {
         $entities = $this->repository->fetch_all();
-        $student_models = teachers_factory::construct_from_entity($entities);
+        $teachers_models = teachers_factory::construct_from_entities($entities);
 
         // load person data
         $person_manager = new persons_manager();
 
-        foreach ($student_models as $student_model) {
-            $person_model = $person_manager->find($student_model->getPersonId());
+        foreach ($teachers_models as $student_model) {
+            $person_model = $person_manager->find_from_child_model($student_model);
             persons_factory::fill_model($student_model, $person_model);
         }
 
-        return $student_models;
+        return $teachers_models;
     }
 
     function update($unique_id, $model)

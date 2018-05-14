@@ -27,4 +27,20 @@ abstract class links
 
         return $path;
     }
+
+    static function get_tag($path)
+    {
+        $tag = "";
+        $file = RESOURCES . '\xml\links.xml';
+        $xml = simplexml_load_file($file);
+
+        foreach ($xml as $node) {
+            if ($node->path == (string)$path) {
+                $tag = $node->tag;
+                break;
+            }
+        }
+
+        return $tag;
+    }
 }

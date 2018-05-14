@@ -28,7 +28,7 @@ class periods_manager extends manager
 
     function find_from_course_instance($model)
     {
-        $entity = $this->repository->find('id', $model->getDayId());
+        $entity = $this->repository->find('id', $model->getPeriodId());
         $ret = periods_factory::construct_from_entity($entity);
 
         return $ret;

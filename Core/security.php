@@ -59,8 +59,10 @@ abstract class security
         }
     }
 
-    static function authorize($tag) {
-        $has_access = access_registry::find($tag);
+    static function authorize($tag)
+    {
+        $view_tag = links::get_tag($tag);
+        $has_access = access_registry::find($view_tag);
 
         if (!$has_access) {
             flashes::set('@UI46', flashes::DANGER, true);

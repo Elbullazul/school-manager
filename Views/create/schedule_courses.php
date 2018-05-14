@@ -34,16 +34,20 @@ load(paths::modal('trimester-dialog.php'), $data);
     }
 
     function create() {
-        var course_id = $('#inputCourseInstances').val();
+        var course_id = $('#inputCourse').val();
         var period_id = $('#inputPeriods').val();
         var day_id = $('#inputDays').val();
         var trimester = $('#inputTrimester').val();
+        var teacher_id = $('#inputTeacher').val();
+        var class_id = $('#inputClass').val();
 
         var course = {
             course_id: course_id,
             period_id: period_id,
             day_id: day_id,
-            trimester_id: trimester
+            trimester_id: trimester,
+            teacher_id: teacher_id,
+            class_id: class_id
         };
 
         courses.push(course);
@@ -72,11 +76,11 @@ load(paths::modal('trimester-dialog.php'), $data);
                 </h2>
                 <div class="spacer-10"></div>
 
-                <select class="form-control" id="inputCourseInstances" name="inputCourseInstances">
+                <select class="form-control" id="inputCourse" name="inputCourse">
                     <option selected disabled>Select a course</option>
                     <?php
                     foreach ($COURSES as $course) { ?>
-                        <option value="<?= $course->getId(); ?>"><?= $course->getCourse()->getName(); ?></option>
+                        <option value="<?= $course->getId(); ?>"><?= $course->getName(); ?></option>
                     <?php }
                     ?>
                 </select>
@@ -97,6 +101,26 @@ load(paths::modal('trimester-dialog.php'), $data);
                     <?php
                     foreach ($DAYS as $day) { ?>
                         <option value="<?= $day->getId(); ?>"><?= $day->getName(); ?></option>
+                    <?php }
+                    ?>
+                </select>
+                <div class="spacer-5"></div>
+
+                <select class="form-control" id="inputTeacher" name="inputTeacher">
+                    <option selected disabled>Select teacher</option>
+                    <?php
+                    foreach ($TEACHERS as $teacher) { ?>
+                        <option value="<?= $teacher->getId(); ?>"><?= $teacher->getFirstName() . ' ' . $teacher->getLastName(); ?></option>
+                    <?php }
+                    ?>
+                </select>
+                <div class="spacer-5"></div>
+
+                <select class="form-control" id="inputClass" name="inputClass">
+                    <option selected disabled>Select class</option>
+                    <?php
+                    foreach ($CLASSES as $class) { ?>
+                        <option value="<?= $class->getId(); ?>"><?= $class->getCode(); ?></option>
                     <?php }
                     ?>
                 </select>

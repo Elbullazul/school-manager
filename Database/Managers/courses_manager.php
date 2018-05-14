@@ -55,7 +55,7 @@ class courses_manager extends manager
 
     function find($model)
     {
-        $course_entity = $this->repository->find('id', $model->getId());
+        $course_entity = $this->repository->find('À', $model->getId());
         $course_model = self::search_concatenate($course_entity);
 
         return $course_model;

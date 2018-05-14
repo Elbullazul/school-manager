@@ -56,7 +56,7 @@
         <student>false</student>
     </link>
     <link>
-        <tag>create-write-course</tag>
+        <tag>create-write-new-course</tag>
         <admin>true</admin>
         <manager>true</manager>
         <teacher>true</teacher>
@@ -64,6 +64,27 @@
     </link>
     <link>
         <tag>create-write-absence</tag>
+        <admin>false</admin>
+        <manager>true</manager>
+        <teacher>true</teacher>
+        <student>false</student>
+    </link>
+    <link>
+        <tag>create-write-new-schedule-courses</tag>
+        <admin>false</admin>
+        <manager>true</manager>
+        <teacher>false</teacher>
+        <student>false</student>
+    </link>
+    <link>
+        <tag>create-write-new-evaluation</tag>
+        <admin>false</admin>
+        <manager>true</manager>
+        <teacher>true</teacher>
+        <student>false</student>
+    </link>
+    <link>
+        <tag>create-write-new-absence</tag>
         <admin>false</admin>
         <manager>true</manager>
         <teacher>true</teacher>
