@@ -10,7 +10,7 @@ load(paths::part('back-button.php'));
 ?>
 
 <script>
-    var count = 0;
+    var count = 1;
 
     function onToggleButton(button) {
 
@@ -80,7 +80,7 @@ load(paths::part('back-button.php'));
                     var placeholder = template.clone();
                     placeholder.find('.content').html('(' + competence['code'] +
                         ') ' + competence['name'] + '</br><small>' + competence['description'] + '</small>');
-                    placeholder.attr("id", "competence_" + count);
+                    placeholder.attr("id", "competence_" + competence['id']);
                     placeholder.removeClass('d-none');
 
                     table.append(placeholder);

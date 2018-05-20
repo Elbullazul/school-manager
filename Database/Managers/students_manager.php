@@ -33,6 +33,19 @@ class students_manager extends manager
         return $student_model;
     }
 
+    function find_by_id($id) {
+        $entity = $this->repository->find('id', $id);
+        $student_model = students_factory::construct_from_entity($entity);
+
+        // load person data
+        $person_manager = new persons_manager();
+        $person_model = $person_manager->find_by_id($student_model->getPersonId());
+
+        persons_factory::fill_model($student_model, $person_model);
+
+        return $student_model;
+    }
+
     function find_from_registration($model) {
         $entity = $this->repository->find('id', $model->getStudentId());
         $student_model = students_factory::construct_from_entity($entity);

@@ -1,0 +1,18 @@
+<menuitems>
+    <menuitem>
+        <tag>/create/course</tag>
+        <label>@PA09</label>
+    </menuitem>
+    <menuitem>
+        <tag>/view/courses</tag>
+        <label>@PA12</label>
+    </menuitem>
+    <menuitem>
+        <tag>/edit/course</tag>
+        <label>@PA10</label>
+    </menuitem>
+    <menuitem>
+        <tag>/destroy/schedule</tag>
+        <label>@PA11</label>
+    </menuitem>
+</menuitems>

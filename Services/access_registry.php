@@ -14,7 +14,7 @@ abstract class access_registry
 {
     static function find($tag)
     {
-        $file = RESOURCES . '\xml\authorizations.xml';
+        $file = RESOURCES . '\xml\links.xml';
         $xml = simplexml_load_file($file);
 
         $has_access = false;
@@ -23,9 +23,11 @@ abstract class access_registry
         foreach ($xml as $node) {
             $node_tag = (string)$node->tag;
 
-            if ($node_tag == $tag && $node->$user_type == 'true') {
-                $has_access = true;
-                break;
+            if ($node_tag == $tag && $node->protected == 'true') {
+                if ($node->$user_type == 'true') {
+                    $has_access = true;
+                    break;
+                }
             }
         }
 

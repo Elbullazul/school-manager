@@ -9,12 +9,14 @@
 namespace Controllers;
 
 use Core\security;
+use Database\Managers\absences_manager;
 use Database\Managers\course_instances_manager;
 use Database\Managers\courses_manager;
 use Database\Managers\days_manager;
 use Database\Managers\periods_manager;
 use Database\Managers\scholar_trimesters_manager;
 use Database\Managers\scholar_years_manager;
+use Database\Managers\students_manager;
 use Objects\Models\period_model;
 use Services\links;
 use Database\Repositories\days_repository;
@@ -67,6 +69,32 @@ class view_controller extends controller
 
         // load view
         $this->view(links::get('view-schedule'), $bundle);
+    }
+
+
+    function absences() {
+        $manager = new absences_manager();
+        $absences = $manager->fetch_all();
+
+        $instances_manager = new course_instances_manager();
+        $students_manager = new students_manager();
+
+        foreach ($absences as $absence) {
+            $student_id = $absence->getStudentId();
+            $instance_id = $absence->getCourseInstanceId();
+
+            $student = $students_manager->find_by_id($student_id);
+            $course_instance = $instances_manager->find_by_id($instance_id);
+
+            $absence->setStudentId($student);
+            $absence->setCourseInstanceId($course_instance);
+        }
+
+        $bundle = array(
+            'ABSENCES' => $absences
+        );
+
+        $this->view(links::get('view-absences'), $bundle);
     }
 
     function view($tag, $data = array())

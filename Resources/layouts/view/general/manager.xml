@@ -1,10 +1,10 @@
 <menuitems>
     <menuitem>
-        <tag>/manage/schedule</tag>
-        <label>@PA07</label>
+        <tag>/view/schedule</tag>
+        <label>@PA12</label>
     </menuitem>
     <menuitem>
-        <tag>/manage/absences</tag>
+        <tag>/view/absences</tag>
         <label>@PA17</label>
     </menuitem>
 </menuitems>

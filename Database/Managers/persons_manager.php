@@ -26,6 +26,13 @@ class persons_manager extends manager
         return $ret;
     }
 
+    function find_by_id($id) {
+        $entity = $this->repository->find('id', $id);
+        $ret = persons_factory::construct_from_entity($entity);
+
+        return $ret;
+    }
+
     function find_from_child_model($model) {
         $entity = $this->repository->find('id', $model->getPersonId());
         $ret = persons_factory::construct_from_entity($entity);

@@ -1,0 +1,18 @@
+<menuitems>
+    <menuitem>
+        <tag>/create/course</tag>
+        <label>@PA15</label>
+    </menuitem>
+    <menuitem>
+        <tag>/create/absences</tag>
+        <label>@PA17</label>
+    </menuitem>
+    <menuitem>
+        <tag>/create/schedule</tag>
+        <label>@PA09</label>
+    </menuitem>
+    <menuitem>
+        <tag>/create/evaluation</tag>
+        <label>@UI49</label>
+    </menuitem>
+</menuitems>

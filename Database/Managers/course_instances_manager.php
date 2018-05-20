@@ -54,6 +54,13 @@ class course_instances_manager extends manager
         return $course_instance_model;
     }
 
+    function find_by_id($id) {
+        $course_instance_entity = $this->repository->find('id', $id);
+        $course_instance_model = self::search_concatenate($course_instance_entity);
+
+        return $course_instance_model;
+    }
+
     function fetch_all()
     {
         $course_instance_models = [];

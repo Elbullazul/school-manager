@@ -119,7 +119,7 @@ class create_controller extends controller
 
         $courses_manager = new course_instances_manager();
         $courses_models = $courses_manager->fetch_current();
-
+		
         $data = array(
             'COURSES' => $courses_models
         );
@@ -217,7 +217,7 @@ class create_controller extends controller
         if (posts::empty()) {
             redirect($this->home());
         }
-
+		
         $data = $_POST;
         $competence_ids = explode(',', $data['inputCompetences']);
 
@@ -261,10 +261,10 @@ class create_controller extends controller
         foreach ($competence_ids as $competence_id) {
             $evaluation_competence_bundle = array(
                 'ponderation' => NULL,
-                'competence_id' => $competence_id,
+                'competence_id' => $competence_id,				
                 'evaluation_id' => $evaluation_id
             );
-
+			
             $evaluation_competence_model = evaluations_competences_factory::construct($evaluation_competence_bundle);
             $evaluations_competences_manager->save($evaluation_competence_model);
         }

@@ -12,6 +12,10 @@
         <label>@PA13</label>
     </menuitem>
     <menuitem>
+        <tag>/create/general</tag>
+        <label>@PA14</label>
+    </menuitem>
+    <menuitem>
         <tag>/user/logout</tag>
         <label>@UI11</label>
     </menuitem>

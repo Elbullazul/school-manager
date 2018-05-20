@@ -2,101 +2,187 @@
     <link>
         <tag>login</tag>
         <title>@PA01</title>
+		<protected>false</protected>
         <path>/public/login</path>
     </link>
     <link>
         <tag>connecting</tag>
         <title>@PA02</title>
+		<protected>false</protected>
         <path>/public/connecting</path>
     </link>
     <link>
         <tag>logout</tag>
         <title>@PA03</title>
+		<protected>false</protected>
         <path>/user/logout</path>
     </link>
     <link>
         <tag>dashboard</tag>
         <title>@PA04</title>
+		<protected>false</protected>
         <path>/user/dashboard</path>
     </link>
     <link>
         <tag>error</tag>
         <title>@PA05</title>
+		<protected>false</protected>
         <path>/public/error</path>
     </link>
     <link>
         <tag>manage-general</tag>
         <title>@PA06</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>true</admin>
         <path>/manage/general</path>
     </link>
     <link>
         <tag>manage-schedule</tag>
         <title>@PA07</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/manage/schedule</path>
     </link>
     <link>
         <tag>view-general</tag>
         <title>@PA06</title>
+		<protected>false</protected>
         <path>/view/general</path>
     </link>
     <link>
         <tag>view-schedule</tag>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <title>@PA08</title>
         <path>/view/schedule</path>
     </link>
     <link>
+        <tag>view-absences</tag>
+        <protected>true</protected>
+        <student>false</student>
+        <teacher>true</teacher>
+        <manager>true</manager>
+        <admin>false</admin>
+        <title>@PA18</title>
+        <path>/view/absences</path>
+    </link>
+    <link>
         <tag>create-general</tag>
         <title>@PA14</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>true</admin>
         <path>/create/general</path>
     </link>
     <link>
         <tag>create-schedule</tag>
         <title>@PA09</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/schedule</path>
     </link>
     <link>
         <tag>create-schedule-courses</tag>
         <title>@PA09</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/schedule_courses</path>
     </link>
     <link>
         <tag>create-absences</tag>
         <title>@PA17</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/absences</path>
     </link>>
     <link>
         <tag>create-evaluation</tag>
         <title>@PA17</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/evaluation</path>
     </link>
     <link>
         <tag>create-course</tag>
         <title>@PA15</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/course</path>
     </link>
     <link>
         <tag>create-competence</tag>
         <title>@PA16</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/competence</path>
     </link>
     <link>
         <tag>create-write-new-course</tag>
         <title>@PA16</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/write_new_course</path>
     </link>
     <link>
         <tag>create-write-new-schedule-courses</tag>
         <title>@PA16</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>false</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/write_new_schedule_courses</path>
     </link>
     <link>
         <tag>create-write-new-evaluation</tag>
         <title>@PA16</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/write_new_evaluation</path>
     </link>
     <link>
         <tag>create-write-new-absence</tag>
         <title>@PA16</title>
+		<protected>true</protected>
+		<student>false</student>
+		<teacher>true</teacher>
+		<manager>true</manager>
+		<admin>false</admin>
         <path>/create/write_new_absence</path>
     </link>
 </links>
