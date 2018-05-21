@@ -62,6 +62,29 @@ load(paths::modal('trimester-dialog.php'), $data);
 
         $('#form-schedule').find("select").prop('selectedIndex', 0);
     }
+
+    $(document).ready(function () {
+        $('#form-schedule').validate({
+            rules: {
+                inputCourse: {
+                    required: true,
+                },
+                inputPeriods: {
+                    required: true,
+                },
+                inputDays: {
+                    required: true,
+                },
+                inputTeacher: {
+                    required: true,
+                }
+                inputClass: {
+                    required: true,
+                }
+            }
+        });
+    });
+
 </script>
 
 <div class="row container-fluid h-100">

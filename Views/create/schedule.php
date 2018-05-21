@@ -15,12 +15,24 @@ load(paths::modal('trimester-dialog.php'), $data);
 
 ?>
 
+<script>
+    $(document).ready(function() {
+        $('#form-new-schedule').validate({
+            rules: {
+                inputTrimester: {
+                    requireD: true
+                }
+            }
+        });
+    });
+</script>
+
 <div class="row container-fluid h-100">
     <div class="col-md-3"></div>
     <div class="col-md-6 pt-3">
         <div class="container">
 
-            <form class="form-signin" id="form-signin" method="Post" action="<?= links::get('create-schedule-courses'); ?>">
+            <form class="form" id="form-new-schedule" method="Post" action="<?= links::get('create-schedule-courses'); ?>">
                 <h2 class="form-signin-heading">
                     <?= labels::get('@PA09'); ?>
                 </h2>
@@ -40,10 +52,6 @@ load(paths::modal('trimester-dialog.php'), $data);
                     Create new trimester
                 </button>
                 <div class='spacer-10'></div>
-
-                <label for="inputCode" class="sr-only">
-                    <?= labels::get('@UI08'); ?>
-                </label>
 
                 <button class="btn btn-lg btn-primary btn-block" type="submit">
                     Suivant

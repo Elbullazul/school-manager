@@ -119,9 +119,13 @@ class create_controller extends controller
 
         $courses_manager = new course_instances_manager();
         $courses_models = $courses_manager->fetch_current();
-		
+
+        $trimester_manager = new scholar_trimesters_manager();
+        $trimester = $trimester_manager->find_current();
+
         $data = array(
-            'COURSES' => $courses_models
+            'COURSES' => $courses_models,
+            'TRIMESTER' => $trimester
         );
 
         $this->view(links::get('create-absences'), $data);

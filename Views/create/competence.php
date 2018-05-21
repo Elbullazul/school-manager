@@ -219,7 +219,7 @@ load(paths::part('back-button.php'));
                 </small>
             </div>
             <div class="spacer-15"></div>
-            <form class="form" method="Post" action="<?= links::get('create-write-new-course'); ?>">
+            <form class="form" id="competence_form" method="Post" action="<?= links::get('create-write-new-course'); ?>">
                 <div class="container">
                     <h2>
                         <?= "Ajouter des compétences"; ?>

@@ -105,9 +105,6 @@ load(paths::modal('scholar-year-dialog.php'));
             }
         });
 
-        $();
-
-
         $('#modal_trimester').on('show.bs.modal', function () {
             removeData(this);
         });

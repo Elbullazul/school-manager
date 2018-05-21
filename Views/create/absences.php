@@ -16,6 +16,49 @@ use Core\ajax_service;
 ?>
 
 <script>
+
+    $(document).ready(function () {
+        $('#form-absences').validate({
+            rules: {
+                inputCourseInstancesId: {
+                    required: true
+                },
+                inputStudent: {
+                    required: true
+                },
+                inputDate: {
+                    required: true,
+                    maxDate: true,
+                    minDate: true
+                },
+                inputAbsenceDuration: {
+                    required: true
+                },
+                inputComment: {
+                    required: true
+                }
+            }
+
+        });
+    });
+
+    $.validator.addMethod("maxDate", function(value, element) {
+        var curDate = new Date('<?= $TRIMESTER->getEnds();?>');
+        var inputDate = new Date(value);
+
+        if (inputDate < curDate)
+            return true;
+        return false;
+    }, "Invalid Date!");
+
+    $.validator.addMethod("minDate", function(value, element) {
+        var curDate = new Date('<?= $TRIMESTER->getBegins();?>');
+        var inputDate = new Date(value);
+        if (inputDate > curDate)
+            return true;
+        return false;
+    }, "Invalid Date!");
+
     function show_students() {
         course_id = $('#select-course').val();
 
@@ -57,17 +100,18 @@ use Core\ajax_service;
     <div class="col-md-6 pt-3">
         <div class="container">
 
-            <form id="form-absences" method="post" action="<?= links::get('create-write-new-absence');?>">
+            <form id="form-absences" method="post" action="<?= links::get('create-write-new-absence'); ?>">
                 <h1 id="title">Register absency</h1>
                 <div class="spacer-15"></div>
 
                 <!--                TODO: Use JQuery for valiadtion-->
-                <select type="text" id="select-course" name="inputCourseInstanceId" autofocus="" class="form-control" required=""
+                <select type="text" id="select-course" name="inputCourseInstanceId" autofocus="" class="form-control"
+                        required=""
                         onchange="show_students()">
                     <option selected disabled>Choose course</option>
                     <?php
                     foreach ($COURSES as $course_instance) { ?>
-                        <option value="<?= $course_instance->getId(); ?>"><?= $course_instance->getCourse()->getName(); ?></option>
+                        <option value="<?= $course_instance->getId(); ?>"><?= $course_instance->getCourse()->getName() . ' (' . $course_instance->getDay()->getName() . ' ' . $course_instance->getPeriod()->genTag() . ')'; ?></option>
                         <?php
                     }
                     ?>
@@ -83,9 +127,12 @@ use Core\ajax_service;
                 <input class="form-control d-none" required="" value="<?= users::username(); ?>"
                        name="inputAbsencySubmitter"/>
 
-                <input type="date" class="form-control" value="<?= date::now(); ?>" id="absence-date" name="inputDate" required="">
+                <label>Date of absency</label>
+                <input type="date" class="form-control" value="<?= date::now(); ?>" id="absence-date" name="inputDate"
+                       required="">
                 <div class="spacer-15"></div>
 
+                <label>Length of absency</label>
                 <input type="time" value="01:00" id="absence-duration" name="inputAbsenceDuration"
                        class="form-control"
                        placeholder="Time absent (in hours)"
@@ -97,6 +144,7 @@ use Core\ajax_service;
 
                 <button class="btn btn-block btn-primary" type="submit">Save</button>
             </form>
+            <div class="spacer-15"></div>
         </div>
     </div>
 </div>

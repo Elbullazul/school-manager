@@ -57,7 +57,9 @@ load(paths::part('back-button.php'));
     }
 
     $(document).ready(function () {
-        $('.btn-toggle').on('click', function() {onToggleButton(this); });
+        $('.btn-toggle').on('click', function () {
+            onToggleButton(this);
+        });
     });
 
     function loadCompetences() {
@@ -87,7 +89,9 @@ load(paths::part('back-button.php'));
                     count++;
                 });
 
-                $('.btn-toggle').on('click', function() {onToggleButton(this); });
+                $('.btn-toggle').on('click', function () {
+                    onToggleButton(this);
+                });
             },
             error: function (result) {
                 $.notify({
@@ -116,7 +120,7 @@ load(paths::part('back-button.php'));
                     <option selected disabled>Select a course</option>
                     <?php
                     foreach ($COURSES as $course) { ?>
-                        <option value="<?= $course->getId(); ?>"><?= $course->getCourse()->getName(); ?></option>
+                        <option value="<?= $course->getId(); ?>"><?= $course->getCourse()->getName() . ' (' . $course->getDay()->getName(). ' ' . $course->getPeriod()->genTag() . ')'; ?></option>
                     <?php }
                     ?>
                 </select>
