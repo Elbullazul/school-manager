@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 use Services\paths;
 use Services\posts;
@@ -65,22 +65,10 @@ load(paths::modal('trimester-dialog.php'), $data);
 
     $(document).ready(function () {
         $('#form-schedule').validate({
-            rules: {
-                inputCourse: {
-                    required: true,
-                },
-                inputPeriods: {
-                    required: true,
-                },
-                inputDays: {
-                    required: true,
-                },
-                inputTeacher: {
-                    required: true,
-                }
-                inputClass: {
-                    required: true,
-                }
+            submitHandler: function (form) {
+
+
+                form.submit();
             }
         });
     });

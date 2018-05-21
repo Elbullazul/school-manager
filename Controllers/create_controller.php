@@ -225,6 +225,8 @@ class create_controller extends controller
         $data = $_POST;
         $competence_ids = explode(',', $data['inputCompetences']);
 
+        dump($competence_ids);
+        
         $course_id = $data['inputCourseInstances'];
         $course_instance_bundle = array(
             'id' => $course_id,
@@ -304,7 +306,8 @@ class create_controller extends controller
 
         }
 
-        flashes::set('@UI51', flashes::SUCCESS, true);
+        if ($objects)
+            flashes::set('@UI51', flashes::SUCCESS, true);
         redirect($this->home());
     }
 

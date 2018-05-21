@@ -20,7 +20,7 @@ load(paths::modal('trimester-dialog.php'), $data);
         $('#form-new-schedule').validate({
             rules: {
                 inputTrimester: {
-                    requireD: true
+                    required: true
                 }
             }
         });

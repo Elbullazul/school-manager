@@ -32,7 +32,7 @@ load(paths::part('back-button.php'));
                 values = competence_id;
             }
 
-            competenceInput.attr('value', values);
+            competenceInput.val(values);
 
             button.text('×');
         } else {
@@ -50,7 +50,7 @@ load(paths::part('back-button.php'));
                 values = '';
             }
 
-            competenceInput.attr('value', values);
+            competenceInput.val(values);
 
             button.text('+');
         }
@@ -79,18 +79,16 @@ load(paths::part('back-button.php'));
                 table.empty();
 
                 $.each(competences, function (index, competence) {
-                    var placeholder = template.clone();
+                    var placeholder = template.clone(true, true);
                     placeholder.find('.content').html('(' + competence['code'] +
                         ') ' + competence['name'] + '</br><small>' + competence['description'] + '</small>');
                     placeholder.attr("id", "competence_" + competence['id']);
                     placeholder.removeClass('d-none');
 
+                    console.log(placeholder);
+
                     table.append(placeholder);
                     count++;
-                });
-
-                $('.btn-toggle').on('click', function () {
-                    onToggleButton(this);
                 });
             },
             error: function (result) {
